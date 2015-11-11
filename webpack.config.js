@@ -1,7 +1,7 @@
 var path = require("path");
 var webpack = require("webpack");
 
-var PROD = process.argv.indexOf('--prod') === -1 ? false : true
+var PROD = process.argv.indexOf('--prod') === -1 ? false : true;
 
 module.exports = {
 	entry: "./js/main.js",
@@ -9,7 +9,17 @@ module.exports = {
 		path: __dirname,
 		filename: "bundle.js"
 	},
+    eslint: {
+        configFile: '.eslintrc'
+    },
 	module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: "eslint-loader",
+                exclude: /node_modules/
+            },
+        ],
         loaders: [
 				{ 
 				test: /\.jsx?$/,
@@ -21,4 +31,4 @@ module.exports = {
 	plugins:  PROD ? [
 		new webpack.optimize.UglifyJsPlugin({minimize:true})
 	] : []
-}
+};
