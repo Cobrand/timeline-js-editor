@@ -1,2 +1,2 @@
-var React = require("react");
-var Backbone = require("backbone");
+export const React = require("react");
+export const Backbone = require("backbone");

@@ -4,6 +4,8 @@
  * Matches https://timeline.knightlab.com/docs/json-format.html
  */
 
+import {Backbone} from "js/main.js";
+
 /**
  * Helper function to auto-handle from[key] == null.
  */
@@ -13,7 +15,7 @@ function set_if(from, to, key) {
     }
 }
 
-class Text {
+export class Text {
     constructor() {
         this.headline = null;
         this.text = null;
@@ -42,7 +44,7 @@ class Text {
     }
 }
 
-class Media {
+export class Media {
     constructor(url) {
         this.url = url;
         this.caption = null;
@@ -76,7 +78,7 @@ class Media {
     }
 }
 
-class Era {
+export class Era {
     constructor(start_date, end_date) {
         this.start_date = start_date;
         this.end_date = end_date;
@@ -109,7 +111,7 @@ class Era {
 }
 
 // TODO: not sure if day is 1-7 or 0-6
-class MDate {
+export class MDate {
     constructor(date, display_date) {
         this.date = date;
         this.display_date = display_date;
@@ -146,7 +148,7 @@ class MDate {
     }
 }
 
-var Slide = Backbone.Model.extend({
+export const Slide = Backbone.Model.extend({
     defaults: {
         start_date: null,
         end_date: null,
@@ -204,7 +206,7 @@ var Slide = Backbone.Model.extend({
     }
 });
 
-var Slides = Backbone.Collection.extend({
+export const Slides = Backbone.Collection.extend({
     model: Slide,
 
     to_json: function() {
@@ -226,7 +228,7 @@ var Slides = Backbone.Collection.extend({
     }
 });
 
-var Timeline = Backbone.Model.extend({
+export const Timeline = Backbone.Model.extend({
     defaults: {
         events: new Slides(),
         title: null,
