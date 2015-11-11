@@ -1,5 +1,7 @@
 Timelinizator, a web interface to create timelines, using the library timeline.js
 
+[![build status](https://gitlab.univ-nantes.fr/ci/projects/5/status.png?ref=master)](https://gitlab.univ-nantes.fr/ci/projects/5?ref=master)
+
 # HOW TO DEV
 
 To install dependencies required by this project:
