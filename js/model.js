@@ -4,7 +4,7 @@
  * Matches https://timeline.knightlab.com/docs/json-format.html
  */
 
-import {Backbone} from "js/main.js";
+import Backbone from "backbone";
 
 /**
  * Helper function to auto-handle from[key] == null.

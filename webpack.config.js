@@ -1,9 +1,13 @@
+const path = require("path");
 const webpack = require("webpack");
 
 const PROD = process.argv.indexOf('--prod') !== -1;
 
 module.exports = {
-    entry: "./js/main.js",
+    entry: "main.js",
+    resolve: {
+        root: path.resolve("js")
+    },
     output: {
         path: __dirname,
         filename: "bundle.js"
@@ -23,6 +27,9 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /(node_modules)/,
             loader: 'babel-loader'
+        },{
+            test: /backbone\.js$/,
+            loader: 'imports?define=>false'
         }]
     },
     plugins:  PROD ? [
