@@ -29,6 +29,10 @@ module.exports = {
             ]
         },
 	plugins:  PROD ? [
-		new webpack.optimize.UglifyJsPlugin({minimize:true})
-	] : []
+		new webpack.optimize.UglifyJsPlugin({minimize:true}),
+
+                new webpack.IgnorePlugin(/^jquery$/)
+	] : [
+            new webpack.IgnorePlugin(/^jquery$/)
+    ]
 };
