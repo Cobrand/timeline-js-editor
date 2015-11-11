@@ -26,7 +26,7 @@ export class Text {
             return null;
         }
 
-        let text = new Text();
+        const text = new Text();
 
         set_if(json, text, "headline");
         set_if(json, text, "text");
@@ -35,7 +35,7 @@ export class Text {
     }
 
     to_json() {
-        let json = {};
+        const json = {};
 
         set_if(this, json, "headline");
         set_if(this, json, "text");
@@ -57,7 +57,7 @@ export class Media {
             return null;
         }
 
-        let media = new Media(json.url);
+        const media = new Media(json.url);
 
         set_if(json, media, "caption");
         set_if(json, media, "credit");
@@ -67,7 +67,7 @@ export class Media {
     }
 
     to_json() {
-        let json = {};
+        const json = {};
 
         set_if(this, json, "url");
         set_if(this, json, "caption");
@@ -90,8 +90,8 @@ export class Era {
             return null;
         }
 
-        let era = new Era(MDate.from_json(json.start_date),
-                          MDate.from_json(json.end_date));
+        const era = new Era(MDate.from_json(json.start_date),
+                            MDate.from_json(json.end_date));
 
         set_if(json, era, "text");
 
@@ -99,7 +99,7 @@ export class Era {
     }
 
     to_json() {
-        let json = {
+        const json = {
             start_date: this.start_date.to_json(),
             end_date: this.end_date.to_json()
         };
@@ -134,7 +134,7 @@ export class MDate {
     }
 
     to_json() {
-        let d = this.date;
+        const d = this.date;
         return {
             year: d.getUTCFullYear(),
             month: d.getUTCMonth() + 1,
@@ -162,7 +162,7 @@ export const Slide = Backbone.Model.extend({
     },
 
     to_json: function() {
-        let json = {};
+        const json = {};
 
         if (this.start_date) {
             json.start_date = this.start_date.to_json();
@@ -190,7 +190,7 @@ export const Slide = Backbone.Model.extend({
             return null;
         }
 
-        let slide = new Slide();
+        const slide = new Slide();
 
         slide.start_date = MDate.from_json(json.start_date);
         slide.end_date = MDate.from_json(json.end_date);
@@ -220,7 +220,7 @@ export const Slides = Backbone.Collection.extend({
             return null;
         }
 
-        let slides = new Slides();
+        const slides = new Slides();
 
         slides.add(json.map(Slide.from_json));
 
@@ -237,7 +237,7 @@ export const Timeline = Backbone.Model.extend({
     },
 
     to_json_str: function() {
-        let json = {
+        const json = {
             events: this.events.to_json()
         };
         if (this.title) {
@@ -254,8 +254,8 @@ export const Timeline = Backbone.Model.extend({
     }
 }, {
     from_json_string: function(json_str) {
-        let json = JSON.parse(json_str);
-        let timeline = new Timeline();
+        const json = JSON.parse(json_str);
+        const timeline = new Timeline();
 
         timeline.events = Slides.from_json(json.events);
         timeline.title = Slide.from_json(json.title);
