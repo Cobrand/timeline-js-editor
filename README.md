@@ -1,6 +1,6 @@
 Timelinizator, a web interface to create timelines, using the library timeline.js
 
-#HOW TO DEV
+# HOW TO DEV
 
 To install dependencies required by this project:
 
@@ -9,11 +9,11 @@ To install dependencies required by this project:
 
 Then choose one :
 
-##Continuous build :
+## Continuous build :
 
 Make sure to have port 8080 open if you want to dev using webpack-dev-server
 
-###Autonomous static server
+### Autonomous static server
 
 Allows you to have a server that hosts your html and your files staticly (everything is visible)
 
@@ -21,7 +21,7 @@ Allows you to have a server that hosts your html and your files staticly (everyt
 $ webpack-dev-server --progress --colors
 ```
 
-###Auto reload
+### Auto reload
 
 If you want to host the server on a custom port, and only have the reloading done when a change is noticed, do :
 
@@ -29,7 +29,7 @@ If you want to host the server on a custom port, and only have the reloading don
 $ webpack --progress --colors --watchify
 ```
 
-##Simple build
+## Simple build
 
 If you don't want to watch but only build, you can just do :
 
@@ -37,7 +37,7 @@ If you don't want to watch but only build, you can just do :
 
 while being in the repository's directory
 
-#HOW TO BUILD FOR PROD:
+# HOW TO BUILD FOR PROD:
 
 You can minify the js files within the compilation with this option :
 
