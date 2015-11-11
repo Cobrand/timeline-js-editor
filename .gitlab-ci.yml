@@ -4,3 +4,7 @@ before_script:
 eslint:
     script:
         - npm run-script lint
+
+build:
+    script:
+        - webpack --progress --colors
