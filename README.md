@@ -4,7 +4,9 @@ Timelinizator, a web interface to create timelines, using the library timeline.j
 
 To install dependencies required by this project:
 
+    # Install dependencies in package.json
     npm install
+    # Install the command line tools
     sudo npm install -g webpack webpack-dev-server
 
 Then choose one :
