@@ -148,42 +148,20 @@ export class MDate {
     }
 }
 
-export class Slide extends Backbone.Model {
-    constructor() {
-        this.start_date = null;
-        this.end_date = null;
-        this.text = null;
-        this.media = null;
-        this.group = null;
-        this.display_date = null;
-        this.background = null;
-        this.autolink = null;
-        this.unique_id = null;
+export const Slide = Backbone.Model.extend({
+    defaults: {
+        start_date: null,
+        end_date: null,
+        text: null,
+        media: null,
+        group: null,
+        display_date: null,
+        background: null,
+        autolink: null,
+        unique_id: null
+    },
 
-        super();
-    }
-
-    static from_json(json) {
-        if (!json) {
-            return null;
-        }
-
-        const slide = new Slide();
-
-        slide.start_date = MDate.from_json(json.start_date);
-        slide.end_date = MDate.from_json(json.end_date);
-        slide.text = Text.from_json(json.text);
-        slide.media = Media.from_json(json.media);
-        set_if(json, slide, "group");
-        set_if(json, slide, "display_date");
-        set_if(json, slide, "background");
-        set_if(json, slide, "autolink");
-        set_if(json, slide, "unique_id");
-
-        return slide;
-    }
-
-    to_json() {
+    to_json: function() {
         const json = {};
 
         if (this.start_date) {
@@ -206,16 +184,38 @@ export class Slide extends Backbone.Model {
 
         return json;
     }
-}
+}, {
+    from_json: function(json) {
+        if (!json) {
+            return null;
+        }
 
-export class Slides extends Backbone.Collection {
-    constructor() {
-        super();
+        const slide = new Slide();
 
-        this.model = Slide;
+        slide.start_date = MDate.from_json(json.start_date);
+        slide.end_date = MDate.from_json(json.end_date);
+        slide.text = Text.from_json(json.text);
+        slide.media = Media.from_json(json.media);
+        set_if(json, slide, "group");
+        set_if(json, slide, "display_date");
+        set_if(json, slide, "background");
+        set_if(json, slide, "autolink");
+        set_if(json, slide, "unique_id");
+
+        return slide;
     }
+});
 
-    static from_json(json) {
+export const Slides = Backbone.Collection.extend({
+    model: Slide,
+
+    to_json: function() {
+        return this.map(function (slide) {
+            return slide.to_json();
+        });
+    }
+}, {
+    from_json: function(json) {
         if (!json) {
             return null;
         }
@@ -226,21 +226,34 @@ export class Slides extends Backbone.Collection {
 
         return slides;
     }
+});
 
-    to_json() {
-        return this.map(slide => slide.to_json());
+export const Timeline = Backbone.Model.extend({
+    defaults: {
+        events: new Slides(),
+        title: null,
+        eras: [],
+        scale: "human"
+    },
+
+    to_json_str: function() {
+        const json = {
+            events: this.events.to_json()
+        };
+        if (this.title) {
+            json.title = this.title.to_json();
+        }
+        if (this.eras) {
+            json.eras = this.eras.map(function (item) {
+                return item.to_json();
+            });
+        }
+        set_if(this, json, "scale");
+
+        return JSON.stringify(json);
     }
-}
-
-export class Timeline extends Backbone.Model {
-    constructor() {
-        this.events = new Slides();
-        this.title = null;
-        this.eras = [];
-        this.scale = "human";
-    }
-
-    static from_json_string(json_str) {
+}, {
+    from_json_string: function(json_str) {
         const json = JSON.parse(json_str);
         const timeline = new Timeline();
 
@@ -251,19 +264,4 @@ export class Timeline extends Backbone.Model {
 
         return timeline;
     }
-
-    to_json_str() {
-        const json = {
-            events: this.events.to_json()
-        };
-        if (this.title) {
-            json.title = this.title.to_json();
-        }
-        if (this.eras) {
-            json.eras = this.eras.map(era => era.to_json());
-        }
-        set_if(this, json, "scale");
-
-        return JSON.stringify(json);
-    }
-}
+});
