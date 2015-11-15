@@ -5,124 +5,105 @@
  */
 
 import Backbone from "backbone";
+import "utils.js";
 
 /**
  * Helper function to auto-handle from[key] == null.
  */
 function set_if(from, to, key) {
-    if (from[key]) {
+    if (from[key] !== undefined && from[key] !== null) {
         to[key] = from[key];
     }
 }
 
-export class Text {
-    constructor() {
-        this.headline = null;
-        this.text = null;
-    }
-
-    static from_json(json) {
+export const Text = {
+    from_object(json) {
         if (!json) {
             return null;
         }
 
-        const text = new Text();
-
-        set_if(json, text, "headline");
-        set_if(json, text, "text");
-
-        return text;
+        return make_Text(json.headline, json.text);
     }
+};
 
-    to_json() {
-        const json = {};
+export function make_Text(headline=null, text=null) {
+    return {
+        __proto__: Text,
 
-        set_if(this, json, "headline");
-        set_if(this, json, "text");
+        to_object() {
+            const json = {};
 
-        return json;
+            set_if(this, json, "headline");
+            set_if(this, json, "text");
+
+            return json;
+        }
+    };
+}
+
+export const Media = {
+    from_object(json) {
+        if (!json) {
+            return null;
+        }
+
+        return make_Media(json.url, json.caption, json.credit, json.thumbnail);
     }
 }
 
-export class Media {
-    constructor(url) {
-        this.url = url;
-        this.caption = null;
-        this.credit = null;
-        this.thumbnail = null;
-    }
+export function make_Media(url, caption=null, credit=null, thumbnail=null) {
+    return {
+        __proto__: Media,
 
-    static from_json(json) {
-        if (!json) {
-            return null;
+        to_object() {
+            const json = {};
+
+            set_if(this, json, "url");
+            set_if(this, json, "caption");
+            set_if(this, json, "credit");
+            set_if(this, json, "thumbnail");
+
+            return json;
         }
-
-        const media = new Media(json.url);
-
-        set_if(json, media, "caption");
-        set_if(json, media, "credit");
-        set_if(json, media, "thumbnail");
-
-        return media;
-    }
-
-    to_json() {
-        const json = {};
-
-        set_if(this, json, "url");
-        set_if(this, json, "caption");
-        set_if(this, json, "credit");
-        set_if(this, json, "thumbnail");
-
-        return json;
-    }
+    };
 }
 
-export class Era {
-    constructor(start_date, end_date) {
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.text = null;
-    }
-
-    static from_json(json) {
+export const Era = {
+    from_object(json) {
         if (!json) {
             return null;
         }
 
-        const era = new Era(MDate.from_json(json.start_date),
-                            MDate.from_json(json.end_date));
-
-        set_if(json, era, "text");
-
-        return era;
+        return make_Era(MDate.from_object(json.start_date),
+                        MDate.from_object(json.end_date),
+                        json.text);
     }
+};
 
-    to_json() {
-        const json = {
-            start_date: this.start_date.to_json(),
-            end_date: this.end_date.to_json()
-        };
+export function make_Era(start_date, end_date, text=null) {
+    return {
+        __proto__: Era,
 
-        set_if(this, json, "text");
+        to_object() {
+            const json = {
+                start_date: this.start_date.to_object(),
+                end_date: this.end_date.to_object()
+            };
 
-        return json;
-    }
+            set_if(this, json, "text");
+
+            return json;
+        }
+    };
 }
 
-// TODO: not sure if day is 1-7 or 0-6
-export class MDate {
-    constructor(date, display_date) {
-        this.date = date;
-        this.display_date = display_date;
-    }
-
-    static from_json(json) {
+export const MDate = {
+    from_object(json) {
         if (!json) {
             return null;
         }
 
-        return new MDate(
+        return make_MDate(
                 new Date(Date.UTC(json.year,
                                   json.month - 1,
                                   json.day,
@@ -130,22 +111,29 @@ export class MDate {
                                   json.minute,
                                   json.second,
                                   json.millisecond)),
-                json.display_date ? json.display_date : null);
+                json.display_date);
     }
+}
 
-    to_json() {
-        const d = this.date;
-        return {
-            year: d.getUTCFullYear(),
-            month: d.getUTCMonth() + 1,
-            day: d.getUTCDay(),
-            hour: d.getUTCHours(),
-            minute: d.getUTCMinutes(),
-            second: d.getUTCSeconds(),
-            millisecond: d.getUTCMilliseconds(),
-            display_date: this.display_date
-        };
-    }
+// TODO: not sure if day is 1-7 or 0-6
+export function make_MDate(date, display_date=null) {
+    return {
+        __proto__: MDate,
+
+        to_object() {
+            const d = this.date;
+            return {
+                year: d.getUTCFullYear(),
+                month: d.getUTCMonth() + 1,
+                day: d.getUTCDay(),
+                hour: d.getUTCHours(),
+                minute: d.getUTCMinutes(),
+                second: d.getUTCSeconds(),
+                millisecond: d.getUTCMilliseconds(),
+                display_date: this.display_date
+            };
+        }
+    };
 }
 
 export const Slide = Backbone.Model.extend({
@@ -161,20 +149,20 @@ export const Slide = Backbone.Model.extend({
         unique_id: null
     },
 
-    to_json: function() {
+    to_object: function() {
         const json = {};
 
         if (this.start_date) {
-            json.start_date = this.start_date.to_json();
+            json.start_date = this.start_date.to_object();
         }
         if (this.end_date) {
-            json.end_date = this.end_date.to_json();
+            json.end_date = this.end_date.to_object();
         }
         if (this.text) {
-            json.text = this.text.to_json();
+            json.text = this.text.to_object();
         }
         if (this.media) {
-            json.media = this.media.to_json();
+            json.media = this.media.to_object();
         }
         set_if(this, json, "group");
         set_if(this, json, "display_date");
@@ -185,17 +173,17 @@ export const Slide = Backbone.Model.extend({
         return json;
     }
 }, {
-    from_json: function(json) {
+    from_object: function(json) {
         if (!json) {
             return null;
         }
 
         const slide = new Slide();
 
-        slide.start_date = MDate.from_json(json.start_date);
-        slide.end_date = MDate.from_json(json.end_date);
-        slide.text = Text.from_json(json.text);
-        slide.media = Media.from_json(json.media);
+        slide.start_date = MDate.from_object(object.start_date);
+        slide.end_date = MDate.from_object(object.end_date);
+        slide.text = Text.from_object(object.text);
+        slide.media = Media.from_object(object.media);
         set_if(json, slide, "group");
         set_if(json, slide, "display_date");
         set_if(json, slide, "background");
@@ -209,20 +197,20 @@ export const Slide = Backbone.Model.extend({
 export const Slides = Backbone.Collection.extend({
     model: Slide,
 
-    to_json: function() {
+    to_object: function() {
         return this.map(function (slide) {
-            return slide.to_json();
+            return slide.to_object();
         });
     }
 }, {
-    from_json: function(json) {
+    from_object: function(json) {
         if (!json) {
             return null;
         }
 
         const slides = new Slides();
 
-        slides.add(json.map(Slide.from_json));
+        slides.add(json.map(Slide.from_object));
 
         return slides;
     }
@@ -236,30 +224,30 @@ export const Timeline = Backbone.Model.extend({
         scale: "human"
     },
 
-    to_json_str: function() {
+    to_json: function() {
         const json = {
-            events: this.events.to_json()
+            events: this.events.to_object(),
+            scale: this.scale
         };
         if (this.title) {
-            json.title = this.title.to_json();
+            json.title = this.title.to_object();
         }
         if (this.eras) {
             json.eras = this.eras.map(function (item) {
-                return item.to_json();
+                return item.to_object();
             });
         }
-        set_if(this, json, "scale");
 
         return JSON.stringify(json);
     }
 }, {
-    from_json_string: function(json_str) {
+    from_json: function(json_str) {
         const json = JSON.parse(json_str);
         const timeline = new Timeline();
 
-        timeline.events = Slides.from_json(json.events);
-        timeline.title = Slide.from_json(json.title);
-        timeline.eras = (json.eras ? json.eras : []).map(Era.from_json);
+        timeline.events = Slides.from_object(json.events);
+        timeline.title = Slide.from_object(json.title);
+        timeline.eras = (json.eras ? json.eras : []).map(Era.from_object);
         set_if(json, timeline, "scale");
 
         return timeline;
