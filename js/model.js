@@ -28,7 +28,7 @@ export const Text = {
 
 export function make_Text(headline=null, text=null) {
     return {
-        __proto__: Text,
+        __proto__: Text.prototype,
 
         to_object() {
             const json = {};
@@ -53,7 +53,7 @@ export const Media = {
 
 export function make_Media(url, caption=null, credit=null, thumbnail=null) {
     return {
-        __proto__: Media,
+        __proto__: Media.prototype,
 
         to_object() {
             const json = {};
@@ -82,7 +82,7 @@ export const Era = {
 
 export function make_Era(start_date, end_date, text=null) {
     return {
-        __proto__: Era,
+        __proto__: Era.prototype,
 
         to_object() {
             const json = {
@@ -118,7 +118,7 @@ export const MDate = {
 // TODO: not sure if day is 1-7 or 0-6
 export function make_MDate(date, display_date=null) {
     return {
-        __proto__: MDate,
+        __proto__: MDate.prototype,
 
         to_object() {
             const d = this.date;
