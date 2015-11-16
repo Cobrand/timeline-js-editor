@@ -1,0 +1,91 @@
+{
+    "title": {
+        "text": {
+            "headline":"Sh*t People Say",
+            "text":"People say stuff"
+        }
+    },
+    "startDate":"2012,1,26",
+    "events": [
+        {
+            "startDate":"2011,12,12",
+            "endDate":"2012,1,27",
+            "text": {
+                "headline":"Vine",
+                "text":"<p>Vine Test</p>"
+            },
+            "media":
+            {
+                "url":"https://vine.co/v/b55LOA1dgJU",
+                "credit":"",
+                "caption":""
+            }
+        },
+        {
+            "startDate":"2012,1,26",
+            "endDate":"2012,1,27",
+            "text": {
+                "headline":"Sh*t Politicians Say",
+                "text":"<p>In true political fashion, his character rattles off common jargon heard from people running for office.</p>"
+            },
+            "media":
+            {
+                "url":"http://youtu.be/u4XpeU9erbg",
+                "credit":"",
+                "caption":""
+            }
+        },
+        {
+            "startDate":"2012,1,10",
+            "text": {
+                "headline":"Sh*t Nobody Says",
+                "text":"<p>Have you ever heard someone say “can I burn a copy of your Nickelback CD?” or “my Bazooka gum still has flavor!” Nobody says that.</p>"
+            },
+            "media":
+            {
+                "url":"http://youtu.be/f-x8t0JOnVw",
+                "credit":"",
+                "caption":""
+            }
+        },
+        {
+            "startDate":"2012,1,26",
+            "text": {
+                "headline":"Sh*t Chicagoans Say",
+                "text":""
+            },
+            "media":
+            {
+                "url":"http://youtu.be/Ofy5gNkKGOo",
+                "credit":"",
+                "caption":""
+            }
+        },
+        {
+            "startDate":"2011,12,12",
+            "text": {
+                "headline":"Sh*t Girls Say",
+                "text":""
+            },
+            "media":
+            {
+                "url":"http://youtu.be/u-yLGIH7W9Y",
+                "credit":"",
+                "caption":"Writers & Creators: Kyle Humphrey & Graydon Sheppard"
+            }
+        },
+        {
+            "startDate":"2012,1,4",
+            "text": {
+                "headline":"Sh*t Broke People Say",
+                "text":""
+            },
+            "media":
+            {
+                "url":"http://youtu.be/zyyalkHjSjo",
+                "credit":"",
+                "caption":""
+            }
+        }
+    ]
+}

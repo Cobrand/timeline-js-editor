@@ -52,6 +52,10 @@ export function shallow_copy(object,props_to_copy ){
 }
 
 
+import React from "react";
+import Backbone from "backbone";
+import _ from "underscore";
+
 // Use react instead of Backbone.View.
 // https://leoasis.github.io/posts/2014/03/22/from_backbone_views_to_react/
 React.Backbone = {

@@ -30,6 +30,9 @@ export function make_Text(headline=null, text=null) {
     return {
         __proto__: Text.prototype,
 
+        headline,
+        text,
+
         to_object() {
             const json = {};
 
@@ -54,6 +57,11 @@ export const Media = {
 export function make_Media(url, caption=null, credit=null, thumbnail=null) {
     return {
         __proto__: Media.prototype,
+
+        url,
+        caption,
+        credit,
+        thumbnail,
 
         to_object() {
             const json = {};
@@ -83,6 +91,10 @@ export const Era = {
 export function make_Era(start_date, end_date, text=null) {
     return {
         __proto__: Era.prototype,
+
+        start_date,
+        end_date,
+        text,
 
         to_object() {
             const json = {
@@ -119,6 +131,9 @@ export const MDate = {
 export function make_MDate(date, display_date=null) {
     return {
         __proto__: MDate.prototype,
+
+        date,
+        display_date,
 
         to_object() {
             const d = this.date;
@@ -180,10 +195,10 @@ export const Slide = Backbone.Model.extend({
 
         const slide = new Slide();
 
-        slide.start_date = MDate.from_object(object.start_date);
-        slide.end_date = MDate.from_object(object.end_date);
-        slide.text = Text.from_object(object.text);
-        slide.media = Media.from_object(object.media);
+        slide.start_date = MDate.from_object(json.start_date);
+        slide.end_date = MDate.from_object(json.end_date);
+        slide.text = Text.from_object(json.text);
+        slide.media = Media.from_object(json.media);
         set_if(json, slide, "group");
         set_if(json, slide, "display_date");
         set_if(json, slide, "background");
@@ -210,7 +225,8 @@ export const Slides = Backbone.Collection.extend({
 
         const slides = new Slides();
 
-        slides.add(json.map(Slide.from_object));
+        json.map(Slide.from_object)
+            .map(slide => slides.add(slide));
 
         return slides;
     }
