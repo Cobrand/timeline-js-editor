@@ -1,4 +1,5 @@
 import React from "react";
+import "utils.js";
 
 export const Slide = React.createClass({
     mixins: [React.Backbone],
