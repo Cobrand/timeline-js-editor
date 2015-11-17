@@ -5,7 +5,7 @@
  */
 
 import Backbone from "backbone";
-import "utils.js";
+import * as utils from "utils.js";
 
 /**
  * Helper function to auto-handle from[key] == null.
@@ -183,7 +183,7 @@ export const Slide = Backbone.Model.extend({
         set_if(this, json, "display_date");
         set_if(this, json, "background");
         set_if(this, json, "autolink");
-        set_if(this, json, "unique_id");
+        json.unique_id = this.unique_id;
 
         return json;
     }
@@ -203,7 +203,7 @@ export const Slide = Backbone.Model.extend({
         set_if(json, slide, "display_date");
         set_if(json, slide, "background");
         set_if(json, slide, "autolink");
-        set_if(json, slide, "unique_id");
+        slide.unique_id = json.unique_id || utils.uuid4();
 
         return slide;
     }

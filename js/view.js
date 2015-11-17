@@ -29,7 +29,9 @@ export const Slides = React.createClass({
     render() {
         const slides = this.props
                            .slides
-                           .map(slide => <Slide slide={slide} />);
+                           .map(slide => <Slide slide={slide}
+                                                key={slide.unique_id}
+                                                />);
         return (
             <div>{slides}</div>
         );
