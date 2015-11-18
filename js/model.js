@@ -255,12 +255,7 @@ export const Slides = Backbone.Collection.extend({
             return null;
         }
 
-        const slides = new Slides();
-
-        json.map(Slide.from_object)
-            .map(slide => slides.add(slide));
-
-        return slides;
+        return new Slides(json.map(Slide.from_object));
     }
 });
 
