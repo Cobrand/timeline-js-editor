@@ -33,6 +33,10 @@ module.exports = {
             loader: 'imports?define=>false'
         },
         {
+            test: /\.json$/,
+            loader: 'json'
+        },
+        {
             test: /\.(png|jpg)$/, // transforms require("imgpath") into urls
             loader: 'url?limit=25000'
         },
