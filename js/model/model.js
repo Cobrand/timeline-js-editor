@@ -183,6 +183,17 @@ export function make_MDate(date, precision, display_date=null) {
     };
 }
 
+export const Tab = Backbone.Model.extend({
+    defaults:{
+        number:null,
+        slide:null,
+    }
+});
+
+export const Tabs = Backbone.Model.extend({
+    model:Tab,
+});
+
 export const Slide = Backbone.Model.extend({
     defaults: {
         start_date: null,
