@@ -36,7 +36,7 @@ export function make_Text(headline=null, text=null) {
         headline,
         text,
 
-        to_object() {
+        toJSON() {
             const json = {};
 
             set_if(this, json, "headline");
@@ -66,7 +66,7 @@ export function make_Media(url, caption=null, credit=null, thumbnail=null) {
         credit,
         thumbnail,
 
-        to_object() {
+        toJSON() {
             const json = {};
 
             set_if(this, json, "url");
@@ -99,10 +99,10 @@ export function make_Era(start_date, end_date, text=null) {
         end_date,
         text,
 
-        to_object() {
+        toJSON() {
             const json = {
-                start_date: this.start_date.to_object(),
-                end_date: this.end_date.to_object()
+                start_date: this.start_date.toJSON(),
+                end_date: this.end_date.toJSON()
             };
 
             set_if(this, json, "text");
@@ -167,7 +167,7 @@ export function make_MDate(date, precision, display_date=null) {
             return display_date || date.format(date_formats[precision]);
         },
 
-        to_object() {
+        toJSON() {
             let obj = {"display_date": display_date};
 
             for (let unit in units) {
@@ -196,20 +196,20 @@ export const Slide = Backbone.Model.extend({
         unique_id: null
     },
 
-    to_object: function() {
+    toJSON() {
         const json = {};
 
         if (this.start_date) {
-            json.start_date = this.start_date.to_object();
+            json.start_date = this.start_date.toJSON();
         }
         if (this.end_date) {
-            json.end_date = this.end_date.to_object();
+            json.end_date = this.end_date.toJSON();
         }
         if (this.text) {
-            json.text = this.text.to_object();
+            json.text = this.text.toJSON();
         }
         if (this.media) {
-            json.media = this.media.to_object();
+            json.media = this.media.toJSON();
         }
         set_if(this, json, "group");
         set_if(this, json, "display_date");
@@ -218,83 +218,65 @@ export const Slide = Backbone.Model.extend({
         json.unique_id = this.unique_id;
 
         return json;
-    }
-}, {
-    from_object: function(json) {
+    },
+
+    parse(json) {
         if (!json) {
             return null;
         }
 
-        const slide = new Slide();
-
-        slide.start_date = MDate.from_object(json.start_date);
-        slide.end_date = MDate.from_object(json.end_date);
-        slide.text = Text.from_object(json.text);
-        slide.media = Media.from_object(json.media);
-        set_if(json, slide, "group");
-        set_if(json, slide, "display_date");
-        set_if(json, slide, "background");
-        set_if(json, slide, "autolink");
-        slide.unique_id = json.unique_id || utils.uuid4();
-
-        return slide;
+        return {
+            start_date: MDate.from_object(json.start_date),
+            end_date: MDate.from_object(json.end_date),
+            text: Text.from_object(json.text),
+            media: Media.from_object(json.media),
+            group: json.group,
+            display_date: json.display_date,
+            background: json.background,
+            autolink: json.autolink,
+            unique_id: json.unique_id || utils.uuid4(),
+        };
     }
 });
 
 export const Slides = Backbone.Collection.extend({
     model: Slide,
-
-    to_object: function() {
-        return this.map(function (slide) {
-            return slide.to_object();
-        });
-    }
-}, {
-    from_object: function(json) {
-        if (!json) {
-            return null;
-        }
-
-        return new Slides(json.map(Slide.from_object));
-    }
 });
 
 export const Timeline = Backbone.Model.extend({
     defaults() {
         return {
             events: new Slides(),
-            title: null,
             eras: [],
             scale: "human"
         };
     },
 
-    to_json: function() {
+    toJSON() {
         const json = {
-            events: this.events.to_object(),
+            events: this.events.toJSON(),
             scale: this.scale
         };
         if (this.title) {
-            json.title = this.title.to_object();
+            json.title = this.title.toJSON();
         }
         if (this.eras) {
             json.eras = this.eras.map(function (item) {
-                return item.to_object();
+                return item.toJSON();
             });
         }
 
-        return JSON.stringify(json);
-    }
-}, {
-    from_json: function(json_str) {
-        const json = JSON.parse(json_str);
-        const timeline = new Timeline();
+        return json;
+    },
 
-        timeline.events = Slides.from_object(json.events);
-        timeline.title = Slide.from_object(json.title);
-        timeline.eras = (json.eras ? json.eras : []).map(Era.from_object);
-        set_if(json, timeline, "scale");
-
-        return timeline;
+    parse(json) {
+        return {
+            events: new Slides(json.events, {parse: true}),
+            title: new Slide(json.title, {parse: true}),
+            eras: (json.eras ? json.eras : []).map(
+                era => new Era(era, {parse: true})
+            ),
+            scale: json.scale
+        };
     }
 });

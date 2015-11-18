@@ -4,12 +4,12 @@ import "utils.js";
 
 export class Timeline extends React.Component {
     getTitle() {
-        const t = this.props.timeline;
-        if (t.title.text) {
+        const title = this.props.timeline.get("title");
+        if (title && title.text) {
             return (
                 <div>
-                    <h1>{t.title.text.headline}</h1>
-                    <h2>{t.title.text.text}</h2>
+                    <h1>{title.text.headline}</h1>
+                    <h2>{title.text.text}</h2>
                 </div>
             );
         }
@@ -20,7 +20,7 @@ export class Timeline extends React.Component {
         return (
             <div>
                 {this.getTitle()}
-                <Slides slides={t.events} />
+                <Slides slides={t.get("events")} />
             </div>
         );
     }

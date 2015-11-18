@@ -4,21 +4,20 @@ import "utils.js";
 export class Slide extends React.Component {
     getDate() {
         const s = this.props.slide;
-        if (s.display_date) {
-            return <p>{s.display_date}</p>;
-        } else if (s.end_date) {
-            return (<p> de {s.start_date.toString()} au {s.end_date && s.end_date.toString()} </p>);
+        if (s.get("display_date")) {
+            return <p>{s.get("display_date")}</p>;
+        } else if (s.get("end_date")) {
+            return (<p> de {s.get("start_date").toString()} au {s.get("end_date") && s.get("end_date").toString()} </p>);
         } else {
-            return <p>{s.start_date.toString()}</p>;
+            return <p>{s.get("start_date").toString()}</p>;
         }
     }
 
     getMedia() {
-        const s = this.props.slide;
-        if (!s.media) {
+        const m = this.props.slide.get("media");
+        if (!m) {
             return;
         }
-        const m = s.media;
         const url = <a href="{m.url}">{m.url}</a>;
         const caption = m.caption ?
             <figcaption dangerouslySetInnerHTML={{__html: m.caption}}
@@ -38,11 +37,10 @@ export class Slide extends React.Component {
     }
 
     getBg() {
-        const s = this.props.slide;
-        if (!s.background) {
+        const b = this.props.slide.get("background");
+        if (!b) {
             return;
         }
-        const b = s.background;
         let style = Object.create(null);
         if (b.url) {
             style.backgroundImage = "url(" + b.url + ")";
@@ -57,8 +55,8 @@ export class Slide extends React.Component {
         const s = this.props.slide;
         return (
             <div className="slide" style={this.getBg()}>
-                <h1 dangerouslySetInnerHTML={{__html: s.text.headline}} />
-                <p dangerouslySetInnerHTML={{__html: s.text.text}} />
+                <h1 dangerouslySetInnerHTML={{__html: s.get("text").headline}} />
+                <p dangerouslySetInnerHTML={{__html: s.get("text").text}} />
                 {this.getDate()}
                 {this.getMedia()}
             </div>
