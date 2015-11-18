@@ -135,6 +135,10 @@ export function make_MDate(date, display_date=null) {
         date,
         display_date,
 
+        toString() {
+            return display_date || date.toString();
+        },
+
         to_object() {
             const d = this.date;
             return {
