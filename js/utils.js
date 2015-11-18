@@ -11,41 +11,31 @@ export function uuid4() {
 } // source : http://stackoverflow.com/a/105074
 
 
-function checkCopyType(type){
-    if (type !== "deep" && type !== "shallow"){
-        throw new TypeError("wrong copy type");
-    }else{
-        return true ;
-    }
-}
-
-export function override_object(object,objectToOverride,props_to_override = null,copy_type="deep"){
-    checkCopyType(copy_type);
+export function deep_override_object(object,objectToOverride,props_to_override = null){
     if (props_to_override == null ){
         for (let key in object){
-            objectToOverride[key] = copy(object[key],copy_type);
+            objectToOverride[key] = deep_copy(object[key]);
         }
     }else if (props_to_override instanceof Array){
         for (let key of props_to_override){
-            objectToOverride[key] = copy(object[key],copy_type);
+            objectToOverride[key] = deep_copy(object[key]);
         }
     }else{
         throw new TypeError("expected array in propos_to_override");
     }
 }
-// type can be either "shallow" or "deep" ;
-function copy(object,props_to_copy,copy_type = "deep"){
-    checkCopyType(copy_type);
+
+function copy(object,props_to_copy){
     let return_value ;
     if(typeof object === "object" ){
-        return_value = new Object() ;
+        return_value = {};
         if (props_to_copy == null){
             for (let key in object){
-                return_value[key] = (copy_type === "deep") ? deep_copy(object[key]): object[key];
+                return_value[key] = deep_copy(object[key]);
             }
         }else if(props_to_copy instanceof Array){
             for (let key of props_to_copy){
-                return_value[key] = (copy_type === "deep") ? deep_copy(object[key]): object[key];
+                return_value[key] = deep_copy(object[key]);
             }
         }else{
             throw new TypeError("props_to_copy is not an Array !");
@@ -57,11 +47,7 @@ function copy(object,props_to_copy,copy_type = "deep"){
 }
 
 export function deep_copy(object,props_to_copy = null){
-    return copy(object,props_to_copy,"deep");
-}
-
-export function shallow_copy(object,props_to_copy ){
-    return copy(object,props_to_copy,"shallow");
+    return copy(object,props_to_copy);
 }
 
 
