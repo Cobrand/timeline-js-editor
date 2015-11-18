@@ -1,7 +1,13 @@
-$background-color: #BBB ;
+@import 'vars';
+@import 'mixins';
 
 body {
+    @include main-font();
     background-color: $background-color ;
+}
+
+h1,h2,h3,h4,h5,h6{
+    @include title-font();
 }
 
 .slide {

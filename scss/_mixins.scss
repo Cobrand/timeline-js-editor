@@ -1,0 +1,13 @@
+@mixin main-font($size : 'auto'){
+    font-family : "Open Sans", "Arial", sans-serif;
+    @if ($size != 'auto'){
+        font-size : $size ;
+    }
+}
+
+@mixin title-font($size : 'auto'){
+    font-family : "Raleway", serif ;
+    @if ($size != 'auto'){
+        font-size : $size ;
+    }
+}
