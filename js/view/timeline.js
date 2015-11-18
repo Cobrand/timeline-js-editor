@@ -2,7 +2,13 @@ import React from "react";
 import {Slide,Slides} from "./slide.js"
 import "utils.js";
 
-export class Timeline extends React.Component {
+export const Timeline = React.createClass({
+    mixins: [React.Backbone],
+
+    updateOnProps: {
+        "timeline": "collection",
+    },
+
     getTitle() {
         const title = this.props.timeline.get("title");
         if (title && title.text) {
@@ -13,7 +19,7 @@ export class Timeline extends React.Component {
                 </div>
             );
         }
-    }
+    },
 
     render() {
         const t = this.props.timeline;
@@ -24,8 +30,4 @@ export class Timeline extends React.Component {
             </div>
         );
     }
-}
-
-Timeline.updateOnProps = {
-    "timeline": "collection",
-}
+});

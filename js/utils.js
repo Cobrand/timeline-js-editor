@@ -83,4 +83,3 @@ React.Backbone = {
 }
 
 Object.assign(React.Backbone, Backbone.Events);
-React.Component.mixins = [React.Backbone];

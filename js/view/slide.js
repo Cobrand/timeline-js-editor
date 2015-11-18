@@ -1,7 +1,13 @@
 import React from "react";
 import "utils.js";
 
-export class Slide extends React.Component {
+export const Slide = React.createClass({
+    mixins: [React.Backbone],
+
+    updateOnProps: {
+        "slide": "model",
+    },
+
     getDate() {
         const s = this.props.slide;
         if (s.get("display_date")) {
@@ -11,7 +17,7 @@ export class Slide extends React.Component {
         } else {
             return <p>{s.get("start_date").toString()}</p>;
         }
-    }
+    },
 
     getMedia() {
         const m = this.props.slide.get("media");
@@ -34,7 +40,7 @@ export class Slide extends React.Component {
                 {credit}
             </figure>
         );
-    }
+    },
 
     getBg() {
         const b = this.props.slide.get("background");
@@ -49,7 +55,7 @@ export class Slide extends React.Component {
             style.backgroundColor = b.color;
         }
         return style;
-    }
+    },
 
     render() {
         const s = this.props.slide;
@@ -62,13 +68,15 @@ export class Slide extends React.Component {
             </div>
         );
     }
-}
+});
 
-Slide.updateOnProps = {
-    "slide": "model",
-}
+export const Slides = React.createClass({
+    mixins: [React.Backbone],
 
-export class Slides extends React.Component {
+    updateOnProps: {
+        "slides": "collection",
+    },
+
     render() {
         const slides = this.props
                            .slides
@@ -79,8 +87,4 @@ export class Slides extends React.Component {
             <div>{slides}</div>
         );
     }
-}
-
-Slides.updateOnProps = {
-    "slides": "collection",
-}
+});
