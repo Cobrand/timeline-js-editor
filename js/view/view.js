@@ -1,3 +1,2 @@
-import {Timeline} from "./timeline.js" ;
-
-export default Timeline ;
+import {Timeline as t} from "./timeline.js" ;
+export const Timeline = t ;
