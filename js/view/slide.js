@@ -1,13 +1,7 @@
 import React from "react";
 import "utils.js";
 
-export const Slide = React.createClass({
-    mixins: [React.Backbone],
-
-    updateOnProps: {
-        "slide": "model",
-    },
-
+export class Slide extends React.Component {
     getDate() {
         const s = this.props.slide;
         if (s.display_date) {
@@ -17,7 +11,7 @@ export const Slide = React.createClass({
         } else {
             return <p>{s.start_date.toString()}</p>;
         }
-    },
+    }
 
     getMedia() {
         const s = this.props.slide;
@@ -41,7 +35,7 @@ export const Slide = React.createClass({
                 {credit}
             </figure>
         );
-    },
+    }
 
     getBg() {
         const s = this.props.slide;
@@ -57,7 +51,7 @@ export const Slide = React.createClass({
             style.backgroundColor = b.color;
         }
         return style;
-    },
+    }
 
     render() {
         const s = this.props.slide;
@@ -70,15 +64,13 @@ export const Slide = React.createClass({
             </div>
         );
     }
-});
+}
 
-export const Slides = React.createClass({
-    mixins: [React.Backbone],
+Slide.updateOnProps = {
+    "slide": "model",
+}
 
-    updateOnProps: {
-        "slides": "collection",
-    },
-
+export class Slides extends React.Component {
     render() {
         const slides = this.props
                            .slides
@@ -89,4 +81,8 @@ export const Slides = React.createClass({
             <div>{slides}</div>
         );
     }
-});
+}
+
+Slides.updateOnProps = {
+    "slides": "collection",
+}
