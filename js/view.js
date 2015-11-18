@@ -13,8 +13,7 @@ export const Slide = React.createClass({
         if (s.display_date) {
             return <p>{s.display_date}</p>;
         } else if (s.end_date) {
-            return (<p> from {s.start_date.toString()}
-                       to {s.end_date && s.end_date.toString()} </p>);
+            return (<p> de {s.start_date.toString()} au {s.end_date && s.end_date.toString()} </p>);
         } else {
             return <p>{s.start_date.toString()}</p>;
         }
