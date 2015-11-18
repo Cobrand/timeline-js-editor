@@ -25,7 +25,7 @@ export function deep_override_object(object,objectToOverride,props_to_override =
     }
 }
 
-function copy(object,props_to_copy){
+function deep_copy(object,props_to_copy){
     let return_value ;
     if(typeof object === "object" ){
         return_value = {};
@@ -45,11 +45,6 @@ function copy(object,props_to_copy){
     }
     return return_value ;
 }
-
-export function deep_copy(object,props_to_copy = null){
-    return copy(object,props_to_copy);
-}
-
 
 import React from "react";
 import Backbone from "backbone";
