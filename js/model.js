@@ -116,13 +116,13 @@ export const MDate = {
         }
 
         return make_MDate(
-                new Date(Date.UTC(json.year,
-                                  json.month - 1,
-                                  json.day,
-                                  json.hour,
-                                  json.minute,
-                                  json.second,
-                                  json.millisecond)),
+                new Date(json.year,
+                         json.month - 1 || 0,
+                         json.day || 1,
+                         json.hour || 0,
+                         json.minute || 0,
+                         json.second || 0,
+                         json.millisecond || 0),
                 json.display_date);
     }
 }
