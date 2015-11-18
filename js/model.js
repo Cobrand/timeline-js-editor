@@ -156,8 +156,6 @@ const date_formats = {
 };
 
 export function make_MDate(date, precision, display_date=null) {
-    console.log(date);
-
     return {
         __proto__: MDate.prototype,
 
