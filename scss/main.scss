@@ -1,5 +1,10 @@
 $background-color: #BBB ;
 
-body{
+body {
     background-color: $background-color ;
+}
+
+.slide {
+    background-repeat: no-repeat;
+    background-size: contain;
 }
