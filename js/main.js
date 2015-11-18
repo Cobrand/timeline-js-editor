@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import Backbone from "backbone";
 
 import "../scss/main.scss";
-import * as model from "model.js";
-import * as view from "view.js";
+import * as Model from "model/model.js";
+import {Timeline} from "view/timeline.js";
 
 const json = require("./example_json.json");
-const timeline = model.Timeline.from_json(JSON.stringify(json));
-ReactDOM.render(<view.Timeline timeline={timeline} />, document.getElementById("root"));
+const timeline = Model.Timeline.from_json(JSON.stringify(json));
+let kek = <Timeline timeline={timeline} /> ;
+ReactDOM.render(kek, document.getElementById("root"));
