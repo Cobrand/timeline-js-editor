@@ -265,11 +265,13 @@ export const Slides = Backbone.Collection.extend({
 });
 
 export const Timeline = Backbone.Model.extend({
-    defaults: {
-        events: new Slides(),
-        title: null,
-        eras: [],
-        scale: "human"
+    defaults() {
+        return {
+            events: new Slides(),
+            title: null,
+            eras: [],
+            scale: "human"
+        };
     },
 
     to_json: function() {
