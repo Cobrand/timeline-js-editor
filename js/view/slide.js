@@ -73,7 +73,7 @@ export class Slides extends React.Component {
         const slides = this.props
                            .slides
                            .map(slide => <Slide slide={slide}
-                                                key={slide.unique_id}
+                                                key={slide.get("unique_id")}
                                                 />);
         return (
             <div>{slides}</div>
