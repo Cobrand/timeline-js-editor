@@ -1,12 +1,14 @@
-export function uuid4() {
-  function s4() {
+function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
+        .toString(16)
+        .substring(1);
 }
+
+// uuid generator
+export function uuid4() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+} // source : http://stackoverflow.com/a/105074
 
 
 function checkCopyType(type){
