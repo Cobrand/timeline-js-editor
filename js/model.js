@@ -5,6 +5,9 @@
  */
 
 import Backbone from "backbone";
+import moment from "moment";
+moment.locale('fr');
+
 import * as utils from "utils.js";
 
 /**
@@ -109,48 +112,75 @@ export function make_Era(start_date, end_date, text=null) {
     };
 }
 
+const units = [
+    "year",
+    "month",
+    "day",
+    "hour",
+    "minute",
+    "second",
+    "millisecond"
+];
+
 export const MDate = {
-    from_object(json) {
-        if (!json) {
+    from_object(json_false_month) {
+        if (!json_false_month) {
             return null;
         }
 
-        return make_MDate(
-                new Date(json.year,
-                         json.month - 1 || 0,
-                         json.day || 1,
-                         json.hour || 0,
-                         json.minute || 0,
-                         json.second || 0,
-                         json.millisecond || 0),
-                json.display_date);
+        let json = Object.assign({}, json_false_month);
+        json["month"] -= 1;
+
+        let precision = "millisecond";
+        for (let unit of units) {
+            if (json[unit] === undefined) {
+                break;
+            }
+            precision = unit;
+        }
+
+        return make_MDate(moment(json),
+                          precision,
+                          json.display_date);
     }
 }
 
-// TODO: not sure if day is 1-7 or 0-6
-export function make_MDate(date, display_date=null) {
+const date_formats = {
+    "year": "YYYY",
+    "month": "YYYY MMMM",
+    "day": "LL",
+    "hour": "LLL",
+    "minute": "LLL",
+    "second": "LL LTS",
+    "millisecond": "LL HH:mm:ss.SSS"
+};
+
+export function make_MDate(date, precision, display_date=null) {
+    console.log(date);
+
     return {
         __proto__: MDate.prototype,
 
         date,
+        precision,
         display_date,
 
         toString() {
-            return display_date || date.toString();
+            return display_date || date.format(date_formats[precision]);
         },
 
         to_object() {
-            const d = this.date;
-            return {
-                year: d.getUTCFullYear(),
-                month: d.getUTCMonth() + 1,
-                day: d.getUTCDay(),
-                hour: d.getUTCHours(),
-                minute: d.getUTCMinutes(),
-                second: d.getUTCSeconds(),
-                millisecond: d.getUTCMilliseconds(),
-                display_date: this.display_date
-            };
+            let obj = {"display_date": display_date};
+
+            for (let unit in units) {
+                obj[unit] = date.get(unit);
+                if (json[unit] === precision) {
+                    break;
+                }
+            }
+            obj["month"] += 1;
+
+            return obj;
         }
     };
 }
