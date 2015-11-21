@@ -9,33 +9,16 @@ import Backbone from "backbone";
 import * as utils from "utils.js";
 
 export class Media {
-    from_object(json) {
-        if (!json) {
-            return null;
-        }
-
-        return make_Media(json.url, json.caption, json.credit, json.thumbnail);
+    constructor(url, caption=null, credit=null, thumbnail=null){
+        this.url = url ;
+        this.caption = caption ;
+        this.credit = credit ;
+        this.thumbnail = thumbnail ;
     }
-}
-
-export function make_Media(url, caption=null, credit=null, thumbnail=null) {
-    return {
-        __proto__: Media.prototype,
-
-        url,
-        caption,
-        credit,
-        thumbnail,
-
-        toJSON() {
-            const json = {};
-
-            set_if(this, json, "url");
-            set_if(this, json, "caption");
-            set_if(this, json, "credit");
-            set_if(this, json, "thumbnail");
-
-            return json;
+    static from_object(json) {
+        if (json == null) {
+            throw new TypeError("expected JSON object, got null");
         }
-    };
+        return new Media(json.url, json.caption, json.credit, json.thumbnail);
+    }
 }
