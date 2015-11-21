@@ -48,13 +48,12 @@ function deep_copy(object,props_to_copy){
 
 import React from "react";
 import Backbone from "backbone";
-import _ from "underscore";
 
 // Use react instead of Backbone.View.
 // https://leoasis.github.io/posts/2014/03/22/from_backbone_views_to_react/
 React.Backbone = {
     listenToProps: function(props) {
-        _.each(this.updateOnProps, function(events, propName) {
+        this.updateOnProps.forEach((events, propName) => {
             switch(events) {
                 case 'collection':
                     events = 'add remove reset sort';
@@ -65,7 +64,7 @@ React.Backbone = {
             this.listenTo(props[propName], events, function() {
                 this.forceUpdate();
             });
-        }, this);
+        });
     },
 
     componentDidMount: function() {
