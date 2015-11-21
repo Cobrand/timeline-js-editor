@@ -1,3 +1,5 @@
+import Backbone from "backbone";
+
 export const Timeline = Backbone.Model.extend({
     defaults() {
         return {

@@ -1,3 +1,5 @@
+import Backbone from "backbone";
+
 export const Tab = Backbone.Model.extend({
     defaults: {
         slide: null,

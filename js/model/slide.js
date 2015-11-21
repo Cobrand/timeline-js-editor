@@ -1,3 +1,6 @@
+import {deep_override_object} from "utils.js" ;
+import Backbone from "backbone";
+
 export const Slide = Backbone.Model.extend({
     defaults: {
         start_date: null,
@@ -26,6 +29,7 @@ export const Slide = Backbone.Model.extend({
         if (this.media) {
             json.media = this.media.toJSON();
         }
+        deep_ove
         set_if(this, json, "group");
         set_if(this, json, "display_date");
         set_if(this, json, "background");
