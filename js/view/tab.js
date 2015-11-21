@@ -7,11 +7,13 @@ export const Tab = React.createClass({
     updateOnProps: {
         "tab": "model",
     },
-
+    function switchToSlide() {
+        this.props.timeline.switchToSlide(this.props.id);
+    },
     render() {
         return (
-            <div className="slide_tab">
-                {this.props.number}
+            <div className="slide_tab" onClick={this.switchToSlide}>
+                {this.props.id}
             </div>
         );
     }
@@ -25,13 +27,13 @@ export const Tabs = React.createClass({
     },
 
     render() {
-        const slides = this.props
+        const tabs = this.props
                            .tabs
                            .map(tab => <Tab tab={tab}
-                                                key={tab.get("unique_id")}
-                                                />);
+                                            key={tab.get("unique_id")}
+                                            />);
         return (
-            <div>{slides}</div>
+            <div>{tabs}</div>
         );
     }
 });
