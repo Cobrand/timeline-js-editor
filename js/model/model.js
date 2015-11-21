@@ -5,8 +5,6 @@
  */
 
 import Backbone from "backbone";
-import moment from "moment";
-moment.locale('fr');
 
 import * as utils from "utils.js";
 

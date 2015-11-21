@@ -1,4 +1,7 @@
+import moment from "moment";
 import * from "utils.js" ;
+var locale = window.navigator.userLanguage || window.navigator.language ;
+moment.locale(locale);
 
 export class TextSlide {
     constructor(headline,content){
