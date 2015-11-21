@@ -1,2 +1,2 @@
-import {Timeline as t} from "./timeline.js" ;
+import {Timeline as t} from "view/timeline.js" ;
 export const Timeline = t ;
