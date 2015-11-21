@@ -36,8 +36,8 @@ export const Slide = Backbone.Model.extend({
     },
 
     parse(json) {
-        if (!json) {
-            return null;
+        if (json == null) {
+            throw new TypeError("expected JSON object, got null");
         }
 
         return {
