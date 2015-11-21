@@ -10,16 +10,7 @@ moment.locale('fr');
 
 import * as utils from "utils.js";
 
-/**
- * Helper function to auto-handle from[key] == null.
- */
-function set_if(from, to, key) {
-    if (from[key] !== undefined && from[key] !== null) {
-        to[key] = from[key];
-    }
-}
-
-export const Media = {
+export class Media {
     from_object(json) {
         if (!json) {
             return null;
