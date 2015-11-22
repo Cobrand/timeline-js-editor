@@ -53,7 +53,8 @@ import Backbone from "backbone";
 // https://leoasis.github.io/posts/2014/03/22/from_backbone_views_to_react/
 React.Backbone = {
     listenToProps: function(props) {
-        this.updateOnProps.forEach((events, propName) => {
+        for (let propName in this.updateOnProps){
+            let events = this.updateOnProps[propName];
             switch(events) {
                 case 'collection':
                     events = 'add remove reset sort';
@@ -64,7 +65,7 @@ React.Backbone = {
             this.listenTo(props[propName], events, function() {
                 this.forceUpdate();
             });
-        });
+        }
     },
 
     componentDidMount: function() {
