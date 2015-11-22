@@ -57,12 +57,35 @@ export const Slide = React.createClass({
         return style;
     },
 
+    handleChangeText(event) {
+        this.props.slide.set({
+            text: {
+                text: event.target.value,
+                headline: this.props.slide.get("text").headline,
+            }
+        });
+    },
+
+    handleChangeTitle(event) {
+        this.props.slide.set({
+            text: {
+                text: this.props.slide.get("text").text,
+                headline: event.target.value,
+            }
+        });
+    },
+
     render() {
         const s = this.props.slide;
         return (
             <div className="slide" style={this.getBg()}>
-                <h1 dangerouslySetInnerHTML={{__html: s.get("text").headline}} />
-                <p dangerouslySetInnerHTML={{__html: s.get("text").text}} />
+                <input value={s.get("text").headline}
+                       onChange={this.handleChangeTitle}
+                       placeholder="Titre" />
+                <textarea value={s.get("text").text}
+                          onChange={this.handleChangeText}
+                          type="text"
+                          placeholder="Texte" />
                 {this.getDate()}
                 {this.getMedia()}
             </div>

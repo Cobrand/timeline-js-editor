@@ -12,7 +12,11 @@ export class Media {
         return new Media(json.url, json.caption, json.credit, json.thumbnail);
     }
     toJSON(){
-        // TODO
-        throw new Error("not implemented");
+        return {
+            url:this.url,
+            caption:this.caption,
+            credit:this.credit,
+            thumbnail:this.thumbnail
+        }
     }
 }

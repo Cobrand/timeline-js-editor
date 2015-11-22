@@ -1,6 +1,6 @@
 import moment from "moment";
 var locale = window.navigator.userLanguage || window.navigator.language ;
-moment.locale(locale);
+moment.locale("fr");
 
 const units = [
     "year",
@@ -28,6 +28,9 @@ export class MDate {
         this.precision = precision ;
         this.display_date = display_date ;
     }
+    toString() {
+        return this.display_date || this.date.format(date_formats[this.precision]) ;
+    }
     static from_object(json_false_month) {
         if (!json_false_month) {
             return null;
@@ -49,11 +52,11 @@ export class MDate {
                           json.display_date);
     }
     toJSON() {
-        let obj = {"display_date": display_date};
+        let obj = {"display_date": this.display_date};
 
         for (let unit in units) {
-            obj[unit] = date.get(unit);
-            if (json[unit] === precision) {
+            obj[unit] = this.date.get(unit);
+            if (json[unit] === this.precision) {
                 break;
             }
         }

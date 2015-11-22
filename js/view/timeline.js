@@ -6,7 +6,7 @@ export const Timeline = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "collection",
+        "timeline": "model",
     },
 
     getTitle() {

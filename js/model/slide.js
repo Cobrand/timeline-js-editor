@@ -19,15 +19,14 @@ export const Slide = Backbone.Model.extend({
 
     toJSON() {
         const json = {};
-
         let props_to_override_toJSON = ["start_date",
                                         "end_date",
                                         "text",
                                         "media"];
 
         for (let prop of props_to_override_toJSON){
-            if (this[prop] != null){
-                json[prop] = this[prop].toJSON();
+            if (this.attributes[prop] != null){
+                json[prop] = this.attributes[prop].toJSON();
             }
         }
 
@@ -36,7 +35,7 @@ export const Slide = Backbone.Model.extend({
                                  "background",
                                  "autolink",
                                  "unique_id"];
-        deep_override_object(this,json,props_to_override)
+        deep_override_object(this.attributes,json,props_to_override)
 
         return json;
     },

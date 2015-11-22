@@ -3,24 +3,23 @@ import {Slide,Slides} from "model/slide.js";
 import {Era} from "model/structs/time.js";
 
 export const Timeline = Backbone.Model.extend({
-    defaults() {
-        return {
-            events: new Slides(),
-            eras: [],
-            scale: "human"
-        };
+    defaults: {
+        events: new Slides(),
+        eras: [],
+        scale: "human"
     },
 
     toJSON() {
+        console.log(this);
         const json = {
-            events: this.events.toJSON(),
-            scale: this.scale
+            events: this.attributes.events.toJSON(),
+            scale: this.attributes.scale
         };
-        if (this.title) {
-            json.title = this.title.toJSON();
+        if (this.attributes.title) {
+            json.title = this.attributes.title.toJSON();
         }
-        if (this.eras) {
-            json.eras = this.eras.map(function (item) {
+        if (this.attributes.eras) {
+            json.eras = this.attributes.eras.map(function (item) {
                 return item.toJSON();
             });
         }
@@ -30,7 +29,7 @@ export const Timeline = Backbone.Model.extend({
 
     parse(json) {
         return {
-            events: json.events ? new Slides(json.events, {parse: true}) : null,
+            events: new Slides(json.events, {parse: true}) ,
             title: json.title ? new Slide(json.title, {parse: true}) : null,
             eras: (json.eras ? json.eras : []).map(
                 era => new Era(era, {parse: true})
