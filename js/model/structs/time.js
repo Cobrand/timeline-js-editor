@@ -1,6 +1,6 @@
 import moment from "moment";
 var locale = window.navigator.userLanguage || window.navigator.language ;
-moment.locale("fr");
+moment.locale(locale);
 
 const units = [
     "year",
