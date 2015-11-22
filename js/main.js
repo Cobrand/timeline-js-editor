@@ -4,8 +4,7 @@ import Backbone from "backbone";
 
 import "../scss/main.scss";
 import * as Model from "model/model.js";
-import {Timeline} from "view/view.js";
-import {Json} from "view/json.js";
+import {Timeline, Json} from "view/view.js";
 
 const json = require("./example_json.json");
 window.timeline = new Model.Timeline(json, {parse: true});
