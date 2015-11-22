@@ -69,7 +69,7 @@ export const Slide = React.createClass({
     handleChangeTitle(event) {
         this.props.slide.set({
             text: {
-                text: this.props.slide.get("headline").headline,
+                text: this.props.slide.get("text").text,
                 headline: event.target.value,
             }
         });
