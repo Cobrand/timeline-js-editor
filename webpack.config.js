@@ -1,7 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 
-const PROD = process.argv.indexOf('--prod') !== -1;
+const PROD = process.argv.indexOf('--prod') !== -1 ||
+             process.argv.indexOf('--release') !== -1 ;
 
 module.exports = {
     entry: "main.js",
