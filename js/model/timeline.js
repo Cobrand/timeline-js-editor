@@ -1,4 +1,6 @@
 import Backbone from "backbone";
+import {Slide,Slides} from "model/slide.js";
+import {Era} from "model/structs/time.js";
 
 export const Timeline = Backbone.Model.extend({
     defaults() {
@@ -28,8 +30,8 @@ export const Timeline = Backbone.Model.extend({
 
     parse(json) {
         return {
-            events: new Slides(json.events, {parse: true}),
-            title: new Slide(json.title, {parse: true}),
+            events: json.events ? new Slides(json.events, {parse: true}) : null,
+            title: json.title ? new Slide(json.title, {parse: true}) : null,
             eras: (json.eras ? json.eras : []).map(
                 era => new Era(era, {parse: true})
             ),

@@ -11,4 +11,8 @@ export class Media {
         }
         return new Media(json.url, json.caption, json.credit, json.thumbnail);
     }
+    toJSON(){
+        // TODO
+        throw new Error("not implemented");
+    }
 }

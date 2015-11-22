@@ -1,4 +1,7 @@
 import {deep_override_object,uuid4} from "utils.js" ;
+import {MDate,Era} from "model/structs/time.js";
+import {Text} from "model/structs/text.js";
+import {Media} from "model/structs/media.js";
 import Backbone from "backbone";
 
 export const Slide = Backbone.Model.extend({
@@ -46,8 +49,8 @@ export const Slide = Backbone.Model.extend({
         return {
             start_date: MDate.from_object(json.start_date),
             end_date: MDate.from_object(json.end_date),
-            text: Text.from_object(json.text),
-            media: Media.from_object(json.media),
+            text: json.text ? Text.from_object(json.text) : null ,
+            media: json.media ? Media.from_object(json.media) : null ,
             group: json.group,
             display_date: json.display_date,
             background: json.background,
