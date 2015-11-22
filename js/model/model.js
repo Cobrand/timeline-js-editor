@@ -131,7 +131,7 @@ export const MDate = {
         let json = Object.assign({}, json_false_month);
         json["month"] -= 1;
 
-        let precision = "millisecond";
+        let precision = "year";
         for (let unit of units) {
             if (json[unit] === undefined) {
                 break;
@@ -168,11 +168,12 @@ export function make_MDate(date, precision, display_date=null) {
         },
 
         toJSON() {
-            let obj = {"display_date": display_date};
+            let obj = {};
+            set_if(this, obj, "display_date");
 
-            for (let unit in units) {
+            for (let unit of units) {
                 obj[unit] = date.get(unit);
-                if (json[unit] === precision) {
+                if (unit === precision) {
                     break;
                 }
             }
@@ -199,23 +200,23 @@ export const Slide = Backbone.Model.extend({
     toJSON() {
         const json = {};
 
-        if (this.start_date) {
-            json.start_date = this.start_date.toJSON();
+        if (this.attributes.start_date) {
+            json.start_date = this.attributes.start_date.toJSON();
         }
-        if (this.end_date) {
-            json.end_date = this.end_date.toJSON();
+        if (this.attributes.end_date) {
+            json.end_date = this.attributes.end_date.toJSON();
         }
-        if (this.text) {
-            json.text = this.text.toJSON();
+        if (this.attributes.text) {
+            json.text = this.attributes.text.toJSON();
         }
-        if (this.media) {
-            json.media = this.media.toJSON();
+        if (this.attributes.media) {
+            json.media = this.attributes.media.toJSON();
         }
-        set_if(this, json, "group");
-        set_if(this, json, "display_date");
-        set_if(this, json, "background");
-        set_if(this, json, "autolink");
-        json.unique_id = this.unique_id;
+        set_if(this.attributes, json, "group");
+        set_if(this.attributes, json, "display_date");
+        set_if(this.attributes, json, "background");
+        set_if(this.attributes, json, "autolink");
+        json.unique_id = this.attributes.unique_id;
 
         return json;
     },
@@ -254,14 +255,14 @@ export const Timeline = Backbone.Model.extend({
 
     toJSON() {
         const json = {
-            events: this.events.toJSON(),
-            scale: this.scale
+            events: this.attributes.events.toJSON(),
+            scale: this.attributes.scale
         };
-        if (this.title) {
-            json.title = this.title.toJSON();
+        if (this.attributes.title) {
+            json.title = this.attributes.title.toJSON();
         }
-        if (this.eras) {
-            json.eras = this.eras.map(function (item) {
+        if (this.attributes.eras) {
+            json.eras = this.attributes.eras.map(function (item) {
                 return item.toJSON();
             });
         }
