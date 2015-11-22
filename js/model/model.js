@@ -25,11 +25,11 @@ export const Text = {
             return null;
         }
 
-        return make_Text(json.headline, json.text);
+        return make_Text(json.headline || "", json.text || "");
     }
 };
 
-export function make_Text(headline=null, text=null) {
+export function make_Text(headline, text) {
     return {
         __proto__: Text.prototype,
 
@@ -37,12 +37,10 @@ export function make_Text(headline=null, text=null) {
         text,
 
         toJSON() {
-            const json = {};
-
-            set_if(this, json, "headline");
-            set_if(this, json, "text");
-
-            return json;
+            return {
+                headline,
+                text
+            };
         }
     };
 }
