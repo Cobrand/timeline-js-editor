@@ -10,7 +10,6 @@ export const Timeline = Backbone.Model.extend({
     },
 
     toJSON() {
-        console.log(this);
         const json = {
             events: this.attributes.events.toJSON(),
             scale: this.attributes.scale

@@ -14,6 +14,4 @@ ReactDOM.render(<View.Timeline timeline={timeline} />,
 ReactDOM.render(<View.Json timeline={timeline} />,
                document.getElementById("json"));
 
-// console.log(window.timeline);
-// console.log(window.timeline.toJSON());
 window.timelinejs = new TL.Timeline('timeline-embed', window.timeline.toJSON());
