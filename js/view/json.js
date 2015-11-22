@@ -1,10 +1,11 @@
 import React from "react";
+import "utils.js";
 
 export const Json = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "collection",
+        "timeline": "model",
     },
 
     render() {
