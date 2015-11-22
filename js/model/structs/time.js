@@ -54,7 +54,7 @@ export class MDate {
     toJSON() {
         let obj = {"display_date": this.display_date};
 
-        for (let unit in units) {
+        for (let unit of units) {
             obj[unit] = this.date.get(unit);
             if (json[unit] === this.precision) {
                 break;
