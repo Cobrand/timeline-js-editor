@@ -8,7 +8,7 @@ stages:
 build:
     stage: build
     script:
-        - ./node_modules/webpack/bin/webpack.js --progress --colors --bail
+        - ./node_modules/webpack/bin/webpack.js --colors --bail
 
 eslint:
     stage: test
