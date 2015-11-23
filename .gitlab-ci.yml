@@ -1,10 +1,16 @@
 before_script:
     - npm install --silent || true
 
-eslint:
-    script:
-        - npm run-script lint
+stages:
+    - build
+    - test
 
 build:
+    stage: build
     script:
         - ./node_modules/webpack/bin/webpack.js --progress --colors --bail
+
+eslint:
+    stage: test
+    script:
+        - npm run-script lint
