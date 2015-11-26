@@ -18,13 +18,13 @@ module.exports = {
         configFile: '.eslintrc'
     },
     module: {
-        //preLoaders: [
-        //    {
-        //        test: /\.js$/,
-        //        loader: "eslint-loader",
-        //        exclude: /node_modules/
-        //    },
-        //],
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: "eslint-loader",
+                exclude: /node_modules/
+            },
+        ],
         loaders: [{
             test: /\.jsx?$/, // compiles jsx+ES6 into browser compatible ES5
             exclude: /(node_modules)/,
