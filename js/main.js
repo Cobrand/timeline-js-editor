@@ -7,7 +7,7 @@ import * as Model from "model/model.js";
 import * as View from "view/view.js";
 const json = require("./example_json.json");
 window.timeline = new Model.Timeline(json, {parse: true});
-ReactDOM.render(<View.Timeline timeline={timeline} />,
+ReactDOM.render(<View.Interface timeline={timeline} />,
                 document.getElementById("root"));
 
 
