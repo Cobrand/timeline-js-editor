@@ -5,10 +5,11 @@ function s4() {
 }
 
 // uuid generator
+// source : http://stackoverflow.com/a/105074
 export function uuid4() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-} // source : http://stackoverflow.com/a/105074
+    return s4() + s4() + "-" + s4() + "-" + s4() + "-" +
+        s4() + "-" + s4() + s4() + s4();
+}
 
 
 export function deep_override_object(object,objectToOverride,props_to_override = null){
@@ -56,11 +57,11 @@ React.Backbone = {
         for (let propName in this.updateOnProps){
             let events = this.updateOnProps[propName];
             switch(events) {
-                case 'collection':
-                    events = 'add remove reset sort';
-                    break;
-                case 'model':
-                    events = 'change';
+            case "collection":
+                events = "add remove reset sort";
+                break;
+            case "model":
+                events = "change";
             }
             this.listenTo(props[propName], events, function() {
                 this.forceUpdate();
@@ -80,6 +81,6 @@ React.Backbone = {
     componentWillUnmount: function() {
         this.stopListening();
     }
-}
+};
 
 Object.assign(React.Backbone, Backbone.Events);

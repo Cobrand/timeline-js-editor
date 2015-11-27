@@ -5,7 +5,7 @@ export const Json = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "model",
+        "timeline": "model"
     },
 
     render() {
@@ -17,4 +17,4 @@ export const Json = React.createClass({
             </div>
         );
     }
-})
+});

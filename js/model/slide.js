@@ -1,5 +1,5 @@
 import {deep_override_object,uuid4} from "utils.js" ;
-import {MDate,Era} from "model/structs/time.js";
+import {MDate} from "model/structs/time.js";
 import {Text} from "model/structs/text.js";
 import {Media} from "model/structs/media.js";
 import Backbone from "backbone";
@@ -35,7 +35,7 @@ export const Slide = Backbone.Model.extend({
                                  "background",
                                  "autolink",
                                  "unique_id"];
-        deep_override_object(this.attributes,json,props_to_override)
+        deep_override_object(this.attributes,json,props_to_override);
 
         return json;
     },
@@ -54,11 +54,11 @@ export const Slide = Backbone.Model.extend({
             display_date: json.display_date,
             background: json.background,
             autolink: json.autolink,
-            unique_id: json.unique_id || uuid4(),
+            unique_id: json.unique_id || uuid4()
         };
     }
 });
 
 export const Slides = Backbone.Collection.extend({
-    model: Slide,
+    model: Slide
 });

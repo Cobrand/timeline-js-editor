@@ -1,12 +1,12 @@
 import React from "react";
-import {Slide,Slides} from "./slide.js"
+import {Slides} from "./slide.js";
 import "utils.js";
 
 export const Timeline = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "model",
+        "timeline": "model"
     },
 
     getTitle() {

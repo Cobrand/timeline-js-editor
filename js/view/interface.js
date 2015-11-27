@@ -1,5 +1,5 @@
 import React from "react";
-import * as view from "view/view.js"
+import * as view from "view/view.js";
 
 export const Interface = React.createClass({
     getInitialState() {
