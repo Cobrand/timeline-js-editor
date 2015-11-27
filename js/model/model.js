@@ -4,5 +4,11 @@
  * Matches https://timeline.knightlab.com/docs/json-format.html
  */
 
- import {Timeline as t} from "model/timeline.js";
- export const Timeline = t ;
+import {Timeline} from "model/timeline.js";
+import {Slide,Slides} from "model/slide.js";
+
+export default {
+    Timeline,
+    Slide,
+    Slides
+};
