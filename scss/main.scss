@@ -16,6 +16,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .slide {
+    box-sizing: border-box;
     background-color: $slide-background;
     padding:5px;
     border-radius:$border-radius;
@@ -23,13 +24,13 @@ h1,h2,h3,h4,h5,h6{
     display:inline-block;
     background-repeat: no-repeat;
     background-size: contain;
-    width:100%;
+    width:$slide-width;
 }
 
 .tabs{
     display:inline-block;
     box-sizing: border-box;
-    width:$tab-width + 25px;
+    width:$tabs-width;
     height:$editor-height;
     min-height:$editor-min-height;
     overflow-x: hidden;
