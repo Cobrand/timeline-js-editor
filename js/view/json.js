@@ -11,7 +11,7 @@ export const Json = React.createClass({
     render() {
         const t = this.props.timeline;
         return (
-            <div>
+            <div className="json">
                 <h1>Timeline en json</h1>
                 <code>{JSON.stringify(t.toJSON())}</code>
             </div>

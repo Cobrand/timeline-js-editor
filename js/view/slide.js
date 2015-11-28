@@ -107,7 +107,9 @@ export const Slides = React.createClass({
                                                 key={slide.get("unique_id")}
                                                 />);
         return (
-            <div>{slides}</div>
+            <div className="slides">
+                {slides}
+            </div>
         );
     }
 });

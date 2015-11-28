@@ -24,7 +24,7 @@ export const Timeline = React.createClass({
     render() {
         const t = this.props.timeline;
         return (
-            <div>
+            <div className="timeline">
                 {this.getTitle()}
                 <Slides slides={t.get("events")} />
             </div>

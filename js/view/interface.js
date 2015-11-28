@@ -23,7 +23,7 @@ export const Interface = React.createClass({
     render() {
         const t = this.props.timeline;
         return (
-            <div>
+            <div className="interface">
                 <view.Tabs tabs={t.get("events")}
                            handleChangeTab={this.handleChangeTab}
                            />
