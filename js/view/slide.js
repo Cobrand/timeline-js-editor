@@ -24,7 +24,7 @@ export const Slide = React.createClass({
         if (!m) {
             return;
         }
-        const url = <a href="{m.url}">{m.url}</a>;
+        const url = <a href={m.url}>{m.url}</a>;
         const caption = m.caption ?
             <figcaption dangerouslySetInnerHTML={{__html: m.caption}}
                         className="caption">
