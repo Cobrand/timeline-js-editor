@@ -15,7 +15,7 @@ export const Tab = React.createClass({
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide}>
-                {this.props.tab.get("unique_id")}
+                {this.props.tab.get("text").headline}
             </div>
         );
     }
