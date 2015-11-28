@@ -36,7 +36,7 @@ export const Tabs = React.createClass({
                                             handleChangeTab={this.props.handleChangeTab}
                                             />);
         return (
-            <div>
+            <div className="tabs">
                 {tabs}
             </div>
         );
