@@ -62,7 +62,9 @@ export class MDate {
                 break;
             }
         }
-        obj["month"] += 1;
+        if (obj["month"] != null){
+            obj["month"] += 1;
+        }
 
         return obj;
     }
