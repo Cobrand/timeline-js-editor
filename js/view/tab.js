@@ -5,7 +5,7 @@ export const Tab = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "tab": "model",
+        "tab": "model"
     },
 
     switchToSlide() {
@@ -25,7 +25,7 @@ export const Tabs = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "tabs": "collection",
+        "tabs": "collection"
     },
 
     render() {
