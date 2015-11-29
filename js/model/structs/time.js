@@ -54,10 +54,18 @@ export class MDate {
                           json.display_date);
     }
     toJSON() {
-        let obj = {"display_date": this.display_date};
+        let obj = {};
+        if (this.display_date != null){
+            obj.display_date = this.display_date;
+        }
 
         for (let unit of units) {
-            obj[unit] = this.date.get(unit);
+            if (unit === "day"){ // moment.get("day") returns day of week, not day of month
+                obj[unit] = this.date.get("date");
+            }else{
+                obj[unit] = this.date.get(unit);
+            }
+
             if (unit === this.precision) {
                 break;
             }
