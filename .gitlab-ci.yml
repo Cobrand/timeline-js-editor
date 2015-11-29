@@ -14,3 +14,8 @@ eslint:
     stage: test
     script:
         - npm run-script lint
+
+mocha:
+    stage: test
+    script:
+        - npm test
