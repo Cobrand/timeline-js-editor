@@ -1,7 +1,7 @@
 import moment from "moment";
 
-var locale = (typeof window !== 'undefined') ?
-(window.navigator.userLanguage || window.navigator.language) : 'en' ;
+var locale = (typeof window !== "undefined") ?
+(window.navigator.userLanguage || window.navigator.language) : "en" ;
 moment.locale(locale);
 
 const units = [
