@@ -1,5 +1,7 @@
 import moment from "moment";
-var locale = window.navigator.userLanguage || window.navigator.language ;
+
+var locale = (typeof window !== "undefined") ?
+(window.navigator.userLanguage || window.navigator.language) : "en" ;
 moment.locale(locale);
 
 const units = [
@@ -52,15 +54,25 @@ export class MDate {
                           json.display_date);
     }
     toJSON() {
-        let obj = {"display_date": this.display_date};
+        let obj = {};
+        if (this.display_date != null){
+            obj.display_date = this.display_date;
+        }
 
         for (let unit of units) {
-            obj[unit] = this.date.get(unit);
+            if (unit === "day"){ // moment.get("day") returns day of week, not day of month
+                obj[unit] = this.date.get("date");
+            }else{
+                obj[unit] = this.date.get(unit);
+            }
+
             if (unit === this.precision) {
                 break;
             }
         }
-        obj["month"] += 1;
+        if (obj["month"] != null){
+            obj["month"] += 1;
+        }
 
         return obj;
     }
