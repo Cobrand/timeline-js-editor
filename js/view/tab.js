@@ -5,15 +5,17 @@ export const Tab = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "tab": "model",
+        "tab": "model"
     },
-    function switchToSlide() {
-        this.props.timeline.switchToSlide(this.props.id);
+
+    switchToSlide() {
+        this.props.handleChangeTab(this.props.tab);
     },
+
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide}>
-                {this.props.id}
+                {this.props.tab.get("text").headline}
             </div>
         );
     }
@@ -23,7 +25,7 @@ export const Tabs = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "tabs": "collection",
+        "tabs": "collection"
     },
 
     render() {
@@ -31,9 +33,12 @@ export const Tabs = React.createClass({
                            .tabs
                            .map(tab => <Tab tab={tab}
                                             key={tab.get("unique_id")}
+                                            handleChangeTab={this.props.handleChangeTab}
                                             />);
         return (
-            <div>{tabs}</div>
+            <div className="tabs">
+                {tabs}
+            </div>
         );
     }
 });

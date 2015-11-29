@@ -14,6 +14,6 @@ export class Text {
         return {
             headline:this.headline,
             text:this.content
-        }
+        };
     }
-};
+}

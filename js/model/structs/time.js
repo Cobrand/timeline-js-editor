@@ -58,7 +58,7 @@ export class MDate {
 
         for (let unit of units) {
             obj[unit] = this.date.get(unit);
-            if (json[unit] === this.precision) {
+            if (unit === this.precision) {
                 break;
             }
         }
@@ -81,14 +81,14 @@ export class Era {
 
         const era = new Era(MDate.from_object(json.start_date),
                             MDate.from_object(json.end_date),
-                            json.text)
+                            json.text);
         return era ;
     }
     toJSON() {
         return {
             start_date: this.start_date.toJSON(),
             end_date: this.end_date.toJSON(),
-            text: this.text,
+            text: this.text
         };
     }
-};
+}

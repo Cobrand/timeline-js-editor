@@ -17,6 +17,6 @@ export class Media {
             caption:this.caption,
             credit:this.credit,
             thumbnail:this.thumbnail
-        }
+        };
     }
 }

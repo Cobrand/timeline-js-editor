@@ -1,12 +1,12 @@
 import React from "react";
-import {Slide,Slides} from "./slide.js"
+import {Slides} from "./slide.js";
 import "utils.js";
 
 export const Timeline = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "model",
+        "timeline": "model"
     },
 
     getTitle() {
@@ -24,7 +24,7 @@ export const Timeline = React.createClass({
     render() {
         const t = this.props.timeline;
         return (
-            <div>
+            <div className="timeline">
                 {this.getTitle()}
                 <Slides slides={t.get("events")} />
             </div>

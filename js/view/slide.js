@@ -5,7 +5,7 @@ export const Slide = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "slide": "model",
+        "slide": "model"
     },
 
     getDate() {
@@ -24,7 +24,7 @@ export const Slide = React.createClass({
         if (!m) {
             return;
         }
-        const url = <a href="{m.url}">{m.url}</a>;
+        const url = <a href={m.url}>{m.url}</a>;
         const caption = m.caption ?
             <figcaption dangerouslySetInnerHTML={{__html: m.caption}}
                         className="caption">
@@ -61,7 +61,7 @@ export const Slide = React.createClass({
         this.props.slide.set({
             text: {
                 text: event.target.value,
-                headline: this.props.slide.get("text").headline,
+                headline: this.props.slide.get("text").headline
             }
         });
     },
@@ -70,7 +70,7 @@ export const Slide = React.createClass({
         this.props.slide.set({
             text: {
                 text: this.props.slide.get("text").text,
-                headline: event.target.value,
+                headline: event.target.value
             }
         });
     },
@@ -97,7 +97,7 @@ export const Slides = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "slides": "collection",
+        "slides": "collection"
     },
 
     render() {
@@ -107,7 +107,9 @@ export const Slides = React.createClass({
                                                 key={slide.get("unique_id")}
                                                 />);
         return (
-            <div>{slides}</div>
+            <div className="slides">
+                {slides}
+            </div>
         );
     }
 });
