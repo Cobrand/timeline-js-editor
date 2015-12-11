@@ -30,13 +30,18 @@ export const Tabs = React.createClass({
 
     render() {
         const tabs = this.props
-                           .tabs
-                           .map(tab => <Tab tab={tab}
-                                            key={tab.get("unique_id")}
-                                            handleChangeTab={this.props.handleChangeTab}
-                                            />);
+                         .tabs
+                         .map(tab => <Tab tab={tab}
+                                          key={tab.get("unique_id")}
+                                          handleChangeTab={this.props.handleChangeTab}
+                                          />);
         return (
             <div className="tabs">
+                <Tab tab={this.props.title}
+                     key={this.props.title.get("unique_id")}
+                     handleChangeTab={this.props.handleChangeTab}
+                     />
+                <hr />
                 {tabs}
             </div>
         );
