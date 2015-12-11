@@ -5,16 +5,18 @@ import {Media} from "model/structs/media.js";
 import Backbone from "backbone";
 
 export const Slide = Backbone.Model.extend({
-    defaults: {
-        start_date: null,
-        end_date: null,
-        text: null,
-        media: null,
-        group: null,
-        display_date: null,
-        background: null,
-        autolink: null,
-        unique_id: null
+    defaults() {
+        return {
+            start_date: new MDate(),
+            end_date: null,
+            text: new Text(),
+            media: null,
+            group: null,
+            display_date: null,
+            background: null,
+            autolink: true,
+            unique_id: uuid4()
+        };
     },
 
     toJSON() {
@@ -54,7 +56,7 @@ export const Slide = Backbone.Model.extend({
             display_date: json.display_date,
             background: json.background,
             autolink: json.autolink,
-            unique_id: json.unique_id || uuid4()
+            unique_id: json.unique_id
         };
     }
 });

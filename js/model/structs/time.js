@@ -26,7 +26,7 @@ const date_formats = {
 
 export class MDate {
     constructor(moment_date,precision="day",display_date=null){
-        this.date = moment_date ;
+        this.date = moment_date || moment();
         this.precision = precision ;
         this.display_date = display_date ;
     }

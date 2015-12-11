@@ -1,7 +1,7 @@
 export class Text {
-    constructor(headline,content){
-        this.headline = headline ;
-        this.content = content ;
+    constructor(headline="", content=""){
+        this.headline = headline;
+        this.content = content;
     }
     static from_object(json) {
         if (json == null) {
