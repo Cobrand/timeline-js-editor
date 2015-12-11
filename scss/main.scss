@@ -58,3 +58,17 @@ h1,h2,h3,h4,h5,h6{
 .slide_tab:last-child{
 
 }
+
+.json {
+    position: fixed;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    left: 5%;
+    top: 5%;
+    background-color: grey;
+
+    code {
+        background-color: white;
+    }
+}
