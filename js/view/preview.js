@@ -1,7 +1,7 @@
 import React from "react";
 import "utils.js";
 
-export const Json = React.createClass({
+export const Preview = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
@@ -11,14 +11,9 @@ export const Json = React.createClass({
     render() {
         const t = this.props.timeline;
         return (
-            <div className="json">
+            <div className="preview">
                 <h1>Timeline en json</h1>
                 <code>{JSON.stringify(t.toJSON())}</code>
-                <button name="close_json"
-                        type="button"
-                        onClick={this.props.handleCloseJSON}>
-                    Fermer
-                </button>
             </div>
         );
     }
