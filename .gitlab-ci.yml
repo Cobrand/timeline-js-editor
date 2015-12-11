@@ -1,5 +1,5 @@
 before_script:
-    - tar xf /tmp/nm_cache.tar && npm prune && npm install --silent && tar cf /tmp/nm_cache.tar node_modules
+    - ./cached_npm.sh
 
 stages:
     - build
