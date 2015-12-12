@@ -1,5 +1,5 @@
 import React from "react";
-import "utils.js";
+import model from "model/model.js";
 
 export const Tab = React.createClass({
     mixins: [React.Backbone],
@@ -28,6 +28,10 @@ export const Tabs = React.createClass({
         "tabs": "collection"
     },
 
+    handleAddSlide() {
+        this.props.tabs.add(new model.Slide());
+    },
+
     render() {
         const tabs = this.props
                          .tabs
@@ -43,6 +47,11 @@ export const Tabs = React.createClass({
                      />
                 <hr />
                 {tabs}
+                <button name="add_slide"
+                        type="button"
+                        onClick={this.handleAddSlide}>
+                    Ajouter une slide
+                </button>
             </div>
         );
     }

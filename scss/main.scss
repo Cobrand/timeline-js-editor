@@ -15,6 +15,18 @@ h1,h2,h3,h4,h5,h6{
     @include title-font();
 }
 
+.interface {
+    height: 100vh;
+}
+
+.menu {
+    height: 10vh;
+}
+
+.content {
+    height: 90vh;
+}
+
 .slide {
     box-sizing: border-box;
     background-color: $slide-background;
@@ -25,6 +37,18 @@ h1,h2,h3,h4,h5,h6{
     background-repeat: no-repeat;
     background-size: contain;
     width:$slide-width;
+    vertical-align: top;
+    height: 100%;
+
+    .slide-right {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .slide-media {
+        display: inline-block;
+        width: 50%;
+    }
 }
 
 .tabs{
@@ -32,7 +56,6 @@ h1,h2,h3,h4,h5,h6{
     box-sizing: border-box;
     width:$tabs-width;
     height:$editor-height;
-    min-height:$editor-min-height;
     overflow-x: hidden;
     overflow-y: scroll;
     border-bottom:$border;
@@ -61,8 +84,8 @@ h1,h2,h3,h4,h5,h6{
 
 .json {
     position: fixed;
-    width: 90%;
-    height: 90%;
+    width: 80%;
+    height: 80vh;
     margin: auto;
     left: 5%;
     top: 5%;
@@ -70,5 +93,6 @@ h1,h2,h3,h4,h5,h6{
 
     code {
         background-color: white;
+        overflow: auto;
     }
 }

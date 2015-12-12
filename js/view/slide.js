@@ -1,5 +1,5 @@
 import React from "react";
-import "utils.js";
+import view from "view/view.js";
 
 export const Slide = React.createClass({
     mixins: [React.Backbone],
@@ -17,29 +17,6 @@ export const Slide = React.createClass({
         } else {
             return <p>{s.get("start_date").toString()}</p>;
         }
-    },
-
-    getMedia() {
-        const m = this.props.slide.get("media");
-        if (!m) {
-            return;
-        }
-        const url = <a href={m.url}>{m.url}</a>;
-        const caption = m.caption ?
-            <figcaption dangerouslySetInnerHTML={{__html: m.caption}}
-                        className="caption">
-            </figcaption> : null;
-        const credit = m.credit ?
-            <figcaption dangerouslySetInnerHTML={{__html: m.credit}}
-                        className="credit">
-            </figcaption> : null;
-        return (
-            <figure>
-                {url}
-                {caption}
-                {credit}
-            </figure>
-        );
     },
 
     getBg() {
@@ -79,15 +56,17 @@ export const Slide = React.createClass({
         const s = this.props.slide;
         return (
             <div className="slide" style={this.getBg()}>
-                <input value={s.get("text").headline}
-                       onChange={this.handleChangeTitle}
-                       placeholder="Titre" />
-                <textarea value={s.get("text").text}
-                          onChange={this.handleChangeText}
-                          type="text"
-                          placeholder="Texte" />
-                {this.getDate()}
-                {this.getMedia()}
+                <view.Media slide={s} />
+                <div className="slide-right">
+                    <input value={s.get("text").headline}
+                           onChange={this.handleChangeTitle}
+                           placeholder="Titre" />
+                    <textarea value={s.get("text").text}
+                              onChange={this.handleChangeText}
+                              type="text"
+                              placeholder="Texte" />
+                    {this.getDate()}
+                </div>
             </div>
         );
     }
