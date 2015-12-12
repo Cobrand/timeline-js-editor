@@ -2,9 +2,15 @@ import React from "react";
 import view from "view/view.js";
 
 export const Interface = React.createClass({
+    mixins: [React.Backbone],
+
+    updateOnProps: {
+        "timeline": "model"
+    },
+
     getInitialState() {
         return {
-            current_slide: null,
+            current_slide: this.props.timeline.get("title"),
             json: null
         };
     },

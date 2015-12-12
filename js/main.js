@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+// For React.Backbone
+import "utils.js";
+
 import "../scss/main.scss";
 import model from "model/model.js";
 import view from "view/view.js";
