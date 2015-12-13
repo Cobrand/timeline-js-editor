@@ -52,6 +52,10 @@ export const Slide = React.createClass({
         });
     },
 
+    onGroupChange(event) {
+        this.props.slide.set("group", event.target.value);
+    },
+
     render() {
         const s = this.props.slide;
         return (
@@ -65,6 +69,9 @@ export const Slide = React.createClass({
                               onChange={this.handleChangeText}
                               placeholder="Texte" />
                     {this.getDate()}
+                    Groupe : <input value={s.get("group")}
+                                    onChange={this.onGroupChange}
+                                    placeholder="Groupe" />
                 </div>
             </div>
         );
