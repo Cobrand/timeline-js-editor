@@ -34,6 +34,10 @@ export const Interface = React.createClass({
         });
     },
 
+    onChangeScale(event) {
+        this.props.timeline.set("scale", event.target.value);
+    },
+
     showPreview() {
 
     },
@@ -59,6 +63,13 @@ export const Interface = React.createClass({
                             onClick={this.showPreview}>
                         Apercu timeline
                     </button>
+                    Échelle temporelle :
+                    <select name="scale"
+                            value={this.props.timeline.get("scale")}
+                            onChange={this.onChangeScale}>
+                        <option value="human">Humaine</option>
+                        <option value="cosmological">Cosmologique</option>
+                    </select>
                 </div>
                 <div className="content">
                     <view.Tabs title={t.get("title")}
