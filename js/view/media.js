@@ -36,12 +36,12 @@ export const Media = React.createClass({
                        type="url"
                        onChange={this.handleChangeUrl}
                        placeholder="URL" />
-                <input value={m.credit}
-                       onChange={this.handleChangeCredit}
-                       placeholder="Crédit" />
-                <input value={m.caption}
-                       onChange={this.handleChangeCaption}
-                       placeholder="Caption" />
+                <textarea value={m.credit}
+                          onChange={this.handleChangeCredit}
+                          placeholder="Crédit" />
+                <textarea value={m.caption}
+                          onChange={this.handleChangeCaption}
+                          placeholder="Caption" />
             </div>
         );
     }
