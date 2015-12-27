@@ -3,7 +3,6 @@
 .slide {
     box-sizing: border-box;
     background-color: $slide-background;
-    padding:5px;
     border-radius:$border-radius;
     border: $border;
     display:inline-block;
@@ -13,32 +12,52 @@
     vertical-align: top;
     height: 100%;
 
+
     textarea,input {
+        @include title-font(1.1em)
+        $margin-horizontal: 5px;
+        box-sizing: border-box;
+        margin-bottom: $margin-horizontal;
+        margin-top: $margin-horizontal;
+        padding:3px;
+        width:100%;
         border:solid 1px #555;
         border-radius: 3px;
-
         &:focus{
             border-color: #AAA;
         }
     }
 }
 
-.slide_media {
+.slide_media,.slide_right {
+    vertical-align: top; // MAGIC TRICK DO NOT REMOVE
     display: inline-block;
     width: 50%;
-
+    height:100%;
+    box-sizing: border-box;
     * {
         display: block;
     }
+    padding:5px;
 }
 
-.slide_right {
-    display: inline-block;
-    width: 50%;
+.slide_media_preview {
+    // TODO do a real preview mate
+    @include main-font(1.5em);
+    font-weight:bold;
+    height:52%;
+    border-radius : 25px;
+    box-sizing: border-box;
+    border: 40px solid black;
+    text-align: center;
+}
 
-    * {
-        display: block;
-    }
+.slide_media{
+    border-right:solid 2px black;
+}
+
+.slide_right{
+
 }
 
 .slide_tab{

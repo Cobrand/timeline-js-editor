@@ -32,7 +32,7 @@ export const Media = React.createClass({
         }
         return (
             <div className="slide_media">
-                <div className="slide_media_preview"></div>
+                <div className="slide_media_preview">Media Preview Here</div>
                 <input className="slide_media_url" value={m.url}
                        type="url"
                        onChange={this.handleChangeUrl}
