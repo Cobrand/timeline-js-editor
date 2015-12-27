@@ -1,0 +1,62 @@
+
+
+.slide {
+    box-sizing: border-box;
+    background-color: $slide-background;
+    padding:5px;
+    border-radius:$border-radius;
+    border: $border;
+    display:inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:$slide-width;
+    vertical-align: top;
+    height: 100%;
+
+    textarea,input {
+        border:solid 1px #555;
+        border-radius: 3px;
+
+        &:focus{
+            border-color: #AAA;
+        }
+    }
+}
+
+.slide_media {
+    display: inline-block;
+    width: 50%;
+
+    * {
+        display: block;
+    }
+}
+
+.slide_right {
+    display: inline-block;
+    width: 50%;
+
+    * {
+        display: block;
+    }
+}
+
+.slide_tab{
+    @include title-font(12px);
+    font-weight: bold;
+    background-color: $tab-background;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-right:$border;
+    border-top:$border;
+    cursor:pointer;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    height:$tab-height;
+    width:$tab-width;
+    padding:3px;
+}
+
+.slide_tab:last-child{
+
+}

@@ -31,15 +31,16 @@ export const Media = React.createClass({
             return;
         }
         return (
-            <div className="slide-media">
-                <input value={m.url}
+            <div className="slide_media">
+                <div className="slide_media_preview"></div>
+                <input className="slide_media_url" value={m.url}
                        type="url"
                        onChange={this.handleChangeUrl}
                        placeholder="URL" />
-                <textarea value={m.credit}
+                <textarea className="slide_media_credit" value={m.credit}
                           onChange={this.handleChangeCredit}
                           placeholder="Crédit" />
-                <textarea value={m.caption}
+                <textarea className="slide_media_caption" value={m.caption}
                           onChange={this.handleChangeCaption}
                           placeholder="Caption" />
             </div>

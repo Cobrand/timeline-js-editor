@@ -61,7 +61,7 @@ export const Slide = React.createClass({
         return (
             <div className="slide" style={this.getBg()}>
                 <view.Media slide={s} />
-                <div className="slide-right">
+                <div className="slide_right">
                     <input value={s.get("text").headline}
                            onChange={this.handleChangeTitle}
                            placeholder="Titre" />

@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'mixins';
+@import 'slide';
 
 body {
     @include main-font();
@@ -27,38 +28,6 @@ h1,h2,h3,h4,h5,h6{
     height: 90vh;
 }
 
-.slide {
-    box-sizing: border-box;
-    background-color: $slide-background;
-    padding:5px;
-    border-radius:$border-radius;
-    border: $border;
-    display:inline-block;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width:$slide-width;
-    vertical-align: top;
-    height: 100%;
-
-    .slide-media {
-        display: inline-block;
-        width: 50%;
-
-        * {
-            display: block;
-        }
-    }
-
-    .slide-right {
-        display: inline-block;
-        width: 50%;
-
-        * {
-            display: block;
-        }
-    }
-}
-
 .tabs{
     display:inline-block;
     box-sizing: border-box;
@@ -68,26 +37,6 @@ h1,h2,h3,h4,h5,h6{
     overflow-y: scroll;
     border-bottom:$border;
     border-bottom-right-radius: $border-radius;
-}
-
-.slide_tab{
-    @include title-font(12px);
-    font-weight: bold;
-    background-color: $tab-background;
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-    border-right:$border;
-    border-top:$border;
-    cursor:pointer;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    height:$tab-height;
-    width:$tab-width;
-    padding:3px;
-}
-
-.slide_tab:last-child{
-
 }
 
 .json {
