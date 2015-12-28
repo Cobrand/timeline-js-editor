@@ -21,6 +21,14 @@ export const Interface = React.createClass({
         });
     },
 
+    handleRemoveSlide() {
+        // TODO: better handler
+        if (!this.props.timeline.get("events").contains(this.state.current_slide)) {
+            this.state.current_slide = null;
+        }
+        this.forceUpdate();
+    },
+
     showJSON() {
         this.setState({
             json: <view.Json timeline={this.props.timeline}
@@ -75,6 +83,7 @@ export const Interface = React.createClass({
                     <view.Tabs title={t.get("title")}
                                tabs={t.get("events")}
                                handleChangeTab={this.handleChangeTab}
+                               handleRemoveSlide={this.handleRemoveSlide}
                                />
                     {this.getSlide()}
                 </div>

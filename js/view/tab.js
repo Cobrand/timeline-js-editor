@@ -12,10 +12,24 @@ export const Tab = React.createClass({
         this.props.handleChangeTab(this.props.tab);
     },
 
+    getButtonRemove() {
+        let callback = this.props.handleRemoveSlide;
+        if (callback) {
+            return (
+                <button name="remove_this_slide"
+                    type="button"
+                    onClick={this.props.handleRemoveSlide}>
+                    Delete
+                </button>
+            );
+        }
+    },
+
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide}>
-                {this.props.tab.get("text").headline}
+                <p>{this.props.tab.get("text").headline}</p>
+                {this.getButtonRemove()}
             </div>
         );
     }
@@ -32,12 +46,19 @@ export const Tabs = React.createClass({
         this.props.tabs.add(new model.Slide());
     },
 
+    handleRemoveSlide(tab, event) {
+        event.stopPropagation();
+        this.props.tabs.remove(tab);
+        this.props.handleRemoveSlide();
+    },
+
     render() {
         const tabs = this.props
                          .tabs
                          .map(tab => <Tab tab={tab}
                                           key={tab.get("unique_id")}
                                           handleChangeTab={this.props.handleChangeTab}
+                                          handleRemoveSlide={this.handleRemoveSlide.bind(this, tab)}
                                           />);
         return (
             <div className="tabs">
