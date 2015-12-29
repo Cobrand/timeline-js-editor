@@ -1,5 +1,3 @@
-
-
 .slide {
     box-sizing: border-box;
     background-color: $slide-background;
@@ -57,26 +55,5 @@
 }
 
 .slide_right{
-
-}
-
-.slide_tab{
-    position: relative;
-    @include title-font(12px);
-    font-weight: bold;
-    background-color: $tab-background;
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-    border-right:$border;
-    border-top:$border;
-    cursor:pointer;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    height:$tab-height;
-    width:$tab-width;
-    padding:3px;
-}
-
-.slide_tab:last-child{
 
 }

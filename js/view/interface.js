@@ -61,13 +61,13 @@ export const Interface = React.createClass({
         return (
             <div className="interface">
                 <div className="menu">
-                    <button className="button_main blue"
+                    <button className="button main blue"
                             name="show_json"
                             type="button"
                             onClick={this.showJSON}>
                         Export JSON
                     </button>
-                    <button className="button_main lightblue"
+                    <button className="button main lightblue"
                             name="preview"
                             type="button"
                             onClick={this.showPreview}>

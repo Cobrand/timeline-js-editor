@@ -1,0 +1,49 @@
+@import 'button';
+.tabs{
+    display:inline-block;
+    box-sizing: border-box;
+    width:$tabs-width;
+    height:$editor-height;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-bottom:$border;
+    border-bottom-right-radius: $border-radius;
+}
+
+.slide_tab{
+    position: relative;
+    @include title-font(12px);
+    font-weight: bold;
+    background-color: $tab-background;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-right:$border;
+    border-top:$border;
+    cursor:pointer;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    height:$tab-height;
+    width:$tab-width;
+    padding:3px;
+}
+
+.slide_tab:last-child{
+
+}
+
+.removeslide{
+    @extend .button, .small, .red;
+    position: absolute;
+    margin:3px;
+    bottom: 0;
+    right:0;
+    float:right;
+}
+
+.newslide{
+    @extend .button, .small, .blue;
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+    box-sizing: border-box;
+}

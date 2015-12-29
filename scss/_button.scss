@@ -1,0 +1,51 @@
+@import 'vars';
+.button { // shamelessly taken from bootstrap css
+    cursor: pointer;
+    -moz-user-select: none; // rend le contenu non selectionnable
+    border: 1px solid transparent;
+    &.blue{
+        color: #FFF;
+        background-color: #337AB7;
+        border-color: #2E6DA4;
+        &:hover{
+            background-color: #286090;
+            border-color: #204d74;
+        }
+    }
+
+    &.lightblue{
+        color: #FFF;
+        background-color: #5BC0DE;
+        border-color: #46B8DA;
+
+        &:hover{
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+    }
+
+    &.red{
+        color: #FFF;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+
+        &:hover{
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+    }
+
+    &.small{
+        height:24px;
+        padding: 2px 4px;
+        font-size: 14px;
+        line-height: 1.2;
+        border-radius: 3px;
+    }
+
+    &.main{
+        @extend .topnav_element;
+        padding: 0 16px;
+        font-size: 18px;
+    }
+}

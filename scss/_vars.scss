@@ -21,3 +21,15 @@ $slide-background:#FEFEFE;
 
 // editor
 $editor-height:100%;
+
+$topnav_element_height:48px;
+.topnav_element{
+    margin: 2px 2px 0 2px;
+    display:inline-block;
+    height:$topnav_element_height;
+    box-sizing: border-box;
+    border-radius: 6px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
