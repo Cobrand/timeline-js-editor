@@ -61,6 +61,7 @@
 }
 
 .slide_tab{
+    position: relative;
     @include title-font(12px);
     font-weight: bold;
     background-color: $tab-background;

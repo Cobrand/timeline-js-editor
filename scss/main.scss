@@ -53,3 +53,68 @@ h1,h2,h3,h4,h5,h6{
         overflow: auto;
     }
 }
+
+.button_main { // shamelessly taken from bootstrap css
+    display: inline-block;
+    margin: 2px 2px 0 2px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33333;
+    border-radius: 6px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+
+    &.blue{
+        color: #FFF;
+        background-color: #337AB7;
+        border-color: #2E6DA4;
+
+        &:hover{
+            background-color: #286090;
+            border-color: #204d74;
+        }
+    }
+
+    &.lightblue{
+        color: #FFF;
+        background-color: #5BC0DE;
+        border-color: #46B8DA;
+
+        &:hover{
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+    }
+
+    &.red{
+        color: #FFF;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+
+        &:hover{
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+    }
+
+    &.small{
+        padding: 2px 4px;
+        font-size: 14px;
+        line-height: 1.2;
+        border-radius: 3px;
+    }
+}
+
+.removebutton{
+    @extend .button_main, .small, .red;
+    position: absolute;
+    bottom: 0;
+    right:0;
+    float:right;
+}

@@ -61,12 +61,14 @@ export const Interface = React.createClass({
         return (
             <div className="interface">
                 <div className="menu">
-                    <button name="show_json"
+                    <button className="button_main blue"
+                            name="show_json"
                             type="button"
                             onClick={this.showJSON}>
                         Export JSON
                     </button>
-                    <button name="preview"
+                    <button className="button_main lightblue"
+                            name="preview"
                             type="button"
                             onClick={this.showPreview}>
                         Apercu timeline

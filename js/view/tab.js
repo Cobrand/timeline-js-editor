@@ -16,10 +16,12 @@ export const Tab = React.createClass({
         let callback = this.props.handleRemoveSlide;
         if (callback) {
             return (
-                <button name="remove_this_slide"
+                <button
+                    className="removebutton"
+                    name="remove_this_slide"
                     type="button"
-                    onClick={this.props.handleRemoveSlide}>
-                    Delete
+                    onClick={callback}>
+                    X
                 </button>
             );
         }
@@ -28,8 +30,7 @@ export const Tab = React.createClass({
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide}>
-                <p>{this.props.tab.get("text").headline}</p>
-                {this.getButtonRemove()}
+                {this.props.tab.get("text").headline} {this.getButtonRemove()}
             </div>
         );
     }
