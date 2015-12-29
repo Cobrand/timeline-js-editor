@@ -26,6 +26,16 @@
     height:$tab-height;
     width:$tab-width;
     padding:3px;
+
+    & .removeslide{
+        display:none;
+    }
+
+    &:hover{
+        & .removeslide{
+            display:inline-block;
+        }
+    }
 }
 
 .slide_tab:last-child{
