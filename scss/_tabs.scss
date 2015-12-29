@@ -13,6 +13,7 @@
 .slide_tab{
     position: relative;
     @include title-font(12px);
+    -moz-user-select: none;
     font-weight: bold;
     background-color: $tab-background;
     border-top-right-radius: $border-radius;

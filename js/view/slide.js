@@ -65,7 +65,9 @@ export const Slide = React.createClass({
                     <input value={s.get("text").headline}
                            onChange={this.handleChangeTitle}
                            placeholder="Titre" />
-                    <textarea value={s.get("text").text}
+                       <textarea
+                              name="text"
+                              value={s.get("text").text}
                               onChange={this.handleChangeText}
                               placeholder="Texte" />
                     {this.getDate()}
