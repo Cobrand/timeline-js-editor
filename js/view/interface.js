@@ -101,6 +101,7 @@ export const Interface = React.createClass({
                 <div className="content">
                     <view.Tabs title={t.get("title")}
                                tabs={t.get("events")}
+                               focused_tab={this.state.current_slide}
                                handleAddSlide={this.handleAddSlide}
                                handleChangeTab={this.handleChangeTab}
                                handleRemoveSlide={this.handleRemoveSlide}

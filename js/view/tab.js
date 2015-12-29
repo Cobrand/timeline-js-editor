@@ -29,7 +29,7 @@ export const Tab = React.createClass({
 
     render() {
         return (
-            <div className="slide_tab" onClick={this.switchToSlide}>
+            <div className="slide_tab" onClick={this.switchToSlide} data-focused={this.props.focused}>
                 {this.props.tab.get("text").headline} {this.getButtonRemove()}
             </div>
         );
@@ -49,20 +49,29 @@ export const Tabs = React.createClass({
         this.props.handleRemoveSlide();
     },
 
+    getTitleTab() {
+        const tab = this.props.title;
+        return (
+            <Tab tab={tab}
+                 key={tab.get("unique_id")}
+                 focused={tab === this.props.focused_tab}
+                 handleChangeTab={this.props.handleChangeTab}
+                 />
+        );
+    },
+
     render() {
         const tabs = this.props
                          .tabs
                          .map(tab => <Tab tab={tab}
                                           key={tab.get("unique_id")}
+                                          focused={tab === this.props.focused_tab}
                                           handleChangeTab={this.props.handleChangeTab}
                                           handleRemoveSlide={this.handleRemoveSlide.bind(this, tab)}
                                           />);
         return (
             <div className="tabs">
-                <Tab tab={this.props.title}
-                     key={this.props.title.get("unique_id")}
-                     handleChangeTab={this.props.handleChangeTab}
-                     />
+                {this.getTitleTab()}
                 <hr />
                 {tabs}
                 <button className="newslide"
