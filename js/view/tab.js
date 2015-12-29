@@ -17,7 +17,7 @@ export const Tab = React.createClass({
         if (callback) {
             return (
                 <button
-                    className="removebutton"
+                    className="removeslide"
                     name="remove_this_slide"
                     type="button"
                     onClick={callback}>
@@ -69,10 +69,11 @@ export const Tabs = React.createClass({
                      />
                 <hr />
                 {tabs}
-                <button name="add_slide"
+                <button className="newslide"
+                        name="add_slide"
                         type="button"
                         onClick={this.handleAddSlide}>
-                    Ajouter une slide
+                    Nouvelle slide
                 </button>
             </div>
         );
