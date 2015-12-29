@@ -43,10 +43,6 @@ export const Tabs = React.createClass({
         "tabs": "collection"
     },
 
-    handleAddSlide() {
-        this.props.tabs.add(new model.Slide());
-    },
-
     handleRemoveSlide(tab, event) {
         event.stopPropagation();
         this.props.tabs.remove(tab);
@@ -72,7 +68,7 @@ export const Tabs = React.createClass({
                 <button className="newslide"
                         name="add_slide"
                         type="button"
-                        onClick={this.handleAddSlide}>
+                        onClick={this.props.handleAddSlide}>
                     Nouvelle slide
                 </button>
             </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import view from "view/view.js";
+import model from "model/model.js";
 
 export const Interface = React.createClass({
     mixins: [React.Backbone],
@@ -27,6 +28,20 @@ export const Interface = React.createClass({
             this.state.current_slide = null;
         }
         this.forceUpdate();
+    },
+
+    handleAddSlide() {
+        const slide = new model.Slide();
+        const tabs = this.props.timeline.get("events");
+
+        if (!this.state.current_slide) {
+            tabs.add(slide);
+        } else {
+            const idx_new = 1 + tabs.indexOf(this.state.current_slide);
+            tabs.add(slide, {at: idx_new});
+        }
+
+        this.handleChangeTab(slide);
     },
 
     showJSON() {
@@ -86,6 +101,7 @@ export const Interface = React.createClass({
                 <div className="content">
                     <view.Tabs title={t.get("title")}
                                tabs={t.get("events")}
+                               handleAddSlide={this.handleAddSlide}
                                handleChangeTab={this.handleChangeTab}
                                handleRemoveSlide={this.handleRemoveSlide}
                                />
