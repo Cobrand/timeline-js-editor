@@ -18,6 +18,14 @@ h1,h2,h3,h4,h5,h6{
     @include title-font();
 }
 
+.fright{
+    float:right;
+}
+
+.fleft{
+    float:left;
+}
+
 .interface {
     height: 100vh;
 }
@@ -32,16 +40,24 @@ h1,h2,h3,h4,h5,h6{
 
 .json {
     position: fixed;
-    width: 80%;
-    height: 80vh;
-    margin: auto;
-    left: 5%;
-    top: 5%;
-    background-color: grey;
+    width: 90%;
+    height: 90vh;
+    padding:10px;
+    top:5vh;
+    left:5%;
+    background-color: #EEE;
+    border-radius:20px;
+    border:solid #222 5px;
 
-    code {
-        background-color: white;
-        overflow: auto;
+    textarea {
+        @include main-font(10px);
+        display:block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width:95%;
+        height:80%;
+        margin:0 auto;
+        resize: none;
     }
 }
 

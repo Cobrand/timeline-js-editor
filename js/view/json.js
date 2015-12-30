@@ -12,13 +12,15 @@ export const Json = React.createClass({
         const t = this.props.timeline;
         return (
             <div className="json">
-                <h1>Timeline en json</h1>
-                <code>{JSON.stringify(t.toJSON())}</code>
-                <button name="close_json"
+                <button className="button main red fright"
+                        name="close_json"
                         type="button"
                         onClick={this.props.handleCloseJSON}>
                     Fermer
                 </button>
+                <h1>Exporter en json</h1>
+                <textarea className="jsontextexport" readOnly="readOnly">{JSON.stringify(t.toJSON())}</textarea>
+
             </div>
         );
     }

@@ -10,7 +10,6 @@
     vertical-align: top;
     height: 100%;
 
-
     textarea,input {
         @include title-font(1.1em)
         $margin-horizontal: 5px;
@@ -24,7 +23,7 @@
         resize:none;
 
         &[name='text']{
-            height:120px;
+            height:130px;
         }
 
         &:focus{
