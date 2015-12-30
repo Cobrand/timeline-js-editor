@@ -20,8 +20,7 @@ export const Tab = React.createClass({
                     className="removeslide"
                     name="remove_this_slide"
                     type="button"
-                    onClick={callback}>
-                    X
+                    onClick={callback}>×
                 </button>
             );
         }

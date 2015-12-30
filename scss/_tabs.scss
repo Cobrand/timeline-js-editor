@@ -12,7 +12,7 @@
 
 .slide_tab{
     position: relative;
-    @include title-font(12px);
+    @include title-font(14px);
     -moz-user-select: none;
     font-weight: bold;
     background-color: $tab-background;
@@ -36,6 +36,11 @@
             display:inline-block;
         }
     }
+
+    &[data-focused='true']{
+        border-color:rgb(123, 104, 238);
+        box-shadow: inset 0px 0px 4px 0px rgba(123, 104, 238,1);
+    }
 }
 
 .slide_tab:last-child{
@@ -43,11 +48,15 @@
 }
 
 .removeslide{
-    @extend .button, .small, .red;
+    @extend .button, .xsmall, .red;
     position: absolute;
-    margin:3px;
+    margin:0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: $border-radius;
+    border-top-right-radius: 0;
     bottom: 0;
     right:0;
+    width:20px;
     float:right;
 }
 

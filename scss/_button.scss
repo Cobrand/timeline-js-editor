@@ -37,9 +37,17 @@
 
     &.small{
         height:24px;
-        padding: 2px 4px;
+        padding: 0 4px;
         font-size: 14px;
         line-height: 1.2;
+        border-radius: 4px;
+    }
+
+    &.xsmall{
+        height:20px;
+        padding: 0 1px;
+        font-size: 12px;
+        line-height: 1;
         border-radius: 3px;
     }
 
