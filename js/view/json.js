@@ -1,8 +1,17 @@
 import React from "react";
+import Filesaver from "filesaver.js";
 import "utils.js";
 
 export const Json = React.createClass({
     mixins: [React.Backbone],
+
+    saveAsFile(){
+        // TODO set filename as title of timeline
+        let filename = this.props.filename || "timeline" ;
+        let canvas = document.getElementById("jsontextexport");
+        let blob = new Blob([canvas.textContent]);
+        Filesaver.saveAs(blob, filename+".json");
+    },
 
     updateOnProps: {
         "timeline": "model"
@@ -18,8 +27,14 @@ export const Json = React.createClass({
                         onClick={this.props.handleCloseJSON}>
                     Fermer
                 </button>
+                <button className="button main blue fright"
+                        name="save_json"
+                        type="button"
+                        onClick={this.saveAsFile}>
+                    Sauvegarder en JSON
+                </button>
                 <h1>Exporter en json</h1>
-                <textarea className="jsontextexport" readOnly="readOnly">{JSON.stringify(t.toJSON())}</textarea>
+                <textarea id="jsontextexport" className="jsontextexport" readOnly="readOnly">{JSON.stringify(t.toJSON())}</textarea>
 
             </div>
         );
