@@ -68,11 +68,18 @@ export const Tabs = React.createClass({
                                           handleChangeTab={this.props.handleChangeTab}
                                           handleRemoveSlide={this.handleRemoveSlide.bind(this, tab)}
                                           />);
+        // do not remove next seemingly useless divs : makes last-child and first-child work in css
         return (
-            <div className="tabs">
-                {this.getTitleTab()}
-                <hr />
-                {tabs}
+            <div className="tabs_panel">
+                <div className="tabs">
+                    <div>
+                        {this.getTitleTab()}
+                    </div>
+                    <hr />
+                    <div>
+                        {tabs}
+                    </div>
+                </div>
                 <button className="newslide"
                         name="add_slide"
                         type="button"

@@ -20,7 +20,7 @@ $slide-width:calc(100% - #{$tabs-width});
 $slide-background:#FEFEFE;
 
 // editor
-$editor-height:100%;
+
 
 $topnav_element_height:48px;
 .topnav_element{
@@ -33,3 +33,6 @@ $topnav_element_height:48px;
     vertical-align: middle;
     white-space: nowrap;
 }
+$topnav_height:52px;
+
+$editor-height:calc(100vh - #{$topnav_height});

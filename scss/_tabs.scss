@@ -1,13 +1,17 @@
 @import 'button';
+.tabs_panel{
+    display:inline-block;
+    height:100%;
+    width:$tabs-width;
+    // TODO FIND THE FUCK WHY THERE IS 4PX UNUSED AFTER TABS ?.?.???
+}
+
 .tabs{
     display:inline-block;
     box-sizing: border-box;
-    width:$tabs-width;
-    height:$editor-height;
+    height:calc(100% - #{30px});
     overflow-x: hidden;
     overflow-y: scroll;
-    border-bottom:$border;
-    border-bottom-right-radius: $border-radius;
 }
 
 .slide_tab{
@@ -16,8 +20,6 @@
     -moz-user-select: none;
     font-weight: bold;
     background-color: $tab-background;
-    border-top-right-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
     border-right:$border;
     border-top:$border;
     cursor:pointer;
@@ -27,7 +29,7 @@
     width:$tab-width;
     padding:3px;
 
-    & .removeslide{
+    &.removeslide{
         display:none;
     }
 
@@ -37,23 +39,25 @@
         }
     }
 
+    &:last-child{
+        border-bottom-right-radius: $border-radius;
+        border-bottom:$border;
+    }
+
+    &:first-child{
+        border-top-right-radius: $border-radius;
+    }
+
     &[data-focused='true']{
         border-color:rgb(123, 104, 238);
         box-shadow: inset 0px 0px 4px 0px rgba(123, 104, 238,1);
     }
 }
 
-.slide_tab:last-child{
-
-}
-
 .removeslide{
     @extend .button, .xsmall, .red;
     position: absolute;
     margin:0px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: $border-radius;
-    border-top-right-radius: 0;
     bottom: 0;
     right:0;
     width:20px;
@@ -62,8 +66,8 @@
 
 .newslide{
     @extend .button, .small, .blue;
-    width:100%;
-    margin-left:0;
-    margin-right:0;
+    $margin-vertical:8px;
+    width:calc(100% - #{2*$margin-vertical});
+    margin:0 $margin-vertical;
     box-sizing: border-box;
 }

@@ -23,11 +23,11 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .menu {
-    height: 10vh;
+    height: $topnav_height;
 }
 
 .content {
-    height: 90vh;
+    height: $editor-height;
 }
 
 .json {
