@@ -5,16 +5,16 @@ import "utils.js";
 export const Json = React.createClass({
     mixins: [React.Backbone],
 
+    updateOnProps: {
+        "timeline": "model"
+    },
+
     saveAsFile(){
         // TODO set filename as title of timeline
         let filename = this.props.filename || "timeline" ;
         let canvas = document.getElementById("jsontextexport");
         let blob = new Blob([canvas.textContent]);
         Filesaver.saveAs(blob, filename+".json");
-    },
-
-    updateOnProps: {
-        "timeline": "model"
     },
 
     render() {

@@ -9,11 +9,15 @@ export const Preview = React.createClass({
     },
 
     render() {
-        const t = this.props.timeline;
         return (
             <div className="preview">
-                <h1>Timeline en json</h1>
-                <code>{JSON.stringify(t.toJSON())}</code>
+                <iframe src="preview.html"></iframe>
+                <button className="button main red fright"
+                        name="close_json"
+                        type="button"
+                        onClick={this.props.handleClosePreview}>
+                    Fermer
+                </button>
             </div>
         );
     }

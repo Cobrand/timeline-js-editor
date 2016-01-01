@@ -12,7 +12,8 @@ export const Interface = React.createClass({
     getInitialState() {
         return {
             current_slide: this.props.timeline.get("title"),
-            json: null
+            json: null,
+            preview: null
         };
     },
 
@@ -62,7 +63,15 @@ export const Interface = React.createClass({
     },
 
     showPreview() {
+        this.setState({
+            preview: <view.Preview handleClosePreview={this.handleClosePreview}/>
+        });
+    },
 
+    handleClosePreview() {
+        this.setState({
+            preview: null
+        });
     },
 
     getSlide() {
@@ -109,6 +118,7 @@ export const Interface = React.createClass({
                     {this.getSlide()}
                 </div>
                 {this.state.json}
+                {this.state.preview}
             </div>
         );
     }
