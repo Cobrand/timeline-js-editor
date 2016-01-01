@@ -66,7 +66,7 @@
 
 .newslide{
     @extend .button, .small, .blue;
-    $margin-vertical:8px;
+    $margin-vertical:1px;
     width:calc(100% - #{2*$margin-vertical});
     margin:0 $margin-vertical;
     box-sizing: border-box;
