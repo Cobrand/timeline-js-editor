@@ -80,6 +80,12 @@ export const Interface = React.createClass({
         }
     },
 
+    getMask() {
+        if (this.state.preview || this.state.json) {
+            return <div className="mask"></div>;
+        }
+    },
+
     render() {
         const t = this.props.timeline;
         return (
@@ -117,6 +123,7 @@ export const Interface = React.createClass({
                                />
                     {this.getSlide()}
                 </div>
+                {this.getMask()}
                 {this.state.json}
                 {this.state.preview}
             </div>
