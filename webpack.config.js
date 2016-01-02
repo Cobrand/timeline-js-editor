@@ -14,7 +14,7 @@ module.exports = {
     },
     output: {
         path: __dirname + "/static",
-        filename: "js/bundle.js"
+        filename: "js/app.js"
     },
     devtool: 'source-map',
     eslint: {
