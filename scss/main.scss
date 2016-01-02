@@ -61,7 +61,8 @@ h1,h2,h3,h4,h5,h6{
     overflow-x: hidden;
     overflow-y: auto;
     width: 95%;
-    height: 80%;
+    height: calc(100% - 90px);
+    // TODO : remplacer 90px par une vraie valeur dépendante du style
     margin: 0 auto;
     resize: none;
 }
