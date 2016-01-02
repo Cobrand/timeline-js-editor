@@ -1,5 +1,4 @@
 import React from "react";
-import model from "model/model.js";
 
 export const Tab = React.createClass({
     mixins: [React.Backbone],
