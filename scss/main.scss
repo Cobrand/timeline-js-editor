@@ -40,25 +40,29 @@ h1,h2,h3,h4,h5,h6{
 
 .json, .preview {
     position: fixed;
-    width: 90%;
-    height: 90vh;
-    padding:10px;
-    top:5vh;
-    left:5%;
-    background-color: #EEE;
-    border-radius:20px;
-    border:solid #222 5px;
+    width: auto;
+    height: auto;
+    top: 5vh;
+    bottom: 5vh;
+    left: 5%;
+    right: 5%;
 
-    textarea {
-        @include main-font(10px);
-        display:block;
-        overflow-x: hidden;
-        overflow-y: auto;
-        width:95%;
-        height:80%;
-        margin:0 auto;
-        resize: none;
-    }
+    padding:10px;
+
+    background-color: #EEE;
+    border: 2px solid #222;
+    border-radius: 20px;
+}
+
+.json textarea {
+    @include main-font(10px);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 95%;
+    height: 80%;
+    margin: 0 auto;
+    resize: none;
 }
 
 .selectscaletext{
