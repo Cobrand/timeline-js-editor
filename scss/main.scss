@@ -54,7 +54,7 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 20px;
 }
 
-.json textarea {
+.json textarea, .preview iframe {
     @include main-font(10px);
     display: block;
     overflow-x: hidden;
@@ -63,11 +63,6 @@ h1,h2,h3,h4,h5,h6{
     height: 80%;
     margin: 0 auto;
     resize: none;
-}
-
-.preview iframe {
-    width: 85%;
-    height: 80%;
 }
 
 .selectscaletext{
