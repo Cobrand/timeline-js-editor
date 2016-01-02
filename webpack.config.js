@@ -5,13 +5,16 @@ const PROD = process.argv.indexOf('--prod') !== -1 ||
              process.argv.indexOf('--release') !== -1 ;
 
 module.exports = {
-    entry: "main.js",
+    entry: {
+        main: "main.js",
+        vendor: ["react", "react-dom", "backbone", "moment", "filesaver.js"]
+    },
     resolve: {
         root: path.resolve("js")
     },
     output: {
-        path: __dirname,
-        filename: "bundle.js"
+        path: __dirname + "/static",
+        filename: "js/bundle.js"
     },
     devtool: 'source-map',
     eslint: {
@@ -47,10 +50,11 @@ module.exports = {
         }
     ]
     },
-    plugins:  PROD ? [
-        new webpack.optimize.UglifyJsPlugin({minimize:true}),
-        new webpack.IgnorePlugin(/^jquery$/)
+    plugins:  (PROD ? [
+        new webpack.optimize.UglifyJsPlugin({minimize:true})
     ] : [
-    new webpack.IgnorePlugin(/^jquery$/)
-    ]
+    ]).concat([
+        new webpack.IgnorePlugin(/^jquery$/),
+        new webpack.optimize.CommonsChunkPlugin("vendor", "js/vendor.js")
+    ])
 };
