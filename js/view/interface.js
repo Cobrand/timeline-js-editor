@@ -23,12 +23,28 @@ export const Interface = React.createClass({
         });
     },
 
-    handleRemoveSlide() {
-        // TODO: better handler
-        if (!this.props.timeline.get("events").contains(this.state.current_slide)) {
-            this.state.current_slide = null;
+    handleRemoveSlide(tab) {
+        const tabs = this.props.timeline.get("events");
+
+        if (tabs.size() < 2) {
+            this.handleChangeTab(this.props.timeline.get("title"));
+            tabs.reset();
+        } else {
+            if (tab == this.state.current_slide) {
+                let idx = tabs.indexOf(tab);
+
+                // On prends le suivant sauf si c'est le dernier
+                if (idx == tabs.size() - 1) {
+                    idx -= 1;
+                } else {
+                    idx += 1;
+                }
+
+                this.handleChangeTab(tabs.at(idx));
+            }
+
+            tabs.remove(tab);
         }
-        this.forceUpdate();
     },
 
     handleAddSlide() {

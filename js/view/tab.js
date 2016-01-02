@@ -43,8 +43,7 @@ export const Tabs = React.createClass({
 
     handleRemoveSlide(tab, event) {
         event.stopPropagation();
-        this.props.tabs.remove(tab);
-        this.props.handleRemoveSlide();
+        this.props.handleRemoveSlide(tab);
     },
 
     getTitleTab() {
