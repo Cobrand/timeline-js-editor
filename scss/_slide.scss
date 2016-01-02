@@ -9,6 +9,7 @@
     width:$slide-width;
     vertical-align: top;
     height: 100%;
+    overflow-y: auto;
 
     textarea,input {
         @include title-font(1.1em)
