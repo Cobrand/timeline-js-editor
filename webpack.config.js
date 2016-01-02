@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const PROD = process.argv.indexOf('--prod') !== -1 ||
              process.argv.indexOf('--release') !== -1 ;
@@ -46,7 +47,7 @@ module.exports = {
         },
         {
             test: /\.s[a|c]ss$/, // must have scss to css compiler
-            loader: 'style!css!sass'
+            loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")
         }
     ]
     },
@@ -55,6 +56,9 @@ module.exports = {
     ] : [
     ]).concat([
         new webpack.IgnorePlugin(/^jquery$/),
-        new webpack.optimize.CommonsChunkPlugin("vendor", "js/vendor.js")
+        new webpack.optimize.CommonsChunkPlugin("vendor", "js/vendor.js"),
+        new ExtractTextPlugin("css/app.css", {
+            allChunks: true
+        })
     ])
 };
