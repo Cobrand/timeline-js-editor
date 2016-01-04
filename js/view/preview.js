@@ -18,7 +18,7 @@ export const Preview = React.createClass({
                     Fermer
                 </button>
                 <h1>Aperçu du rendu</h1>
-                <iframe src="preview.html"></iframe>
+                <iframe src="preview/preview.html"></iframe>
             </div>
         );
     }
