@@ -20,7 +20,8 @@ export const Media = React.createClass({
     },
 
     set(key, value) {
-        const pote = Object.assign({}, this.props.slide.get("media"));
+        const m = this.props.slide.get("media");
+        const pote = Object.assign(Object.create(m.prototype), m);
         pote[key] = value;
         this.props.slide.set("media", pote);
     },
