@@ -3,4 +3,4 @@ set -euo pipefail
 IFS=$'\n\t'
 
 npm install
-webpack --prod
+./node_modules/.bin/webpack --prod
