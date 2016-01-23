@@ -5,6 +5,7 @@ import {Tabs, Tab} from "view/tab.js";
 import {Slide} from "view/slide.js";
 import {Preview} from "view/preview.js";
 import {Media} from "view/media.js";
+import {MDate} from "view/date.js";
 
 export default {
     Timeline,
@@ -14,5 +15,6 @@ export default {
     Tabs,
     Slide,
     Preview,
-    Media
+    Media,
+    MDate
 };

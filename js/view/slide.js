@@ -9,17 +9,6 @@ export const Slide = React.createClass({
         "slide": "model"
     },
 
-    getDate() {
-        const s = this.props.slide;
-        if (s.get("display_date")) {
-            return <p>{s.get("display_date")}</p>;
-        } else if (s.get("end_date")) {
-            return (<p> de {s.get("start_date").toString()} au {s.get("end_date") && s.get("end_date").toString()} </p>);
-        } else {
-            return <p>{s.get("start_date").toString()}</p>;
-        }
-    },
-
     getBg() {
         const b = this.props.slide.get("background");
         if (!b) {
@@ -64,15 +53,15 @@ export const Slide = React.createClass({
                     <input value={s.get("text").headline}
                            onChange={this.handleChangeTitle}
                            placeholder="Titre" />
-                       <textarea
-                              name="text"
+                    <textarea name="text"
                               value={s.get("text").text}
                               onChange={this.handleChangeText}
                               placeholder="Texte" />
-                    {this.getDate()}
-                    Groupe : <input value={s.get("group")}
-                                    onChange={this.onGroupChange}
-                                    placeholder="Groupe" />
+                    <view.MDate slide={this.props.slide} />
+                    Groupe :
+                    <input value={s.get("group")}
+                           onChange={this.onGroupChange}
+                           placeholder="Groupe" />
                 </div>
             </div>
         );
