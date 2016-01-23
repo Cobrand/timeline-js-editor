@@ -1,4 +1,5 @@
 import React from "react";
+import model from "model/model.js";
 
 export const Media = React.createClass({
     mixins: [React.Backbone],
@@ -21,7 +22,7 @@ export const Media = React.createClass({
 
     set(key, value) {
         const m = this.props.slide.get("media");
-        const pote = Object.assign(Object.create(m.prototype), m);
+        const pote = new model.Media.from_object(m);
         pote[key] = value;
         this.props.slide.set("media", pote);
     },
