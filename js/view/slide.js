@@ -1,5 +1,6 @@
 import React from "react";
 import view from "view/view.js";
+import model from "model/model.js";
 
 export const Slide = React.createClass({
     mixins: [React.Backbone],
@@ -35,20 +36,18 @@ export const Slide = React.createClass({
     },
 
     handleChangeText(event) {
-        this.props.slide.set({
-            text: {
-                text: event.target.value,
-                headline: this.props.slide.get("text").headline
-            }
+        const s = this.props.slide;
+        const text = new model.Text(s.get("text").headline, event.target.value);
+        s.set({
+            text: text
         });
     },
 
     handleChangeTitle(event) {
-        this.props.slide.set({
-            text: {
-                text: this.props.slide.get("text").text,
-                headline: event.target.value
-            }
+        const s = this.props.slide;
+        const text = new model.Text(event.target.value, s.get("text").text);
+        s.set({
+            text: text
         });
     },
 
