@@ -1,5 +1,7 @@
 import React from "react";
 import moment from "moment";
+import DatePicker from "react-pikaday-component";
+import model from "model/model.js";
 
 export const MDate = React.createClass({
     mixins: [React.Backbone],
@@ -8,9 +10,9 @@ export const MDate = React.createClass({
         "slide": "model"
     },
 
-    handleChange(prop, event) {
-        this.props.slide.set("start_date", this.parse(event.target.value));
-        return moment(string, "YYYY-MM-DD");
+    handleChange(prop, date) {
+        const mdate = new model.MDate(moment(date));
+        this.props.slide.set(prop, mdate);
     },
 
     handleChangeStart(event) {
@@ -29,10 +31,8 @@ export const MDate = React.createClass({
         //               placeholder="Fin" />
         return (
             <div className="date">
-                <input type="date"
-                       value={s.get("start_date").date.format("YYYY-MM-DD")}
-                       onChange={this.handleChangeStart}
-                       placeholder="Début" />
+                <DatePicker value={s.get("start_date").date.toDate()}
+                         onChange={this.handleChangeStart} />
             </div>
         );
     }
