@@ -23,16 +23,38 @@ export const MDate = React.createClass({
         this.handleChange("end_date", event);
     },
 
+    toggleEndDate() {
+        const s = this.props.slide;
+        if (s.get("end_date")) {
+            s.set("end_date", null);
+        } else {
+            s.set("end_date", s.get("start_date"));
+        }
+    },
+
+    getEndDate() {
+        const d = this.props.slide.get("end_date");
+        if (d) {
+            return <DatePicker value={d.date.toDate()}
+                               onChange={this.handleChangeEnd} />;
+        }
+    },
+
     render() {
         const s = this.props.slide;
-        //<input type="date"
-        //               value={s.get("end_date").date.format("YYYY-MM-DD")}
-        //               onChange={this.handleChangeEnd}
-        //               placeholder="Fin" />
         return (
             <div className="date">
-                <DatePicker value={s.get("start_date").date.toDate()}
-                         onChange={this.handleChangeStart} />
+                <div className="datepicker">
+                    <DatePicker value={s.get("start_date").date.toDate()}
+                                onChange={this.handleChangeStart} />
+                    {this.getEndDate()}
+                </div>
+                <button name="toggle_end_date"
+                        className="toggle_end_date"
+                        type="button"
+                        onClick={this.toggleEndDate}>
+                    Date de fin
+                </button>
             </div>
         );
     }
