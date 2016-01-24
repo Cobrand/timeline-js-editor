@@ -1,12 +1,19 @@
 import React from "react";
 import Filesaver from "filesaver.js";
 import "utils.js";
+import model from "model/model.js";
 
 export const Json = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
         "timeline": "model"
+    },
+
+    propTypes: {
+        timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
+        filename: React.PropTypes.string,
+        handleCloseJSON: React.PropTypes.func.isRequired
     },
 
     saveAsFile(){

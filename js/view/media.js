@@ -8,6 +8,10 @@ export const Media = React.createClass({
         "slide": "model"
     },
 
+    propTypes: {
+        slide: React.PropTypes.objectOf(model.Slide).isRequired
+    },
+
     handleChangeUrl(event) {
         this.set("url", event.target.value);
     },

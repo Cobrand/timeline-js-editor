@@ -1,10 +1,18 @@
 import React from "react";
+import model from "model/model.js";
 
 export const Tab = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
         "tab": "model"
+    },
+
+    propTypes: {
+        handleChangeTab: React.PropTypes.func.isRequired,
+        handleRemoveSlide: React.PropTypes.func,
+        focused: React.PropTypes.bool.isRequired,
+        tab: React.PropTypes.objectOf(model.Slide).isRequired
     },
 
     switchToSlide() {
@@ -39,6 +47,15 @@ export const Tabs = React.createClass({
 
     updateOnProps: {
         "tabs": "collection"
+    },
+
+
+    propTypes: {
+        tabs: React.PropTypes.objectOf(model.Slides).isRequired,
+        handleRemoveSlide: React.PropTypes.func.isRequired,
+        handleChangeTab: React.PropTypes.func.isRequired,
+        handleAddSlide: React.PropTypes.func.isRequired,
+        focused_tab: React.PropTypes.objectOf(model.Slide).isRequired
     },
 
     handleRemoveSlide(tab, event) {

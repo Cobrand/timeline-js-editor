@@ -9,6 +9,10 @@ export const Interface = React.createClass({
         "timeline": "model"
     },
 
+    propTypes: {
+        timeline: React.PropTypes.objectOf(model.Timeline).isRequired
+    },
+
     getInitialState() {
         return {
             current_slide: this.props.timeline.get("title"),

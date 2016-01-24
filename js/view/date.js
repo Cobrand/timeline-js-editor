@@ -10,6 +10,9 @@ export const MDate = React.createClass({
         "slide": "model"
     },
 
+    propTypes: {
+        slide: React.PropTypes.objectOf(model.Slide).isRequired
+    },
     handleChange(prop, date) {
         const mdate = new model.MDate(moment(date));
         this.props.slide.set(prop, mdate);

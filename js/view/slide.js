@@ -9,6 +9,10 @@ export const Slide = React.createClass({
         "slide": "model"
     },
 
+    propTypes: {
+        slide: React.PropTypes.objectOf(model.Slide).isRequired
+    },
+
     getBg() {
         const b = this.props.slide.get("background");
         if (!b) {
@@ -73,6 +77,10 @@ export const Slides = React.createClass({
 
     updateOnProps: {
         "slides": "collection"
+    },
+
+    propTypes: {
+        slide: React.PropTypes.objectOf(model.Slides).isRequired
     },
 
     render() {
