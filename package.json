@@ -25,6 +25,7 @@
     "json-loader": "^0.5.3",
     "moment": "^2.10.6",
     "node-sass": "^3.4.2",
+    "pikaday": "^1.4.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-pikaday-component": "^0.2.2",
