@@ -48,6 +48,10 @@ module.exports = {
         {
             test: /\.s[a|c]ss$/, // must have scss to css compiler
             loader: ExtractTextPlugin.extract("css?sourceMap!sass?sourceMap")
+        },
+        {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("css?sourceMap")
         }
         ]
     },
