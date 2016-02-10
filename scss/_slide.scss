@@ -33,15 +33,16 @@
     }
 }
 
+.datepicker {
+    display: flex;
+}
+
 .slide_media,.slide_right {
     vertical-align: top; // MAGIC TRICK DO NOT REMOVE
     display: inline-block;
     width: 50%;
     height:100%;
     box-sizing: border-box;
-    * {
-        display: block;
-    }
     padding:5px;
 }
 
@@ -58,8 +59,4 @@
 
 .slide_media{
     border-right:solid 2px black;
-}
-
-.slide_right{
-
 }

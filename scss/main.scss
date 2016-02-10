@@ -99,11 +99,18 @@ h1,h2,h3,h4,h5,h6{
     margin:0 auto;
 }
 
-iframe.media_preview{
+iframe.media_preview,div.media_preview{
     height:60%;
     width:100%;
     max-width:90wh;
     max-height:90vh;
+}
+
+div.media_preview.empty{
+    display: flex;
+    font-size: 2em;
+    align-items: center;
+    text-align: center;
 }
 
 img.media_preview{
@@ -112,6 +119,7 @@ img.media_preview{
     max-height:100%;
     max-width:100%;
 }
+
 
 
 .mask {
@@ -124,8 +132,4 @@ img.media_preview{
 
     background-color: black;
     opacity: 0.6;
-}
-
-.datepicker {
-    display: flex;
 }
