@@ -32,5 +32,19 @@ export const Timeline = Backbone.Model.extend({
             ),
             scale: json.scale
         };
+    },
+
+    resetFromJson(data) {
+        let json;
+        try {
+            json = JSON.parse(data);
+        } catch (error) {
+            alert("Erreur dans le JSON : " + error.message);
+            return;
+        }
+
+        // TODO: error detection
+        const attrs = this.parse(json);
+        this.set(attrs);
     }
 });

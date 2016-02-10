@@ -106,11 +106,35 @@ export const Interface = React.createClass({
         }
     },
 
+    importJSON(event) {
+        const file = event.target.files[0];
+        if (!file) {
+            alert("Aucun fichier sélectionné");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => this.props
+                                   .timeline
+                                   .resetFromJson(e.target.result);
+        reader.readAsText(file);
+    },
+
     render() {
         const t = this.props.timeline;
         return (
             <div className="interface">
                 <div className="menu">
+                    <button className="button main blue"
+                            type="button"
+                            onClick={() => document.getElementById("importPicker")
+                                                   .click()}>
+                        Import
+                    </button>
+                    <input id="importPicker"
+                           type="file"
+                           onChange={this.importJSON}
+                           style={{display: "none"}} />
                     <button className="button main blue"
                             name="show_json"
                             type="button"
