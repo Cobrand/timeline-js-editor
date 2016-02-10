@@ -48,3 +48,5 @@ export const Timeline = Backbone.Model.extend({
         this.set(attrs);
     }
 });
+
+window.Timeline = Timeline;
