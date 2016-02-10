@@ -32,7 +32,7 @@ export const Slide = React.createClass({
         const s = this.props.slide;
         const text = new model.Text(s.get("text").headline, event.target.value);
         s.set({
-            text: text
+            text
         });
     },
 
@@ -40,7 +40,7 @@ export const Slide = React.createClass({
         const s = this.props.slide;
         const text = new model.Text(event.target.value, s.get("text").text);
         s.set({
-            text: text
+            text
         });
     },
 

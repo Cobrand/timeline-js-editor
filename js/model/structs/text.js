@@ -1,7 +1,7 @@
 export class Text {
-    constructor(headline="", content=""){
+    constructor(headline="", text=""){
         this.headline = headline;
-        this.content = content;
+        this.text = text;
     }
     static from_object(json) {
         if (json == null) {
@@ -13,7 +13,7 @@ export class Text {
     toJSON() {
         return {
             headline:this.headline,
-            text:this.content
+            text:this.text
         };
     }
 }

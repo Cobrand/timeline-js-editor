@@ -150,9 +150,9 @@ export const Interface = React.createClass({
                     <div className="selectscaletext">
                         Échelle temporelle :
                         <select name="scale"
-                            value={this.props.timeline.get("scale")}
-                            onChange={this.onChangeScale}
-                            className="select_option">
+                                className="select_option">
+                                value={this.props.timeline.get("scale")}
+                                onChange={this.onChangeScale}>
                             <option value="human">Humaine</option>
                             <option value="cosmological">Cosmologique</option>
                         </select>
