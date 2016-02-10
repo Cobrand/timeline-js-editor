@@ -55,16 +55,16 @@ export const Export = React.createClass({
 
         let id, ext;
         switch (this.state.which_export) {
-            case "json":
-                id = "jsontextexport";
-                ext = ".json";
-                break;
-            case "html":
-                id = "htmltextexport";
-                ext = ".html";
-                break;
-            default:
-                throw "unsupported export type";
+        case "json":
+            id = "jsontextexport";
+            ext = ".json";
+            break;
+        case "html":
+            id = "htmltextexport";
+            ext = ".html";
+            break;
+        default:
+            throw "unsupported export type";
         }
 
         let txt = document.getElementById(id).textContent;

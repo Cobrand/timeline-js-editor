@@ -1,6 +1,5 @@
 import React from "react";
 import "utils.js";
-import model from "model/model.js";
 
 export const Preview = React.createClass({
     mixins: [React.Backbone],
