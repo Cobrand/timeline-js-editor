@@ -13,6 +13,7 @@ export const MDate = React.createClass({
     propTypes: {
         slide: React.PropTypes.objectOf(model.Slide).isRequired
     },
+
     handleChange(prop, date) {
         const mdate = new model.MDate(moment(date));
         this.props.slide.set(prop, mdate);
@@ -40,6 +41,13 @@ export const MDate = React.createClass({
         if (d) {
             return <DatePicker value={d.date.toDate()}
                                onChange={this.handleChangeEnd} />;
+        } else {
+            return <DatePicker value={this.props
+                                          .slide
+                                          .get("start_date")
+                                          .date
+                                          .toDate()}
+                               disabled={true} />;
         }
     },
 
