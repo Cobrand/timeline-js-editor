@@ -67,7 +67,7 @@ export const Interface = React.createClass({
 
     showJSON() {
         this.setState({
-            json: <view.Json timeline={this.props.timeline}
+            json: <view.Export timeline={this.props.timeline}
                              handleCloseJSON={this.handleCloseJSON}/>
         });
     },
@@ -115,7 +115,7 @@ export const Interface = React.createClass({
                             name="show_json"
                             type="button"
                             onClick={this.showJSON}>
-                        Export JSON
+                        Export
                     </button>
                     <button className="button main lightblue"
                             name="preview"

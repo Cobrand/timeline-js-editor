@@ -1,5 +1,5 @@
 import {Timeline} from "view/timeline.js" ;
-import {Json} from "view/json.js";
+import {Export} from "view/export.js";
 import {Interface} from "view/interface.js";
 import {Tabs, Tab} from "view/tab.js";
 import {Slide} from "view/slide.js";
@@ -9,7 +9,7 @@ import {MDate} from "view/date.js";
 
 export default {
     Timeline,
-    Json,
+    Export,
     Interface,
     Tab,
     Tabs,

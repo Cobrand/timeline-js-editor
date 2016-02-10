@@ -24,13 +24,13 @@ const EXPORT = `<div class="timeline">
             "use strict";
             var options = {};
             window.timelinejs = new TL.Timeline("timeline-embed-RANDOMID",
-                                                TIMELINE,
+                                                JSON.parse('TIMELINE'),
                                                 options);
         }());
     </script>
 </div>`;
 
-export const Json = React.createClass({
+export const Export = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
@@ -52,9 +52,24 @@ export const Json = React.createClass({
     saveAsFile(){
         // TODO set filename as title of timeline
         let filename = this.props.filename || "timeline" ;
-        let canvas = document.getElementById("jsontextexport");
-        let blob = new Blob([canvas.textContent]);
-        Filesaver.saveAs(blob, filename+".json");
+
+        let id, ext;
+        switch (this.state.which_export) {
+            case "json":
+                id = "jsontextexport";
+                ext = ".json";
+                break;
+            case "html":
+                id = "htmltextexport";
+                ext = ".html";
+                break;
+            default:
+                throw "unsupported export type";
+        }
+
+        let txt = document.getElementById(id).textContent;
+        let blob = new Blob([txt]);
+        Filesaver.saveAs(blob, filename + ext);
     },
 
     getEmbedHtml() {
@@ -103,7 +118,7 @@ export const Json = React.createClass({
                         name="save_json"
                         type="button"
                         onClick={this.saveAsFile}>
-                    Sauvegarder en JSON
+                    Sauvegarder
                 </button>
                 <h1>Exporter en</h1>
                 <select value={this.state.which_export}
