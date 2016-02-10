@@ -29,12 +29,12 @@
     width:$tab-width;
     padding:3px;
 
-    &.removeslide{
+    &>.removeslide{
         display:none;
     }
 
     &:hover{
-        & .removeslide{
+        &>.removeslide{
             display:inline-block;
         }
     }
