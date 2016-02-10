@@ -5,17 +5,24 @@
               rel="stylesheet"
               href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
         </link>
-        <link rel="stylesheet"
-              href="preview.css">
-        </link>
-        <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"
-                defer>
-        </script>
-        <script src="preview.js"
-                defer>
-        </script>
+        <style>
+            html, body, #timeline-embed {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+        </style>
     </head>
     <body>
         <div id="timeline-embed"></div>
+
+        <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js">
+        </script>
+        <script>
+            var options = {};
+            window.timelinejs = new TL.Timeline("timeline-embed",
+                                                parent.window.timeline.toJSON(),
+                                                options);
+        </script>
     </body>
 </html>
