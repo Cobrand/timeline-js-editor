@@ -3,6 +3,7 @@
 @import 'button';
 @import 'slide';
 @import 'tabs';
+@import 'select';
 
 body {
     @include main-font();
@@ -69,6 +70,15 @@ h1,h2,h3,h4,h5,h6{
 
 .export h1, .export select {
     display: inline-block;
+}
+
+.export h1{
+    margin-right:16px;
+}
+
+.export select{
+    font-weight:bold;
+    font-size:  1.6em ;
 }
 
 .selectscaletext{

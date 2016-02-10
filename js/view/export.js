@@ -122,7 +122,8 @@ export const Export = React.createClass({
                 </button>
                 <h1>Exporter en</h1>
                 <select value={this.state.which_export}
-                        onChange={this.onWhichExportChange}>
+                        onChange={this.onWhichExportChange}
+                        className="select_option">
                     <option value="json">JSON</option>
                     <option value="html">HTML</option>
                 </select>
