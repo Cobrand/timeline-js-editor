@@ -1,5 +1,6 @@
 import React from "react";
 import model from "model/model.js";
+import {embed_media} from "embed_media.js";
 
 export const Media = React.createClass({
     mixins: [React.Backbone],
@@ -38,17 +39,19 @@ export const Media = React.createClass({
         }
         return (
             <div className="slide_media">
-                <div className="slide_media_preview">Media Preview Here</div>
-                <input className="slide_media_url" value={m.url}
-                       type="url"
-                       onChange={this.handleChangeUrl}
-                       placeholder="URL" />
-                <textarea className="slide_media_credit" value={m.credit}
-                          onChange={this.handleChangeCredit}
-                          placeholder="Crédit" />
-                <textarea className="slide_media_caption" value={m.caption}
-                          onChange={this.handleChangeCaption}
-                          placeholder="Caption" />
+                {embed_media(m.url)}
+                <div className="slide_media_info">
+                    <input className="slide_media_url" value={m.url}
+                           type="url"
+                           onChange={this.handleChangeUrl}
+                           placeholder="URL" />
+                    <textarea className="slide_media_credit" value={m.credit}
+                              onChange={this.handleChangeCredit}
+                              placeholder="Crédit" />
+                    <textarea className="slide_media_caption" value={m.caption}
+                              onChange={this.handleChangeCaption}
+                              placeholder="Caption" />
+                </div>
             </div>
         );
     }
