@@ -71,28 +71,3 @@ export const Slide = React.createClass({
         );
     }
 });
-
-export const Slides = React.createClass({
-    mixins: [React.Backbone],
-
-    updateOnProps: {
-        "slides": "collection"
-    },
-
-    propTypes: {
-        slide: React.PropTypes.objectOf(model.Slides).isRequired
-    },
-
-    render() {
-        const slides = this.props
-                           .slides
-                           .map(slide => <Slide slide={slide}
-                                                key={slide.get("unique_id")}
-                                                />);
-        return (
-            <div className="slides">
-                {slides}
-            </div>
-        );
-    }
-});
