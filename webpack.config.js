@@ -11,10 +11,10 @@ module.exports = {
         vendor: ["react", "react-dom", "backbone", "moment", "filesaver.js"]
     },
     resolve: {
-        root: path.resolve("js")
+        root: path.resolve("js/client")
     },
     output: {
-        path: __dirname + "/static",
+        path: path.join(__dirname,"static"),
         filename: "js/app.js"
     },
     devtool: "source-map",
