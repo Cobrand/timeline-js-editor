@@ -22,7 +22,7 @@ if (!!options.dialect && !!options.database ){
     let Timeline = sequelize.define('timeline', {
         id:{type:Sequelize.INTEGER,primaryKey:true,autoIncrement:true,allowNull:false},
         owner:{type:Sequelize.INTEGER,references:{model:User,key:'id'},allowNull:false},
-        timeline_path:{type:Sequelize.STRING,unique:true,allowNull:false},
+        timeline:{type:Sequelize.TEXT,allowNull:false},
         created:{type:Sequelize.DATE,allowNull:false,defaultValue: Sequelize.NOW,comment:"When was this timeline created"},
         last_modified:{type:Sequelize.DATE,comment:"When was this timeline last modified ?"},
     },{indexes:[{unique:false,fields:['owner']}],timestamps: false,underscored: true,tableName: 'timeline_timelines'});
@@ -33,7 +33,7 @@ if (!!options.dialect && !!options.database ){
         console.error("ERROR: something something");
         throw error;
     });
-    module.exports = sequelize ;
+    module.exports = {sequelize:sequelize,User:User,Timeline:Timeline} ;
 } else {
     console.error("ERROR: Dialect and database name are needed to start the app\n\
     Please include them as command line option or in the config file (server_config.js)")
