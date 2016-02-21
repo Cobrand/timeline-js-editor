@@ -9,20 +9,28 @@ To install dependencies required by this project:
     # Install dependencies in package.json
     npm install
     # Install the command line tools
-    sudo npm install -g webpack webpack-dev-server
+    sudo npm install -g webpack
 
 Then choose one :
 
 ## Continuous build :
 
-Make sure to have port 8080 open if you want to dev using webpack-dev-server
+Run side by side :
 
 ### Autonomous static server
 
-Allows you to have a server that hosts your html and your files staticly (everything is visible)
+Allows you to the server to reload automatically (with nodemon)
 
 ```bash
-$ webpack-dev-server --progress --colors
+$ npm start
+```
+
+It will be hosted on port 8080.
+
+If you want a custom port you will have to do instead :
+
+```bash
+$ ./node_modules/.bin/nodemon --use_strict js/server/main.js --port 61080
 ```
 
 ### Auto reload
@@ -39,7 +47,9 @@ If you don't want to watch but only build, you can just do :
 
     webpack --progress --colors
 
-while being in the repository's directory
+while being in the repository's directory, then to launch the server :
+
+$ node --use_strict js/server/main.js --port 8080
 
 # HOW TO BUILD FOR PROD:
 
@@ -47,4 +57,7 @@ You can minify the js files within the compilation with this option :
 
     webpack --progress --colors --prod
 
-Warning : this takes a much longer time
+Warning : adding the --prod tag takes a much longer time. Then
+to launch the server you can do :
+
+$ node --use_strict js/server/main.js --port 8080
