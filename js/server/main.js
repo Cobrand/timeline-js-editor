@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+let path = require('path');
 let koa = require("koa");
-let krouter = require("koa-router")();
+let koa_mount = require('koa-mount');
+let krouter_api = require("koa-router")();
+let serve = require("koa-static");
 let koa_bodyparser = require("koa-bodyparser");
+let api = koa();
 let app = koa();
 let program = require("commander");
 let DEFAULT_PORT = 8080 ;
@@ -13,14 +17,14 @@ program
     .parse(process.argv);
 
 // ROUTES
-krouter.get('/timeline/:timelineid', function* (next){
+krouter_api.get('/timeline/:timelineid', function* (next){
     let query = this.request.query ;
     let params = this.params ;
     let timelineid = params.timelineid;
     this.body = {"json":{}}
 })
 
-krouter.get('/connect/:userid',function *(next){
+krouter_api.get('/connect/:userid',function *(next){
     let userid = this.params.userid ;
     if (userid == "800815"){
         this.body = {"validation_key":"EXAMPLE KEY_HERE"}
@@ -30,7 +34,7 @@ krouter.get('/connect/:userid',function *(next){
 })
 
 // MIDDLEWARE
-app.use(function* (next){
+api.use(function* (next){
     yield next;
     if (this.status >= 200 && this.status <= 299){
         this.body.status = "ok" ;
@@ -40,8 +44,16 @@ app.use(function* (next){
         this.body = {status:"error",message:"internal server error"}
     }
 })
-app.use(koa_bodyparser());
-app.use(krouter.routes());
+api.use(koa_bodyparser());
+api.use(krouter_api.routes());
+
+// mount the API under /api
+app.use(koa_mount('/api',api));
+
+// static file delivery
+// WHY ??
+app.use(serve('.'));
+// WHY DOES THIS WORK ??? SERIOUSLY I DONT UNDERSTAND ????
 
 app.listen(program.port);
 console.info("Starting server, listening on port "+program.port);
