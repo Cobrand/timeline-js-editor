@@ -3,8 +3,9 @@
 let koa_mount = require('koa-mount');
 let koa_bodyparser = require("koa-bodyparser");
 let serve = require("koa-static");
+let program = require("../program.js");
 
-module.exports = function(app,api,program){
+module.exports = function(app,api){
     let krouter_api = require('./api_router.js')();
 
     api.use(function* (next){
