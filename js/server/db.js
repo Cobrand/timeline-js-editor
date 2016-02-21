@@ -8,9 +8,34 @@ if (!!options.dialect && !!options.database ){
         host:options.host,
         dialect:options.dialect
     });
+
+    let User = sequelize.define('user', {
+        id:{type:Sequelize.INTEGER,primaryKey:true,autoIncrement:true,allowNull:false},
+        username:{type:Sequelize.STRING(128),unique:true,allowNull:false},
+        email:{type:Sequelize.STRING(128),unique:true,allowNull:false},
+        password:{type:Sequelize.STRING(32),allowNull:false,comment:"password = sha512(sha512(raw_password)+salt)"},
+        salt:{type:Sequelize.STRING(32),allowNull:false},
+        joined:{type:Sequelize.DATE,allowNull:false,defaultValue: Sequelize.NOW,comment:"When the user first created his account"},
+        last_connected:{type:Sequelize.DATE,comment:"When did the user last connect to the software"},
+    },{timestamps: false,underscored: true,tableName: 'timeline_users'});
+
+    let Timeline = sequelize.define('timeline', {
+        id:{type:Sequelize.INTEGER,primaryKey:true,autoIncrement:true,allowNull:false},
+        owner:{type:Sequelize.INTEGER,references:{model:User,key:'id'},allowNull:false},
+        timeline_path:{type:Sequelize.STRING,unique:true,allowNull:false},
+        created:{type:Sequelize.DATE,allowNull:false,defaultValue: Sequelize.NOW,comment:"When was this timeline created"},
+        last_modified:{type:Sequelize.DATE,comment:"When was this timeline last modified ?"},
+    },{indexes:[{unique:false,fields:['owner']}],timestamps: false,underscored: true,tableName: 'timeline_timelines'});
+
+    sequelize.sync().then(() => {
+
+    }).catch((error) => {
+        console.error("ERROR: something something");
+        throw error;
+    });
     module.exports = sequelize ;
 } else {
-    console.error("ERROR: Dialect and database name are needed to start the app")
-    console.error("Please include them as command line option or in the config file (server_config.js)")
+    console.error("ERROR: Dialect and database name are needed to start the app\n\
+    Please include them as command line option or in the config file (server_config.js)")
     process.exit(1);
 }
