@@ -14,6 +14,7 @@ let DEFAULT_PORT = 8080 ;
 program
     .version('0.0.0')
     .option("-p, --port <n>","sets which port the application listens to (default 8080)",(n) => parseInt(n),DEFAULT_PORT)
+    .option("-d, --dev","runs the app in dev mode (errors will be displayed to the client)")
     .parse(process.argv);
 
 // ROUTES
@@ -29,19 +30,34 @@ krouter_api.get('/connect/:userid',function *(next){
     if (userid == "800815"){
         this.body = {"validation_key":"EXAMPLE KEY_HERE"}
     }else{
-        this.status = 404;
+        this.status = 404 ;
     }
 })
 
 // MIDDLEWARE
 api.use(function* (next){
-    yield next;
-    if (this.status >= 200 && this.status <= 299){
-        this.body.status = "ok" ;
-    } else if (this.status >= 400 && this.status <= 499 ){
-        this.body = {status:"error",message:"not found"}
-    } else if (this.status >= 500) {
-        this.body = {status:"error",message:"internal server error"}
+    try {
+        yield next;
+        if (this.status >= 200 && this.status <= 299){
+            this.body.status = "ok" ;
+        } else if (this.status === 404 ){
+            this.body = {status:"error",message:"not found"}
+        } else if (this.status >= 400 && this.status <= 499 ){
+            this.body = {status:"error",message:this.message}
+        } else if (this.status >= 500) {
+            if (program.dev){
+                this.body = {status:"error",message:this.message}
+            } else{
+                this.body = {status:"error",message:"internal server error"}
+            }
+        }
+    } catch (e) {
+        if (program.dev){
+            this.body = {status:"error",message:e.message,name:e.name,stack:e.stack.split("\n    ")}
+        } else{
+            this.body = {status:"error",message:"internal server error"}
+        }
+        console.error("ERROR["+e.name+"]: "+e.message);
     }
 })
 api.use(koa_bodyparser());
