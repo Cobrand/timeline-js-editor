@@ -5,6 +5,7 @@ let Sequelize = require("sequelize");
 
 if (!!options.dialect && !!options.database ){
     let sequelize = new Sequelize(options.database,options.username,options.password,{
+        logging:false,
         host:options.host,
         dialect:options.dialect
     });
@@ -22,7 +23,7 @@ if (!!options.dialect && !!options.database ){
     let Timeline = sequelize.define('timeline', {
         id:{type:Sequelize.INTEGER,primaryKey:true,autoIncrement:true,allowNull:false},
         owner:{type:Sequelize.INTEGER,references:{model:User,key:'id'},allowNull:false},
-        timeline:{type:Sequelize.TEXT,allowNull:false},
+        timeline:{type:Sequelize.TEXT},
         created:{type:Sequelize.DATE,allowNull:false,defaultValue: Sequelize.NOW,comment:"When was this timeline created"},
         last_modified:{type:Sequelize.DATE,comment:"When was this timeline last modified ?"},
     },{indexes:[{unique:false,fields:['owner']}],timestamps: false,underscored: true,tableName: 'timeline_timelines'});

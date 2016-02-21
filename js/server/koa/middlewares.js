@@ -14,7 +14,7 @@ module.exports = function(app,api){
             if (this.status >= 200 && this.status <= 299){
                 this.body.status = "ok" ;
             } else if (this.status === 404 ){
-                this.body = {status:"error",message:"not found"}
+                this.body = {status:"error",message:this.message || "not found"}
             } else if (this.status >= 400 && this.status <= 499 ){
                 this.body = {status:"error",message:this.message}
             } else if (this.status >= 500) {
