@@ -4,7 +4,7 @@
   "description": "Web app to create timeline using timeline.js",
   "main": "js/server/main.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon --use_strict js/server/main.js -- -d",
+    "start": "./node_modules/.bin/nodemon --use_strict js/server/main.js -- -z",
     "lint": "./node_modules/.bin/eslint js/ --ext .js --ext .jsx",
     "test": "./node_modules/.bin/mocha --recursive --compilers jsx:babel-core/register,js:babel-core:register --reporter spec"
   },

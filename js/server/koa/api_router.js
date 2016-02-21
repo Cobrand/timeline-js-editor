@@ -1,6 +1,6 @@
 "use strict";
 let krouter_api = require("koa-router")();
-
+let db = require("../db.js");
 // ALL ROUTES HERE
 module.exports = function(){
     krouter_api.get('/timeline/:timelineid', function* (next){

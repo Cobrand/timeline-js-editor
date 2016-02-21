@@ -6,9 +6,8 @@ let options = {
     db:{
         host:"localhost",
         dialect:"mariadb",//'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
-        database:"database_name",
-        username:"username",
-        password:"password"
+        username:"root",
+        password:""
     }
 } ;
 let config_filename = path.join(__dirname,"./../../","server_config.js") ;
