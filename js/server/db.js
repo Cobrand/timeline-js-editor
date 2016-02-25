@@ -2,6 +2,7 @@
 
 let options = require('./program.js');
 let Sequelize = require("sequelize");
+let winston = require("winston");
 
 if (!!options.dialect && !!options.database ){
     let sequelize = new Sequelize(options.database,options.username,options.password,{
@@ -31,12 +32,12 @@ if (!!options.dialect && !!options.database ){
     sequelize.sync().then(() => {
 
     }).catch((error) => {
-        console.error("ERROR: something something");
+        winston.error("ERROR: something something");
         throw error;
     });
     module.exports = {sequelize:sequelize,User:User,Timeline:Timeline} ;
 } else {
-    console.error("ERROR: Dialect and database name are needed to start the app\n\
+    winston.error("ERROR: Dialect and database name are needed to start the app\n\
     Please include them as command line option or in the config file (server_config.js)")
     process.exit(1);
 }

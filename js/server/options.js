@@ -1,6 +1,7 @@
 "use strict";
 let fs = require("fs");
-let path = require("path")
+let path = require("path");
+//let winston = require("winston");
 let options = {
     port:8080,
     db:{
@@ -16,14 +17,13 @@ try {
         try {
             Object.assign(options,require(config_filename) || {});
         } catch (e) {
-            console.error("ERROR["+e.name+"] "+e.stack);
+            winston.error("Unexpected error "+e.name+" : "+e.stack);
         }
     } else {
-        console.error("ERROR: server_config.js file not found");
+        winston.error("server_config.js file not found");
     }
 } catch (e) {
-    console.error("ERROR: server_config.js file not found");
-    console.error("please create one with your own config")
+    winston.error("server_config.js file not found; please create one with your own config");
     process.exit(1);
 }
 

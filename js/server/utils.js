@@ -1,6 +1,7 @@
 "use strict";
 let db = require('./db.js');
 let sha512 = require('sha512');
+let winston = require("winston");
 
 function UserNotFoundError(message){
     this.name = 'UserNotFoundError';

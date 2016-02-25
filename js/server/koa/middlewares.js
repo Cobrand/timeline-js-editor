@@ -4,6 +4,7 @@ let koa_mount = require('koa-mount');
 let koa_bodyparser = require("koa-bodyparser");
 let serve = require("koa-static");
 let program = require("../program.js");
+let winston = require("winston");
 
 module.exports = function(app,api){
     let krouter_api = require('./api_router.js')();
@@ -30,7 +31,7 @@ module.exports = function(app,api){
             } else{
                 this.body = {status:"error",message:"internal server error"}
             }
-            console.error("ERROR["+e.name+"]: "+e.message);
+            winston.error("Unexpected error "+e.name+" : "+e.message);
         }
     })
     api.use(koa_bodyparser());

@@ -1,6 +1,7 @@
 "use strict";
 let program = require("commander");
 let options = require("./options.js");
+let winston = require("winston");
 
 program
     .version('0.0.0')
@@ -13,6 +14,14 @@ program
     .option("--storage <s>","path to the database (sqlite only)",options.db.storage)
     .option("-z, --dev","runs the app in dev mode (errors will be displayed to clients)")
     .parse(process.argv);
-console.info("INFO: Running the app in dev mode, expect verbose");
+
+winston.level = 'info' ;
+
+if (program.dev) {
+    winston.level = 'debug' ;
+    winston.info("Running the app in dev mode, expect verbose");
+}
+
+
 
 module.exports = program ;

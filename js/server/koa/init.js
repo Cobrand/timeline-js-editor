@@ -2,6 +2,7 @@
 
 let koa = require("koa");
 let program = require("../program.js");
+let winston = require("winston");
 
 module.exports = function(){
     let api = koa();
