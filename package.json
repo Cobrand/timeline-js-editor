@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/nodemon js/server/main.js -- -z",
     "lint": "./node_modules/.bin/eslint js/ --ext .js --ext .jsx",
-    "test": "./node_modules/.bin/mocha --recursive --compilers jsx:babel-core/register,js:babel-core:register --reporter spec"
+    "test": "./node_modules/mocha/bin/mocha --recursive --compilers jsx:babel-core/register,js:babel-core:register --reporter spec"
   },
   "author": "",
   "license": "MIT",

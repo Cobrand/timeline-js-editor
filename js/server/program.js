@@ -13,9 +13,13 @@ program
     .option("--database [s]","name of database to use inside the db",options.db.database)
     .option("--storage <s>","path to the database (sqlite only)",options.db.storage)
     .option("-z, --dev","runs the app in dev mode (errors will be displayed to web clients)")
-    .option("-l, --logging [s]","sets the logging level for the app, (can be 'error','warn','info','verbose','debug' or 'silly'), default 'info', 'verbose' in dev mode",/^(error|warn|info|verbose|debug|silly|default)$/,"default")
+    .option("-l, --logging [level]","sets the logging level for the app, (can be 'error','warn','info','verbose','debug' or 'silly'), default 'info', 'verbose' in dev mode",/^(error|warn|info|verbose|debug|silly|default)$/,"default")
+    .option("-o, --output <file>","which file to log to instead of standard output")
+    .option("--keep-standard-output","only with --output option, will keep outputing to standard output when a file is specified")
     .parse(process.argv);
 
+//winston.loggers.default.transports[0].colorize = true ;
+//colorize console output
 if (program.logging === "default"){
     if (program.dev){
         winston.level = "verbose";
@@ -25,6 +29,17 @@ if (program.logging === "default"){
     }
 } else {
     winston.level = program.logging;
+    if (program.dev){
+        winston.info("Running the app in dev mode with non-default '"+winston.level+"' logging")
+    }
+}
+
+if (program.output){
+    winston.info("Outputing logs to "+program.output);
+    winston.add(winston.transports.File, { filename: program.output , json:false});
+    if (!program["keepStandardOutput"]){
+        winston.remove(winston.transports.Console);
+    }
 }
 
 module.exports = program ;
