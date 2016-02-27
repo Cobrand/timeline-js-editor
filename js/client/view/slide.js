@@ -48,6 +48,72 @@ export const Slide = React.createClass({
         this.props.slide.set("group", event.target.value);
     },
 
+    toggleBgColor() {
+        const s = this.props.slide;
+        const bg = s.get("background");
+        if (bg) {
+            if (bg.color) {
+                s.set("background", {url: bg.url});
+            } else {
+                s.set("background", {url: bg.url, color: "#ffffff"});
+            }
+        } else {
+            s.set("background", {color: "#ffffff"});
+        }
+    },
+
+    getBgColor() {
+        const bg = this.props.slide.get("background");
+        let val = "#ffffff";
+        if (bg && bg.color) {
+            val = bg.url;
+        }
+        let onBgColorChange = (event) => {
+            const s = this.props.slide;
+            const bg = s.get("background");
+            s.set("background", Object.assign({}, bg, {color: event.target.value}));
+        };
+        return (
+            <input type="color"
+                   value={val}
+                   onChange={onBgColorChange}>
+            </input>
+        );
+    },
+
+    toggleBgImage() {
+        const s = this.props.slide;
+        const bg = s.get("background");
+        if (bg) {
+            if (bg.url) {
+                s.set("background", {color: bg.color});
+            } else {
+                s.set("background", {color: bg.color, url: ""});
+            }
+        } else {
+            s.set("background", {url: ""});
+        }
+    },
+
+    getBgImage() {
+        const bg = this.props.slide.get("background");
+        let val = "";
+        if (bg && bg.url) {
+            val = bg.url;
+        }
+        let onBgImageChange = (event) => {
+            const s = this.props.slide;
+            const bg = s.get("background");
+            s.set("background", Object.assign({}, bg, {url: event.target.value}));
+        };
+        return (
+            <input type="url"
+                   value={val}
+                   onChange={onBgImageChange}>
+            </input>
+        );
+    },
+
     render() {
         const s = this.props.slide;
         return (
@@ -66,6 +132,18 @@ export const Slide = React.createClass({
                     <input value={s.get("group")}
                            onChange={this.onGroupChange}
                            placeholder="Groupe" />
+
+                    Fond :
+                    <input type="checkbox"
+                           className="toggle_bg_color"
+                           onClick={this.toggleBgColor}>
+                    </input>
+                    {this.getBgColor()}
+                    <input type="checkbox"
+                           className="toggle_bg_image"
+                           onClick={this.toggleBgImage}>
+                    </input>
+                    {this.getBgImage()}
                 </div>
             </div>
         );
