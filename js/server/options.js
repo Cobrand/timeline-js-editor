@@ -1,7 +1,7 @@
 "use strict";
 let fs = require("fs");
 let path = require("path");
-//let winston = require("winston");
+let winston = require("winston");
 let options = {
     port:8080,
     db:{
