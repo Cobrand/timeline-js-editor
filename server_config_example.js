@@ -5,6 +5,7 @@ module.exports = {
         "dialect":"mariadb",//'mysql'|'mariadb'|'sqlite'|'postgres'|'mssql'
         "database":"database_name",
         "username":"username",
-        "password":"password"
+        "password":"password",
+        "storage": "db.sqlite"
     }
 }

@@ -8,7 +8,8 @@ if (!!options.dialect && !!options.database ){
     let sequelize = new Sequelize(options.database,options.username,options.password,{
         logging:false,
         host:options.host,
-        dialect:options.dialect
+        dialect:options.dialect,
+        storage:options.storage
     });
 
     let User = sequelize.define('user', {
