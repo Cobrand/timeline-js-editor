@@ -12,16 +12,19 @@ program
     .option("--password [s]","password used to connect to the db",options.db.password)
     .option("--database [s]","name of database to use inside the db",options.db.database)
     .option("--storage <s>","path to the database (sqlite only)",options.db.storage)
-    .option("-z, --dev","runs the app in dev mode (errors will be displayed to clients)")
+    .option("-z, --dev","runs the app in dev mode (errors will be displayed to web clients)")
+    .option("-l, --logging [s]","sets the logging level for the app, (can be 'error','warn','info','verbose','debug' or 'silly'), default 'info', 'verbose' in dev mode",/^(error|warn|info|verbose|debug|silly|default)$/,"default")
     .parse(process.argv);
 
-winston.level = 'info' ;
-
-if (program.dev) {
-    winston.level = 'debug' ;
-    winston.info("Running the app in dev mode, expect verbose");
+if (program.logging === "default"){
+    if (program.dev){
+        winston.level = "verbose";
+        winston.info("Running the app in dev mode, expect verbose");
+    } else {
+        winston.level = "info";
+    }
+} else {
+    winston.level = program.logging;
 }
-
-
 
 module.exports = program ;
