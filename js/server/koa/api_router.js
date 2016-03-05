@@ -182,16 +182,16 @@ module.exports = function(){
                     method:"POST",
                     path:common_path+"/user/connect",
                     description:"Returns credentials_key based on login info",
-                    parameters:"(email OR username OR (user_id OR userid OR id)) AND sha512_password"
+                    parameters:"(email OR username OR (user_id OR userid OR id)) AND password::sha512password[0:32]"
                 },
                 {
                     method:"POST",
                     path:common_path+"/user/",
                     description:"Creates a new user",
-                    parameters:"email AND username AND sha512_password"
+                    parameters:"email AND username AND password::sha512password[0:32]"
                 },
                 {
-                    method:"POST",
+                    method:"GET",
                     path:common_path+"/user/timelines/",
                     description:"Returns all timelines for connected user",
                     parameters:"credentials_key AND (user_id OR userid OR id)"
@@ -214,7 +214,6 @@ module.exports = function(){
                     description:"Modify an existing timeline",
                     parameters:"credentials_key AND (user_id OR userid OR id) AND timeline_id"
                 }
-
             ]}
     })
 

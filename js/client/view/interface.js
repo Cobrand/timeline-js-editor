@@ -94,6 +94,29 @@ export const Interface = React.createClass({
         });
     },
 
+    getUserInterface(){
+        let credentials_key = localStorage.getItem("credentials_key") ;
+        let user_id = localStorage.getItem("user_id") ;
+        if ( credentials_key && user_id ){
+            // user is connected ?
+
+        } else {
+            // user is not connected, show him the login + sign up buttons
+        }
+    },
+
+    showLoginScreen() {
+        this.setState({
+            loginScreen: <view.LoginScreen handleCloseLoginScreen={this.handleCloseLoginScreen}/>
+        });
+    },
+
+    handleCloseLoginScreen() {
+        this.setState({
+            loginScreen: null
+        });
+    },
+
     getSlide() {
         if (this.state.current_slide) {
             return <view.Slide slide={this.state.current_slide}/>;
@@ -122,6 +145,16 @@ export const Interface = React.createClass({
 
     render() {
         const t = this.props.timeline;
+        // <div className="selectscaletext">
+        //     Échelle temporelle :
+        //     <select name="scale"
+        //             className="select_option">
+        //             value={this.props.timeline.get("scale")}
+        //             onChange={this.onChangeScale}>
+        //         <option value="human">Humaine</option>
+        //         <option value="cosmological">Cosmologique</option>
+        //     </select>
+        // </div> // useless for now , TODO : add it and make it functionnal ?
         return (
             <div className="interface">
                 <div className="menu">
@@ -147,16 +180,7 @@ export const Interface = React.createClass({
                             onClick={this.showPreview}>
                         Apercu timeline
                     </button>
-                    <div className="selectscaletext">
-                        Échelle temporelle :
-                        <select name="scale"
-                                className="select_option">
-                                value={this.props.timeline.get("scale")}
-                                onChange={this.onChangeScale}>
-                            <option value="human">Humaine</option>
-                            <option value="cosmological">Cosmologique</option>
-                        </select>
-                    </div>
+
                 </div>
                 <div className="content">
                     <view.Tabs title={t.get("title")}

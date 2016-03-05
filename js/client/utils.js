@@ -4,6 +4,8 @@ function s4() {
         .substring(1);
 }
 
+import sha512 from "sha512" ;
+
 // uuid generator
 // source : http://stackoverflow.com/a/105074
 export function uuid4() {
@@ -45,6 +47,10 @@ function deep_copy(object,props_to_copy){
         return_value = object ;
     }
     return return_value ;
+}
+
+function hash_password(unhashed_password){
+    return sha512(unhashed_password).toString("hex").substr(0,32);
 }
 
 import React from "react";
