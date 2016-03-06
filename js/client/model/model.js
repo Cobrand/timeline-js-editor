@@ -9,6 +9,8 @@ import {Slide,Slides} from "model/slide.js";
 import {Media} from "model/structs/media.js";
 import {Text} from "model/structs/text.js";
 import {MDate,Era} from "model/structs/time.js";
+import {Login} from "model/login/loginscreen.js";
+import {SignUp} from "model/login/signupscreen.js";
 
 export default {
     Timeline,
@@ -17,5 +19,7 @@ export default {
     Media,
     Text,
     MDate,
-    Era
+    Era,
+    Login,
+    SignUp
 };

@@ -10,5 +10,7 @@ import model from "model/model.js";
 import view from "view/view.js";
 const json = require("example_json.json");
 window.timeline = new model.Timeline(json, {parse: true});
-ReactDOM.render(<view.Interface timeline={window.timeline} />,
+ReactDOM.render(<view.Interface timeline={window.timeline}
+                                login={new model.Login()}
+                                signup={new model.SignUp()}/>,
                 document.getElementById("root"));

@@ -6,11 +6,15 @@ export const Interface = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
-        "timeline": "model"
+        "timeline": "model",
+        "login": "model",
+        "signup": "model",
     },
 
     propTypes: {
-        timeline: React.PropTypes.objectOf(model.Timeline).isRequired
+        timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
+        login: React.PropTypes.objectOf(model.Login).isRequired,
+        signup: React.PropTypes.objectOf(model.SignUp).isRequired,
     },
 
     getInitialState() {
@@ -109,7 +113,8 @@ export const Interface = React.createClass({
 
     showLoginScreen() {
         this.setState({
-            loginScreen: <view.LoginScreen handleClose={this.handleCloseLoginScreen}/>
+            loginScreen: <view.LoginScreen handleClose={this.handleCloseLoginScreen}
+                                           login={this.props.login}/>
         });
     },
 
@@ -121,7 +126,8 @@ export const Interface = React.createClass({
 
     showSignupScreen() {
         this.setState({
-            signupScreen: <view.SignUpScreen handleClose={this.handleCloseSignupScreen}/>
+            signupScreen: <view.SignUpScreen handleClose={this.handleCloseSignupScreen}
+                                             signup={this.props.signup}/>
         });
     },
 
@@ -195,17 +201,17 @@ export const Interface = React.createClass({
                         Apercu timeline
                     </button>
 
-                    <button className="button main blue"
+                    <button className="button main blue fright"
                             id="open_login"
                             type="button"
                             onClick={this.showLoginScreen}>
                         Connexion
                     </button>
-                    <button className="button main blue"
+                    <button className="button main green fright"
                             id="open_signup"
                             type="button"
                             onClick={this.showSignupScreen}>
-                        Connexion
+                        Inscription
                     </button>
                 </div>
                 <div className="content">

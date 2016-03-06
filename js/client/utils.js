@@ -49,7 +49,7 @@ function deep_copy(object,props_to_copy){
     return return_value ;
 }
 
-function hash_password(unhashed_password){
+export function hash_password(unhashed_password){
     return sha512(unhashed_password).toString("hex").substr(0,32);
 }
 

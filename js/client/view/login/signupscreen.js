@@ -1,4 +1,5 @@
 import React from "react";
+import model from "model/model.js";
 import "utils.js";
 
 export const SignUpScreen = React.createClass({
