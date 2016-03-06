@@ -5,16 +5,16 @@ export const LoginScreen = React.createClass({
     mixins: [React.Backbone],
 
     propTypes: {
-        handleCloseSignUpScreen: React.PropTypes.func
+        handleClose: React.PropTypes.func
     },
 
     render() {
         return (
-            <div className="signupscreen">
+            <div className="loginscreen">
                 <button className="button main red fright"
                         name="close_json"
                         type="button"
-                        onClick={this.props.handleCloseLoginScreen}>
+                        onClick={this.props.handleClose}>
                     Fermer
                 </button>
             </div>

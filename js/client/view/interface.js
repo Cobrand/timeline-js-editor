@@ -17,7 +17,9 @@ export const Interface = React.createClass({
         return {
             current_slide: this.props.timeline.get("title"),
             json: null,
-            preview: null
+            preview: null,
+            loginScreen: null,
+            signupScreen: null
         };
     },
 
@@ -107,13 +109,25 @@ export const Interface = React.createClass({
 
     showLoginScreen() {
         this.setState({
-            loginScreen: <view.LoginScreen handleCloseLoginScreen={this.handleCloseLoginScreen}/>
+            loginScreen: <view.LoginScreen handleClose={this.handleCloseLoginScreen}/>
         });
     },
 
     handleCloseLoginScreen() {
         this.setState({
             loginScreen: null
+        });
+    },
+
+    showSignupScreen() {
+        this.setState({
+            signupScreen: <view.SignUpScreen handleClose={this.handleCloseSignupScreen}/>
+        });
+    },
+
+    handleCloseSignupScreen() {
+        this.setState({
+            signupScreen: null
         });
     },
 
@@ -181,6 +195,18 @@ export const Interface = React.createClass({
                         Apercu timeline
                     </button>
 
+                    <button className="button main blue"
+                            id="open_login"
+                            type="button"
+                            onClick={this.showLoginScreen}>
+                        Connexion
+                    </button>
+                    <button className="button main blue"
+                            id="open_signup"
+                            type="button"
+                            onClick={this.showSignupScreen}>
+                        Connexion
+                    </button>
                 </div>
                 <div className="content">
                     <view.Tabs title={t.get("title")}
@@ -195,6 +221,8 @@ export const Interface = React.createClass({
                 {this.getMask()}
                 {this.state.json}
                 {this.state.preview}
+                {this.state.loginScreen}
+                {this.state.signupScreen}
             </div>
         );
     }
