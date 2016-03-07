@@ -12,7 +12,7 @@ export const LoginScreen = React.createClass({
     },
 
     propTypes: {
-        handleClose: React.PropTypes.func,
+        handleClose: React.PropTypes.func.isRequired,
         login: React.PropTypes.objectOf(model.Login).isRequired
     },
 
