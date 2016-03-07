@@ -1,6 +1,8 @@
 import React from "react";
 import view from "view/view.js";
 import model from "model/model.js";
+import Promise from "bluebird";
+import axios from "axios";
 
 export const Interface = React.createClass({
     mixins: [React.Backbone],
@@ -103,9 +105,27 @@ export const Interface = React.createClass({
     getUserInterface(){
         let credentials_key = localStorage.getItem("credentials_key") ;
         let user_id = localStorage.getItem("user_id") ;
-        if ( credentials_key && user_id ){
-            // user is connected ?
 
+        if ( credentials_key && user_id ){
+            let saveTimeline = () => {
+                Promise.resolve().then(() => {
+                    return axios.post("/api/user/timeline", {
+                        credentials_key,
+                        user_id,
+                        timeline: this.props.timeline.toJSON()
+                    });
+                }).catch((err) => {
+                    alert("Erreur de sauvegarde : " + err.statusText);
+                });
+            };
+
+            return (
+                <button className="button main blue"
+                        id="save_timeline"
+                        onClick={saveTimeline}>
+                    Sauvegarder
+                </button>
+            );
         } else {
             // user is not connected, show him the login + sign up buttons
         }
@@ -200,6 +220,8 @@ export const Interface = React.createClass({
                             onClick={this.showPreview}>
                         Apercu timeline
                     </button>
+
+                    {this.getUserInterface()}
 
                     <button className="button main blue fright"
                             id="open_login"
