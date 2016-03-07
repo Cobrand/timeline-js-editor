@@ -1,0 +1,22 @@
+{
+    "preset": "crockford",
+    "requireDotNotation": null,
+    "requireMultipleVarDecl": null,
+    "disallowSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+    },
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowMultipleLineStrings": null,
+    "disallowSpaceBeforeSemicolon": true,
+    "requireSemicolons": true,
+    "disallowTabs": true,
+    "requireSpaceBeforeKeywords": [
+        "else",
+        "while",
+        "catch"
+    ],
+    "requireSpaceBetweenArguments": true,
+    "validateQuoteMarks": { "mark": "\"", "escape": true  }
+}
