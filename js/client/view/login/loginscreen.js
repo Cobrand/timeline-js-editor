@@ -69,14 +69,14 @@ export const LoginScreen = React.createClass({
             <div className="loginscreen">
                 <input type="text"
                        placeholder="Identifiant"
-                       onChange={this.onChangeId}>
+                       onChange={this.handleChangeLogin}>
                 </input>
                 <input type="password"
                        placeholder="Mot de passe"
-                       onChange={this.onChangePass}>
+                       onChange={this.handleChangePassword}>
                 </input>
                 <button type="button"
-                        onClick={this.onConnect}>
+                        onClick={this.handleLoginButton}>
                     Connexion
                 </button>
                 <button className="button main red fright"
