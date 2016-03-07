@@ -13,7 +13,8 @@ export const SignUpScreen = React.createClass({
 
     getInitialState() {
         return {
-            signupPromise: null
+            signupPromise: null,
+            errorMessage: null
         };
     },
 
@@ -43,13 +44,21 @@ export const SignUpScreen = React.createClass({
                 password: hash_password(this.props.signup.get("password")),
                 email: this.props.signup.get("email")
             });
+        }).then((res) => {
+            this.setState({
+                errorMessage: null
+            });
+        }).catch((err) => {
+            this.setState({
+                errorMessage: err.statusText
+            });
         }).finally(() => {
             this.setState({
                 signupPromise: null
             });
         });
 
-        this.state.set({signupPromise});
+        this.setState({signupPromise});
     },
 
     render() {
@@ -77,6 +86,7 @@ export const SignUpScreen = React.createClass({
                         onClick={this.props.handleClose}>
                     Fermer
                 </button>
+                {this.state.errorMessage}
             </div>
         );
     }

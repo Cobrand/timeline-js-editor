@@ -18,6 +18,7 @@ export const LoginScreen = React.createClass({
 
     getInitialState() {
         return {
+            errorMessage: null,
             loginPromise:null // if != null : currently connecting
         }
     },
@@ -45,9 +46,15 @@ export const LoginScreen = React.createClass({
         }).then((response) => {
             console.log("UTILISATEUR CONNECTE !!!")
             console.log(response);
-        }).catch((response) => {
+            this.setState({
+                errorMessage: null
+            });
+        }).catch((err) => {
             console.log("TU SAIS PAS TAPER TON MOT DE PASSE ??? !!!")
-            console.log(response);
+            console.log(err);
+            this.setState({
+                errorMessage: err.statusText
+            });
         }).finally(() => {
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
@@ -85,6 +92,7 @@ export const LoginScreen = React.createClass({
                         onClick={this.props.handleClose}>
                     Fermer
                 </button>
+                {this.state.errorMessage}
             </div>
         );
     }
