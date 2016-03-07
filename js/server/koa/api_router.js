@@ -105,7 +105,6 @@ module.exports = function(){
                 if (affectedCount === 0 ){
                     this.status = 404;
                     this.message = "Timeline not found"
-                    this.body = {"timeline":timeline.timeline};
                 } else if (affectedCount === 1 ) {
                     this.body = {"message":"Successfully updated timeline"};
                 }
