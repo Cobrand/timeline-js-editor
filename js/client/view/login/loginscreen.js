@@ -35,14 +35,13 @@ export const LoginScreen = React.createClass({
         });
     },
 
-    handleLoginButton(){
-        this.setState({isLoading:true});
+    handleLoginButton() {
         console.log("debut de la connexion ... creation de promise");
-        this.loadingPromise = Promise.resolve().then(() => {
-            return axios.post('/api/user/connect',{ // wrap ES6 promise inside bluebird
-                username:this.props.login.get("username"),
-                password:this.props.login.get("hashed_password")
-            })
+        let loadingPromise = Promise.resolve().then(() => {
+            return axios.post("/api/user/connect", { // wrap ES6 promise inside bluebird
+                username: this.props.login.get("login"),
+                password: this.props.login.get("hashed_password")
+            });
         }).then((response) => {
             console.log("UTILISATEUR CONNECTE !!!")
             console.log(response);
@@ -58,29 +57,11 @@ export const LoginScreen = React.createClass({
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ^^^^ important, si c'est marqué 8 fois c'est pas pour faire joli ^^^^
-            this.setState({isLoading:false});
             console.log("fin de la connexion ... destruction de promise");
-            this.loadingPromise = null ;
-        })
-    },
+            this.setState({loadingPromise: null});
+        });
 
-    getInitialState() {
-        return {
-            id: "",
-            pass: ""
-        };
-    },
-
-    onChangeId(event) {
-        this.setState({id: event.target.value});
-    },
-
-    onChangePass(event) {
-        this.setState({pass: event.target.value});
-    },
-
-    onConnect() {
-
+        this.setState({loadingPromise});
     },
 
     render() {
@@ -103,21 +84,6 @@ export const LoginScreen = React.createClass({
                         type="button"
                         onClick={this.props.handleClose}>
                     Fermer
-                </button>
-                <input value={this.props.login.get("login")}
-                       onChange={this.handleChangeLogin}
-                       placeholder="login"
-                       name="login" />
-                <input value={this.props.login.get("password")}
-                       onChange={this.handleChangePassword}
-                       type="password"
-                       name="password"
-                       placeholder="password" />
-                <button className="button main blue"
-                        name="connect"
-                        type="button"
-                        onClick={this.handleLoginButton}>
-                    Login
                 </button>
             </div>
         );
