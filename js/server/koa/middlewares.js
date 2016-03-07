@@ -12,19 +12,22 @@ module.exports = function(app,api){
     api.use(function* (next){
         try {
             yield next;
-            if (this.status >= 200 && this.status <= 299){
+            throw Error("pote");
+            let status = this.status ;
+            if (status >= 200 && status <= 299){
                 this.body.status = "ok" ;
-            } else if (this.status === 404 ){
+            } else if (status === 404 ){
                 this.body = {status:"error",message:this.message || "not found"}
-            } else if (this.status >= 400 && this.status <= 499 ){
+            } else if (status >= 400 && status <= 499 ){
                 this.body = {status:"error",message:this.message}
-            } else if (this.status >= 500) {
+            } else if (status >= 500) {
                 if (program.dev){
                     this.body = {status:"error",message:this.message}
                 } else{
                     this.body = {status:"error",message:"internal server error"}
                 }
             }
+            this.status = status ;
         } catch (e) {
             if (program && program.dev){
                 this.body = {status:"error",message:e.message,name:e.name,stack:e.stack.split("\n    ")}
@@ -32,6 +35,7 @@ module.exports = function(app,api){
                 this.body = {status:"error",message:"internal server error"}
             }
             winston.error("Unexpected error "+e.name+" : "+e.message);
+            this.status = 500 ;
         }
     })
     api.use(koa_bodyparser());
