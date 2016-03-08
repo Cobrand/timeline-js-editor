@@ -20,8 +20,11 @@ module.exports = {
             user = yield db.User.findById(id);
         }
         if (!!user){
+            let is_login_correct = sha512(user.id.toString(16)+user.salt+user.password).toString('hex').substr(0, 32) === credentials_key ;
+            winston.debug("checkCredentials : login for user "+id+" is "+is_login_correct ? "true" : "false");
             return sha512(user.id.toString(16)+user.salt+user.password).toString('hex').substr(0, 32) === credentials_key ;
         }else{
+            winston.debug("checkCredentials : user_id wasnt found in the db");
             throw new UserNotFoundError();
         }
     },
@@ -33,8 +36,10 @@ module.exports = {
             user = {id,salted_password,salt};
         }
         if (!!user){
+            winston.debug("generateCredentials : generated credentials for "+user.id);
             return sha512(user.id.toString(16)+user.salt+user.password).toString('hex').substr(0, 32) ;
         }else{
+            winston.debug("generateCredentials : could not generate credentials for "+user.id+" : user not found");
             throw new UserNotFoundError();
         }
     },

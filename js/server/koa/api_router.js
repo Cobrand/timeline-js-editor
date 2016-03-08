@@ -125,6 +125,34 @@ module.exports = function(){
         }
     })
 
+    krouter_api.delete('/timeline/:timelineid/', function* (next){
+        winston.debug("Received DELETE /timeline/"+this.params.timelineid+"/ request : "+JSON.stringify(this.request.body));
+        let timelineid = parseInt(this.params.timelineid);
+        let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
+        let credentials_key = this.request.body.credentials_key ;
+        // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
+        let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
+        if (is_connected){
+            winston.debug("(DELETE : user is connected, deleting timeline ...)");
+            let affectedCount = yield db.Timeline.destroy({where:{owner:user_id,id:timelineid}}) ;
+            if (affectedCount === 0 ){
+                winston.debug("(DELETE : timeline not found)");
+                this.status = 404;
+                this.message = "Timeline not found"
+            } else if (affectedCount === 1 ) {
+                winston.debug("(DELETE : deleted timeline peacefully)");
+                this.body = {"message":"Successfully deleted timeline"};
+            } else {
+                winston.error("(DELETE: Unexpected affectedCount be > than 1, what the fuck mate)")
+                throw Error("UNEXPECTED affectedCount be > than 1, this should never happen")
+            }
+        } else {
+            winston.debug("(DELETE : user is not connected)");
+            this.status = 401 ;
+            this.message = "Bad credentials to delete this data" ;
+        }
+    })
+
     krouter_api.post('/timeline/', function* (next){
         winston.debug("Received POST /timeline/ request : "+JSON.stringify(this.request.body));
         let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
@@ -134,13 +162,16 @@ module.exports = function(){
             // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
             let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
             if (is_connected){
+                winston.debug("(POST : user is connected, proceding to update)");
                 let timeline = yield db.Timeline.create({timeline:JSON.stringify(timelineJSON),owner:user_id,last_modified:Date.now()}) ;
                 this.body = {"timelineid":timeline.id,message:"Successfully created timeline"};
             } else {
+                winston.debug("(POST : user is not connected, deny him)");
                 this.status = 401 ;
                 this.message = "Bad credentials to create this data" ;
             }
         } catch (e){
+            winston.debug("caught error for POST request");
             if (e instanceof SyntaxError){
                 this.status = 400 ;
                 this.message = "Could not parse JSON object 'timeline'" ;
