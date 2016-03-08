@@ -109,11 +109,20 @@ export const Interface = React.createClass({
         if ( credentials_key && user_id ){
             let saveTimeline = () => {
                 Promise.resolve().then(() => {
-                    return axios.post("/api/user/timeline", {
+                    let timelineid = localStorage.getItem("current_timeline");
+                    let url = "/api/timeline/";
+                    if (timelineid !== "undefined") {
+                        url += timelineid;
+                    }
+
+                    return axios.post(url, {
                         credentials_key,
                         user_id,
-                        timeline: this.props.timeline.toJSON()
+                        timeline: JSON.stringify(this.props.timeline.toJSON()),
+                        timeline_id: timelineid
                     });
+                }).then((msg) => {
+                    localStorage.setItem("current_timeline", msg.data.timelineid);
                 }).catch((err) => {
                     alert("Erreur de sauvegarde : " + err.statusText);
                 });

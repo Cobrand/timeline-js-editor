@@ -1,6 +1,7 @@
 import React from "react";
 import model from "model/model.js";
 import {hash_password} from "utils.js";
+import Promise from "bluebird";
 import axios from "axios";
 
 export const SignUpScreen = React.createClass({
