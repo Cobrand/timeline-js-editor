@@ -15,18 +15,20 @@ export const Interface = React.createClass({
     },
 
     propTypes: {
-        timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
         login: React.PropTypes.objectOf(model.Login).isRequired,
         signup: React.PropTypes.objectOf(model.SignUp).isRequired,
     },
 
     getInitialState() {
+        let timeline = new model.Timeline();
         return {
-            current_slide: this.props.timeline.get("title"),
+            current_slide: timeline.get("title"),
+            timeline,
             json: null,
             preview: null,
             loginScreen: null,
             signupScreen: null,
+            selectTimelineScreen: null,
             isConnected:(!!localStorage.getItem("credentials_key"))
         };
     },
@@ -38,10 +40,10 @@ export const Interface = React.createClass({
     },
 
     handleRemoveSlide(tab) {
-        const tabs = this.props.timeline.get("events");
+        const tabs = this.state.timeline.get("events");
 
         if (tabs.size() < 2) {
-            this.handleChangeTab(this.props.timeline.get("title"));
+            this.handleChangeTab(this.state.timeline.get("title"));
             tabs.reset();
         } else {
             if (tab == this.state.current_slide) {
@@ -63,7 +65,7 @@ export const Interface = React.createClass({
 
     handleAddSlide() {
         const slide = new model.Slide();
-        const tabs = this.props.timeline.get("events");
+        const tabs = this.state.timeline.get("events");
 
         if (!this.state.current_slide) {
             tabs.add(slide);
@@ -77,7 +79,7 @@ export const Interface = React.createClass({
 
     showJSON() {
         this.setState({
-            json: <view.Export timeline={this.props.timeline}
+            json: <view.Export timeline={this.state.timeline}
                              handleCloseJSON={this.handleCloseJSON}/>
         });
     },
@@ -89,10 +91,11 @@ export const Interface = React.createClass({
     },
 
     onChangeScale(event) {
-        this.props.timeline.set("scale", event.target.value);
+        this.state.timeline.set("scale", event.target.value);
     },
 
     showPreview() {
+        window.timeline = this.state.timeline;
         this.setState({
             preview: <view.Preview handleClosePreview={this.handleClosePreview}/>
         });
@@ -118,7 +121,7 @@ export const Interface = React.createClass({
             return axios.post(url, {
                 credentials_key,
                 user_id,
-                timeline: JSON.stringify(this.props.timeline.toJSON()),
+                timeline: JSON.stringify(this.state.timeline.toJSON()),
                 timeline_id: timelineid
             });
         }).then((msg) => {
@@ -159,6 +162,11 @@ export const Interface = React.createClass({
                             id="save_timeline"
                             onClick={this.saveTimeline}>
                         Sauvegarder
+                    </button>
+                    <button className="button main blue"
+                            id="select_timeline_button"
+                            onClick={this.showSelectTimelineScreen}>
+                        Sélectionner une timeline
                     </button>
                     <button className="button main red fright"
                             id="disconnect"
@@ -213,6 +221,27 @@ export const Interface = React.createClass({
         });
     },
 
+    showSelectTimelineScreen() {
+        this.setState({
+            selectTimelineScreen: <view.SelectTimeline handleClose={this.handleCloseSelectTimelineScreen}
+                                                       handleSelect={this.handleSelectTimeline} />
+        });
+    },
+
+    handleCloseSelectTimelineScreen() {
+        this.setState({
+            selectTimelineScreen: null
+        });
+    },
+
+    handleSelectTimeline(timeline) {
+        this.handleCloseSelectTimelineScreen();
+        this.setState({
+            timeline,
+            current_slide: timeline.get("title")
+        });
+    },
+
     getSlide() {
         if (this.state.current_slide) {
             return <view.Slide slide={this.state.current_slide}/>;
@@ -239,19 +268,19 @@ export const Interface = React.createClass({
         }
 
         const reader = new FileReader();
-        reader.onload = (e) => this.props
+        reader.onload = (e) => this.state
                                    .timeline
                                    .resetFromJson(e.target.result);
         reader.readAsText(file);
     },
 
     render() {
-        const t = this.props.timeline;
+        const t = this.state.timeline;
         // <div className="selectscaletext">
         //     Échelle temporelle :
         //     <select name="scale"
         //             className="select_option">
-        //             value={this.props.timeline.get("scale")}
+        //             value={this.state.timeline.get("scale")}
         //             onChange={this.onChangeScale}>
         //         <option value="human">Humaine</option>
         //         <option value="cosmological">Cosmologique</option>
@@ -301,6 +330,7 @@ export const Interface = React.createClass({
                 {this.state.preview}
                 {this.state.loginScreen}
                 {this.state.signupScreen}
+                {this.state.selectTimelineScreen}
             </div>
         );
     }

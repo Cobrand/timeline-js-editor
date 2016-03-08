@@ -8,8 +8,10 @@ import {Media} from "view/media.js";
 import {MDate} from "view/date.js";
 import {LoginScreen} from "view/login/loginscreen.js";
 import {SignUpScreen} from "view/login/signupscreen.js";
+import {SelectTimeline} from "view/selectTimeline.js";
 
 export default {
+    SelectTimeline,
     Timeline,
     Export,
     Interface,
