@@ -1,4 +1,5 @@
 {
+    "esnext": true,
     "preset": "crockford",
     "requireDotNotation": null,
     "requireMultipleVarDecl": null,
