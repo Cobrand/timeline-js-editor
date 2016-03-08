@@ -12,7 +12,6 @@ module.exports = function(app,api){
     api.use(function* (next){
         try {
             yield next;
-            throw Error("pote");
             let status = this.status ;
             if (status >= 200 && status <= 299){
                 this.body.status = "ok" ;
