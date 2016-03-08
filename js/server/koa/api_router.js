@@ -101,7 +101,8 @@ module.exports = function(){
             // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
             let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
             if (is_connected){
-                let affectedCount = yield db.Timeline.update({timeline:JSON.stringify(timeline),last_modified:Date.now()},{where:{'owner':user_id,'id':timelineid}})[0] ;
+                let result = yield db.Timeline.update({timeline:JSON.stringify(timeline),last_modified:Date.now()},{where:{'owner':user_id,'id':timelineid}}) ;
+                let affectedCount = result[0]
                 if (affectedCount === 0 ){
                     this.status = 404;
                     this.message = "Timeline not found"
