@@ -52,7 +52,9 @@ module.exports = function(){
             let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
             if (is_connected){
                 // success, return the answer
-                this.body = {"timelines":yield db.Timeline.findAll({where:{'owner':user_id}})};
+                let timelines = yield db.Timeline.findAll({where:{'owner':user_id}}) ;
+                timelines = timelines.map((v) => {v.timeline = JSON.parse(v.timeline);return v ;});
+                this.body = {"timelines":timelines};
             } else {
                 this.status = 401 ;
                 this.message = "Bad credentials to access this data" ;
