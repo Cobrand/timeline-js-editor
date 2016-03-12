@@ -25,7 +25,8 @@ export const Interface = React.createClass({
             json: null,
             preview: null,
             loginScreen: null,
-            signupScreen: null
+            signupScreen: null,
+            isConnected:(!!localStorage.getItem("credentials_key"))
         };
     },
 
@@ -102,40 +103,73 @@ export const Interface = React.createClass({
         });
     },
 
+    saveTimeline() {
+        let credentials_key = localStorage.getItem("credentials_key") ;
+        let user_id = localStorage.getItem("user_id") ;
+
+        Promise.resolve().then(() => {
+            let timelineid = localStorage.getItem("current_timeline");
+            let url = "/api/timeline/";
+            if (timelineid !== "undefined") {
+                url += timelineid;
+            }
+
+            return axios.post(url, {
+                credentials_key,
+                user_id,
+                timeline: JSON.stringify(this.props.timeline.toJSON()),
+                timeline_id: timelineid
+            });
+        }).then((msg) => {
+            localStorage.setItem("current_timeline", msg.data.timelineid);
+        }).catch((err) => {
+            alert("Erreur de sauvegarde : " + err.statusText);
+        });
+    },
+
+    disconnect(){
+        localStorage.removeItem("current_timeline");
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("credentials_key");
+        this.setState({
+            isConnected:false
+        })
+    },
+
     getUserInterface(){
         let credentials_key = localStorage.getItem("credentials_key") ;
         let user_id = localStorage.getItem("user_id") ;
 
         if ( credentials_key && user_id ){
-            let saveTimeline = () => {
-                Promise.resolve().then(() => {
-                    let timelineid = localStorage.getItem("current_timeline");
-                    let url = "/api/timeline/";
-                    if (timelineid !== "undefined") {
-                        url += timelineid;
-                    }
-
-                    return axios.post(url, {
-                        credentials_key,
-                        user_id,
-                        timeline: JSON.stringify(this.props.timeline.toJSON()),
-                        timeline_id: timelineid
-                    });
-                }).then((msg) => {
-                    localStorage.setItem("current_timeline", msg.data.timelineid);
-                }).catch((err) => {
-                    alert("Erreur de sauvegarde : " + err.statusText);
-                });
-            };
-
             return (
-                <button className="button main blue"
-                        id="save_timeline"
-                        onClick={saveTimeline}>
-                    Sauvegarder
-                </button>
+                <div style={{display:"inline"}}>
+                    <button className="button main blue"
+                            id="save_timeline"
+                            onClick={this.saveTimeline}>
+                        Sauvegarder
+                    </button>
+                    <button className="button main red fright"
+                            id="disconnect"
+                            onClick={this.disconnect}>
+                        Déconnexion
+                    </button>
+                </div>
             );
         } else {
+            return (<div style={{display:"inline"}}>
+                <button className="button main blue fright"
+                        id="open_login"
+                        type="button"
+                        onClick={this.showLoginScreen}>
+                    Connexion
+                </button>
+                <button className="button main green fright"
+                        id="open_signup"
+                        type="button"
+                        onClick={this.showSignupScreen}>
+                    Inscription
+                </button>
+            </div>);
             // user is not connected, show him the login + sign up buttons
         }
     },
@@ -143,7 +177,8 @@ export const Interface = React.createClass({
     showLoginScreen() {
         this.setState({
             loginScreen: <view.LoginScreen handleClose={this.handleCloseLoginScreen}
-                                           login={this.props.login}/>
+                                           login={this.props.login}
+                                           onConnect={this.onConnect}/>
         });
     },
 
@@ -176,6 +211,12 @@ export const Interface = React.createClass({
         if (this.state.preview || this.state.json) {
             return <div className="mask"></div>;
         }
+    },
+
+    onConnect(){
+        this.setState({
+            isConnected:true
+        })
     },
 
     importJSON(event) {
@@ -232,18 +273,6 @@ export const Interface = React.createClass({
 
                     {this.getUserInterface()}
 
-                    <button className="button main blue fright"
-                            id="open_login"
-                            type="button"
-                            onClick={this.showLoginScreen}>
-                        Connexion
-                    </button>
-                    <button className="button main green fright"
-                            id="open_signup"
-                            type="button"
-                            onClick={this.showSignupScreen}>
-                        Inscription
-                    </button>
                 </div>
                 <div className="content">
                     <view.Tabs title={t.get("title")}

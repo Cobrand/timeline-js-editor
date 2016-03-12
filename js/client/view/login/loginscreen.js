@@ -51,6 +51,8 @@ export const LoginScreen = React.createClass({
             });
             localStorage.setItem("user_id", response.data.userid);
             localStorage.setItem("credentials_key", response.data.credentials_key);
+            this.props.onConnect();
+            this.props.handleClose();
         }).catch((err) => {
             console.log("TU SAIS PAS TAPER TON MOT DE PASSE ??? !!!")
             console.log(err);
