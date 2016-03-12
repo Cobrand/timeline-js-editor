@@ -3,6 +3,7 @@ import view from "view/view.js";
 import model from "model/model.js";
 import Promise from "bluebird";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const Interface = React.createClass({
     mixins: [React.Backbone],
@@ -123,7 +124,15 @@ export const Interface = React.createClass({
         }).then((msg) => {
             localStorage.setItem("current_timeline", msg.data.timelineid);
         }).catch((err) => {
-            alert("Erreur de sauvegarde : " + err.statusText);
+            swal({
+                title:"Erreur serveur",
+                text:"Erreur de sauvegarde : "+ err.statusText,
+                type:"error"
+            });
+            console.error(err);
+        }).catch((err) => {
+            alert("Unexpected error : " + err.name);
+            throw err ;
         });
     },
 

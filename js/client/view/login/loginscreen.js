@@ -1,8 +1,10 @@
 import React from "react";
+import Spinner from "react-spin";
 import model from "model/model.js";
 import {hash_password} from "utils.js";
 import Promise from "bluebird";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const LoginScreen = React.createClass({
     mixins: [React.Backbone],
@@ -18,8 +20,15 @@ export const LoginScreen = React.createClass({
 
     getInitialState() {
         return {
-            errorMessage: null,
-            loginPromise:null // if != null : currently connecting
+            loadingPromise:null // if != null : currently connecting
+        }
+    },
+
+    getSpin(){
+        if (this.state.loadingPromise){
+            return <Spinner/>
+        } else {
+            return ;
         }
     },
 
@@ -37,28 +46,32 @@ export const LoginScreen = React.createClass({
     },
 
     handleLoginButton() {
-        console.log("debut de la connexion ... creation de promise");
+        let shouldClose = false ;
         let loadingPromise = Promise.resolve().then(() => {
             return axios.post("/api/user/connect", { // wrap ES6 promise inside bluebird
                 username: this.props.login.get("login"),
                 password: this.props.login.get("hashed_password")
             });
         }).then((response) => {
-            console.log("UTILISATEUR CONNECTE !!!")
-            console.log(response);
-            this.setState({
-                errorMessage: null
-            });
             localStorage.setItem("user_id", response.data.userid);
             localStorage.setItem("credentials_key", response.data.credentials_key);
             this.props.onConnect();
-            this.props.handleClose();
+            shouldClose = true ;
         }).catch((err) => {
-            console.log("TU SAIS PAS TAPER TON MOT DE PASSE ??? !!!")
-            console.log(err);
-            this.setState({
-                errorMessage: err.statusText
-            });
+            if (err.status === 404){
+                swal({
+                    "title":"Identification échouée",
+                    "text":"Nom d'utilisateur ou mot de passe incorrect",
+                    "type":"error"
+                })
+            } else {
+                swal({
+                    "title":"Identification échouée",
+                    "text":"Erreur inconnue",
+                    "type":"error"
+                })
+                console.log(err);
+            }
         }).finally(() => {
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
@@ -68,8 +81,10 @@ export const LoginScreen = React.createClass({
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
             // ^^^^ important, si c'est marqué 8 fois c'est pas pour faire joli ^^^^
-            console.log("fin de la connexion ... destruction de promise");
             this.setState({loadingPromise: null});
+            if (shouldClose){
+                this.props.handleClose(); // force close of this screen
+            }
         });
 
         this.setState({loadingPromise});
@@ -78,6 +93,7 @@ export const LoginScreen = React.createClass({
     render() {
         return (
             <div className="loginscreen">
+                {this.getSpin()}
                 <input type="text"
                        placeholder="Identifiant"
                        onChange={this.handleChangeLogin}>
@@ -96,7 +112,6 @@ export const LoginScreen = React.createClass({
                         onClick={this.props.handleClose}>
                     Fermer
                 </button>
-                {this.state.errorMessage}
             </div>
         );
     }

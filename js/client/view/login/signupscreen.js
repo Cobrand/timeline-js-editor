@@ -3,6 +3,7 @@ import model from "model/model.js";
 import {hash_password} from "utils.js";
 import Promise from "bluebird";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const SignUpScreen = React.createClass({
     mixins: [React.Backbone],
@@ -38,7 +39,6 @@ export const SignUpScreen = React.createClass({
     },
 
     onConnect() {
-        console.log("pote");
         let signupPromise = Promise.resolve().then(() => {
             return axios.post("/api/user/", {
                 username: this.props.signup.get("login"),
@@ -46,13 +46,35 @@ export const SignUpScreen = React.createClass({
                 email: this.props.signup.get("email")
             });
         }).then((res) => {
-            this.setState({
-                errorMessage: null
-            });
+            swal({
+                "title":"Inscription terminée !",
+                "text":"Vous êtes désormais inscrit ! Vous pouvez commencer à éditer !",
+                "type":"success"
+            })
         }).catch((err) => {
-            this.setState({
-                errorMessage: err.statusText
-            });
+            if (err.status === 500){
+                swal({
+                    "title":"Erreur serveur",
+                    "text":"Le serveur a renvoyé une erreur",
+                    "type":"error"
+                })
+                console.error("Une erreur serveur est survenue :");
+                console.error(err);
+            } else if (err.status === 409){
+                swal({
+                    "title":"Inscription échouée",
+                    "text":"Nom d'utilisateur ou email déjà utilisé",
+                    "type":"error"
+                })
+            } else {
+                swal({
+                    "title":"Erreur",
+                    "text":"Une erreur inconnue est survenue : "+err.statusText,
+                    "type":"error"
+                })
+                console.error("Une erreur inconnue est survenue :");
+                console.error(err);
+            }
         }).finally(() => {
             this.setState({
                 signupPromise: null
@@ -87,7 +109,6 @@ export const SignUpScreen = React.createClass({
                         onClick={this.props.handleClose}>
                     Fermer
                 </button>
-                {this.state.errorMessage}
             </div>
         );
     }
