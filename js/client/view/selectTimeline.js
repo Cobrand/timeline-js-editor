@@ -75,6 +75,7 @@ export const SelectTimeline = React.createClass({
         });
 
         this.setState({promise});
+        return promise;
     },
 
     componentDidMount() {
@@ -96,7 +97,7 @@ export const SelectTimeline = React.createClass({
                 }
             });
         }).then(() => {
-            this.refreshTimelines();
+            return this.refreshTimelines();
         }).catch((err) => {
             alert("Erreur lors de la suppression : " + err.statusText);
         });
@@ -125,7 +126,7 @@ export const SelectTimeline = React.createClass({
                 timeline: JSON.stringify((new model.Timeline()).toJSON())
             });
         }).then(() => {
-            this.refreshTimelines();
+            return this.refreshTimelines();
         }).catch((err) => {
             alert("Erreur lors de la création : " + err.statusText);
         });
