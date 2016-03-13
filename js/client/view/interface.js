@@ -111,7 +111,7 @@ export const Interface = React.createClass({
         Promise.resolve().then(() => {
             let timelineid = localStorage.getItem("current_timeline");
             let url = "/api/timeline/";
-            if (timelineid !== "undefined") {
+            if (timelineid && timelineid !== "undefined") {
                 url += timelineid;
             }
 
