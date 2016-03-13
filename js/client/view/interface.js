@@ -234,12 +234,13 @@ export const Interface = React.createClass({
         });
     },
 
-    handleSelectTimeline(timeline) {
+    handleSelectTimeline(id, timeline) {
         this.handleCloseSelectTimelineScreen();
         this.setState({
             timeline,
             current_slide: timeline.get("title")
         });
+        localStorage.setItem("current_timeline", id);
     },
 
     getSlide() {

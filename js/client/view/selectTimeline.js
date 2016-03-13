@@ -12,6 +12,7 @@ const TimelinePreview = React.createClass({
 
     propTypes: {
         timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
+        timelineid: React.PropTypes.string.isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onSelect: React.PropTypes.func.isRequired
     },
@@ -19,7 +20,7 @@ const TimelinePreview = React.createClass({
     render() {
         return (
             <div>
-                <p onClick={() => this.props.onSelect(this.props.timeline)}>
+                <p onClick={() => this.props.onSelect(this.props.timelineid, this.props.timeline)}>
                     {this.props.timeline.get("title").get("text").headline || "pooooote"}
                 </p>
                 <button onClick={this.props.onDelete}>
@@ -99,6 +100,7 @@ export const SelectTimeline = React.createClass({
     getPreviews() {
         let t = this.state.timelines.map((item) => {
             return <TimelinePreview timeline={item.timeline}
+                                    timelineid={item.id}
                                     onDelete={this.deleteTimeline.bind(null, item.id)}
                                     onSelect={this.props.handleSelect}/>;
         });
