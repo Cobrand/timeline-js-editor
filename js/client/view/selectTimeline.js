@@ -12,7 +12,7 @@ const TimelinePreview = React.createClass({
 
     propTypes: {
         timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
-        timelineid: React.PropTypes.string.isRequired,
+        timelineid: React.PropTypes.number.isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onSelect: React.PropTypes.func.isRequired
     },
@@ -106,6 +106,7 @@ export const SelectTimeline = React.createClass({
         let t = this.state.timelines.map((item) => {
             return <TimelinePreview timeline={item.timeline}
                                     timelineid={item.id}
+                                    key={item.id}
                                     onDelete={this.deleteTimeline.bind(null, item.id)}
                                     onSelect={this.props.handleSelect}/>;
         });
