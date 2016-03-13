@@ -13,29 +13,35 @@ module.exports = function(){
         let email = this.request.body.email ;
         let password = this.request.body.password
         if (!!username && !!email && !!password){
-            // if all variables are defined
-            let salt = sha512(Math.random().toString(16)).toString('hex').substr(0,32);
-            // should be an already sha512'd password
-            // we wouldnt want to sent plain text password to a server ...
-            let salted_password = utils.saltedPassword(password,salt);
-            let user = yield db.User.findOne({where :{"$or":{'username':username,'email':email}}});
-            if (!user){
-                user = yield db.User.create({
-                    username:username,
-                    email:email,
-                    password:salted_password,
-                    salt:salt,
-                })
-                // TODO send email to confirm account creation
-                this.body = {
-                    "message":"Account successfully created",
-                    "userid":user.id,
-                    "credentials_key":yield* utils.generateCredentials(user.id,salted_password,user.salt)
-                };
-            }else{
-                this.status = 409 ;
-                this.message = "username "+username+" or email "+email+" already in use";
-                winston.verbose("Error when creating account : username "+username+" or email "+email+" already in use");
+            if (username.length < 128 && email.length < 128){
+                // if all variables are defined
+                let salt = sha512(Math.random().toString(16)).toString('hex').substr(0,32);
+                // should be an already sha512'd password
+                // we wouldnt want to sent plain text password to a server ...
+                let salted_password = utils.saltedPassword(password,salt);
+                let user = yield db.User.findOne({where :{"$or":{'username':username,'email':email}}});
+                if (!user){
+                    user = yield db.User.create({
+                        username:username,
+                        email:email,
+                        password:salted_password,
+                        salt:salt,
+                    })
+                    // TODO send email to confirm account creation
+                    this.body = {
+                        "message":"Account successfully created",
+                        "userid":user.id,
+                        "credentials_key":yield* utils.generateCredentials(user.id,salted_password,user.salt)
+                    };
+                }else{
+                    this.status = 409 ;
+                    this.message = "username "+username+" or email "+email+" already in use";
+                    winston.verbose("Error when creating account : username "+username+" or email "+email+" already in use");
+                }
+            } else {
+                this.status = 400 ;
+                this.message = "'username' or 'email' are too long, must be under 128 characters"
+                winston.verbose("'username' or 'email' are too long, must be under 128 characters ; request :"+JSON.stringify(this.request.body));
             }
         }else{
             this.status = 400 ;
@@ -74,82 +80,97 @@ module.exports = function(){
 
     krouter_api.get('/timeline/:timelineid/', function* (next){
         winston.debug("Received /timeline/"+this.params.timelineid+"/ request : "+JSON.stringify(this.request.query));
-        let timelineid = parseInt(this.params.timelineid);
-        let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
-        let credentials_key = this.request.query.credentials_key ;
-        let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
-        if (is_connected){
-            let timeline = yield db.Timeline.findOne({where:{'owner':user_id,'id':timelineid}}) ;
-            if (timeline){
-                this.body = {"timeline":JSON.parse(timeline.timeline)};
+        let timelineid = Number(this.params.timelineid);
+        if (!isNaN(timelineid)){
+            let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
+            let credentials_key = this.request.query.credentials_key ;
+            let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
+            if (is_connected){
+                let timeline = yield db.Timeline.findOne({where:{'owner':user_id,'id':timelineid}}) ;
+                if (timeline){
+                    this.body = {"timeline":JSON.parse(timeline.timeline)};
+                } else {
+                    this.status = 404;
+                    this.message = "Timeline not found"
+                }
             } else {
-                this.status = 404;
-                this.message = "Timeline not found"
+                this.status = 401 ;
+                this.message = "Bad credentials to access this data" ;
             }
         } else {
-            this.status = 401 ;
-            this.message = "Bad credentials to access this data" ;
+            this.status = 400 ;
+            this.message = "Invalid 'timeline' parameter" ;
         }
     })
 
     krouter_api.post('/timeline/:timelineid/', function* (next){
         winston.debug("Received POST /timeline/"+this.params.timelineid+"/ request : "+JSON.stringify(this.request.body));
-        let timelineid = parseInt(this.params.timelineid);
+        let timelineid = Number(this.params.timelineid);
         let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
         let credentials_key = this.request.body.credentials_key ;
-
-        try {
-            let timeline = JSON.parse(this.request.body.timeline)
-            // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
-            let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
-            if (is_connected){
-                let result = yield db.Timeline.update({timeline:JSON.stringify(timeline),last_modified:Date.now()},{where:{'owner':user_id,'id':timelineid}}) ;
-                let affectedCount = result[0]
-                if (affectedCount === 0 ){
-                    this.status = 404;
-                    this.message = "Timeline not found"
-                } else if (affectedCount === 1 ) {
-                    this.body = {"message":"Successfully updated timeline"};
+        if (!isNaN(timelineid)){
+            try {
+                let timeline = JSON.parse(this.request.body.timeline)
+                // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
+                let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
+                if (is_connected){
+                    let result = yield db.Timeline.update({timeline:JSON.stringify(timeline),last_modified:Date.now()},{where:{'owner':user_id,'id':timelineid}}) ;
+                    let affectedCount = result[0]
+                    if (affectedCount === 0 ){
+                        this.status = 404;
+                        this.message = "Timeline not found"
+                    } else if (affectedCount === 1 ) {
+                        this.body = {"message":"Successfully updated timeline"};
+                    }
+                } else {
+                    this.status = 401 ;
+                    this.message = "Bad credentials to modify this data" ;
                 }
-            } else {
-                this.status = 401 ;
-                this.message = "Bad credentials to modify this data" ;
+            } catch (e){
+                if (e instanceof SyntaxError){
+                    this.status = 400 ;
+                    this.message = "Could not parse JSON object 'timeline'" ;
+                    winston.verbose("Could not parse JSON object : "+timeline);
+                } else {
+                    throw e ;
+                }
             }
-        } catch (e){
-            if (e instanceof SyntaxError){
-                this.status = 400 ;
-                this.message = "Could not parse JSON object 'timeline'" ;
-            } else {
-                throw e ;
-            }
+        } else {
+            this.status = 400 ;
+            this.message = "Invalid 'timeline' parameter" ;
         }
     })
 
     krouter_api.delete('/timeline/:timelineid/', function* (next){
         winston.debug("Received DELETE /timeline/"+this.params.timelineid+"/ request : "+JSON.stringify(this.request.body));
-        let timelineid = parseInt(this.params.timelineid);
-        let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
-        let credentials_key = this.request.body.credentials_key ;
-        // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
-        let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
-        if (is_connected){
-            winston.debug("(DELETE : user is connected, deleting timeline ...)");
-            let affectedCount = yield db.Timeline.destroy({where:{owner:user_id,id:timelineid}}) ;
-            if (affectedCount === 0 ){
-                winston.debug("(DELETE : timeline not found)");
-                this.status = 404;
-                this.message = "Timeline not found"
-            } else if (affectedCount === 1 ) {
-                winston.debug("(DELETE : deleted timeline peacefully)");
-                this.body = {"message":"Successfully deleted timeline"};
+        let timelineid = Number(this.params.timelineid);
+        if (!isNaN(timelineid)){
+            let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
+            let credentials_key = this.request.body.credentials_key ;
+            // parsing of the JSON object jsut to make sure it's valid, and not total crap is sent to the db
+            let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
+            if (is_connected){
+                winston.debug("(DELETE : user is connected, deleting timeline ...)");
+                let affectedCount = yield db.Timeline.destroy({where:{owner:user_id,id:timelineid}}) ;
+                if (affectedCount === 0 ){
+                    winston.debug("(DELETE : timeline not found)");
+                    this.status = 404;
+                    this.message = "Timeline not found"
+                } else if (affectedCount === 1 ) {
+                    winston.debug("(DELETE : deleted timeline peacefully)");
+                    this.body = {"message":"Successfully deleted timeline"};
+                } else {
+                    winston.error("(DELETE: Unexpected affectedCount be > than 1, what the fuck mate)")
+                    throw Error("UNEXPECTED affectedCount be > than 1, this should never happen")
+                }
             } else {
-                winston.error("(DELETE: Unexpected affectedCount be > than 1, what the fuck mate)")
-                throw Error("UNEXPECTED affectedCount be > than 1, this should never happen")
+                winston.debug("(DELETE : user is not connected)");
+                this.status = 401 ;
+                this.message = "Bad credentials to delete this data" ;
             }
         } else {
-            winston.debug("(DELETE : user is not connected)");
-            this.status = 401 ;
-            this.message = "Bad credentials to delete this data" ;
+            this.status = 400 ;
+            this.message = "Invalid 'timeline' parameter" ;
         }
     })
 

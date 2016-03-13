@@ -13,6 +13,7 @@ module.exports = function(app,api){
         try {
             yield next;
             let status = this.status ;
+            let message = this.message ;
             if (status >= 200 && status <= 299){
                 this.body.status = "ok" ;
             } else if (status === 404 ){
@@ -27,6 +28,7 @@ module.exports = function(app,api){
                 }
             }
             this.status = status ;
+            this.message = message ;
         } catch (e) {
             if (program && program.dev){
                 this.body = {status:"error",message:e.message,name:e.name,stack:e.stack.split("\n    ")}
