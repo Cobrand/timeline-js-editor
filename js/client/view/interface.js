@@ -122,7 +122,10 @@ export const Interface = React.createClass({
                 timeline_id: timelineid
             });
         }).then((msg) => {
-            localStorage.setItem("current_timeline", msg.data.timelineid);
+            const timelineid = msg.data.timelineid;
+            if (timelineid && timelineid !== "undefined") {
+                localStorage.setItem("current_timeline", timelineid);
+            }
         }).catch((err) => {
             swal({
                 title:"Erreur serveur",
