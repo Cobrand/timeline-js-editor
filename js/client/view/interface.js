@@ -20,7 +20,13 @@ export const Interface = React.createClass({
     },
 
     getInitialState() {
-        let timeline = new model.Timeline();
+        let timeline;
+        if (localStorage.getItem("credentials_key")) {
+            timeline = new model.Timeline();
+        } else {
+            const json = require("example_json.json");
+            timeline = new model.Timeline(json, {parse: true});
+        }
         return {
             current_slide: timeline.get("title"),
             timeline,
