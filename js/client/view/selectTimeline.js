@@ -90,7 +90,7 @@ export const SelectTimeline = React.createClass({
     deleteTimeline(id) {
         Promise.resolve().then(() => {
             return axios.delete("/api/timeline/" + id, {
-                params: {
+                data: {
                     user_id: localStorage.getItem("user_id"),
                     credentials_key: localStorage.getItem("credentials_key")
                 }
