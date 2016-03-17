@@ -58,11 +58,11 @@
 }
 
 .closepopup{
-    @extend .button, .xsmall, .red;
+    @extend .closebutton;
     position: absolute;
     margin:0px;
-    top: 0;
-    right:0;
+    top: 10px;
+    right:10px;
     width:20px;
     float:right;
 }

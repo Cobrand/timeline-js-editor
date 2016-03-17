@@ -55,12 +55,11 @@
 }
 
 .removeslide{
-    @extend .button, .xsmall, .red;
+    @extend .closebutton;
     position: absolute;
     margin:0px;
-    bottom: 0;
-    right:0;
-    width:20px;
+    bottom:2px;
+    right:2px;
     float:right;
 }
 

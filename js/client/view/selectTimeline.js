@@ -19,12 +19,12 @@ const TimelinePreview = React.createClass({
 
     render() {
         return (
-            <div className="select_timeline_preview">
-                <p onClick={() => this.props.onSelect(this.props.timelineid, this.props.timeline)}>
-                    {this.props.timeline.get("title").get("text").headline || "pooooote"}
+            <div className="select_timeline_preview" onClick={() => this.props.onSelect(this.props.timelineid, this.props.timeline)}>
+                <p>
+                    {this.props.timeline.get("title").get("text").headline || "Sample Timeline"}
                 </p>
                 <button onClick={this.props.onDelete}
-                        className="removeslide">
+                        className="removeslide">×
                 </button>
             </div>
         );

@@ -26,7 +26,7 @@ export const LoginScreen = React.createClass({
 
     getSpin(){
         if (this.state.loadingPromise){
-            return <Spinner/>
+            return <Spinner config={{top:"80%"}}/>
         } else {
             return ;
         }
@@ -99,6 +99,7 @@ export const LoginScreen = React.createClass({
                         onClick={this.props.handleClose}>
                     ×
                 </button>
+                <h2>Connectez-vous</h2>
                 <input type="text"
                        placeholder="Identifiant"
                        onChange={this.handleChangeLogin}>

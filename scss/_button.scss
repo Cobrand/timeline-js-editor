@@ -61,3 +61,24 @@
         font-size: 18px;
     }
 }
+
+.closebutton{
+    padding: 0;
+    margin:0;
+    cursor: pointer;
+    -moz-user-select: none; // rend le contenu non selectionnable
+    color:#FF0000;
+    background:rgba(0,0,0,0);
+    border:none;
+    font-size:2em;
+    width:22px;
+    height:22px;
+    line-height: 11px;
+
+    &.large{
+        font-size:3.5em;
+        width:40px;
+        height:40px;
+        line-height:15px;
+    }
+}
