@@ -13,3 +13,24 @@
 	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
+.select_timeline_preview {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: 20%;
+
+    p {
+        margin-top: 0;
+    }
+}
+
+.select_timeline_previews {
+    overflow-x: none;
+    overflow-y: auto;
+    height: 90%;
+}

@@ -19,12 +19,12 @@ const TimelinePreview = React.createClass({
 
     render() {
         return (
-            <div>
+            <div className="select_timeline_preview">
                 <p onClick={() => this.props.onSelect(this.props.timelineid, this.props.timeline)}>
                     {this.props.timeline.get("title").get("text").headline || "pooooote"}
                 </p>
-                <button onClick={this.props.onDelete}>
-                    Supprimer
+                <button onClick={this.props.onDelete}
+                        className="removeslide">
                 </button>
             </div>
         );
@@ -112,7 +112,7 @@ export const SelectTimeline = React.createClass({
                                     onSelect={this.props.handleSelect}/>;
         });
         return (
-            <div>
+            <div className="select_timeline_previews">
                 {t}
             </div>
         );
@@ -135,19 +135,21 @@ export const SelectTimeline = React.createClass({
     render() {
         return (
             <div className="selecttimeline">
-                {this.getPreviews()}
-                <button className="button main red fright"
-                        name="close_select_timeline"
-                        type="button"
-                        onClick={this.newTimeline}>
-                    Nouvelle timeline
-                </button>
-                <button className="button main red fright"
+                <div>
+                    <button className="button main red fright"
                         name="close_select_timeline"
                         type="button"
                         onClick={this.props.handleClose}>
-                    Fermer
-                </button>
+                        Fermer
+                    </button>
+                    <button className="button main blue fright"
+                        name="close_select_timeline"
+                        type="button"
+                        onClick={this.newTimeline}>
+                        Nouvelle timeline
+                    </button>
+                </div>
+                {this.getPreviews()}
             </div>
         );
     }
