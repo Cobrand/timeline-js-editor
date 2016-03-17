@@ -108,6 +108,7 @@ export const Interface = React.createClass({
     },
 
     handleClosePreview() {
+        console.log("mdr");
         this.setState({
             preview: null
         });
@@ -255,10 +256,19 @@ export const Interface = React.createClass({
         }
     },
 
+    closeAllPopups(){
+        this.handleCloseJSON();
+        this.handleClosePreview();
+        this.handleCloseLoginScreen();
+        this.handleCloseSignupScreen();
+        this.handleCloseSelectTimelineScreen();
+    },
+
     getMask() {
         if (this.state.preview || this.state.json
-            || this.state.loginScreen || this.state.signupScreen ) {
-            return <div className="popup-background"></div>;
+            || this.state.loginScreen || this.state.signupScreen
+            || this.state.selectTimelineScreen ) {
+            return <div className="popup-background" onClick={this.closeAllPopups}></div>;
         }
     },
 

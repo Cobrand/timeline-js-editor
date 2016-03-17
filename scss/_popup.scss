@@ -5,8 +5,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: black;
-    opacity: 0.6;
+    background-color: #000000;
+    opacity: 0.5;
 }
 
 .popup {
@@ -20,12 +20,16 @@
     border: 2px solid #222;
     z-index: 3;
     padding:$padding;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
     // ^ common ^
 
     width: $width;
     height: $height;
     margin-left:calc( 0px - #{$padding} - #{$width/2} );
     margin-top:calc( 0px - #{$padding} - #{$height/2} );
+
 
     &.small{
         $height:400px;
