@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "react-spin";
 import model from "model/model.js";
 import {hash_password} from "utils.js";
 import Promise from "bluebird";
@@ -15,9 +16,16 @@ export const SignUpScreen = React.createClass({
 
     getInitialState() {
         return {
-            signupPromise: null,
-            errorMessage: null
+            loadingPromise: null
         };
+    },
+
+    getSpin(){
+        if (this.state.loadingPromise){
+            return <Spinner/>
+        } else {
+            return ;
+        }
     },
 
     onChangeId(event) {
@@ -39,7 +47,7 @@ export const SignUpScreen = React.createClass({
     },
 
     onConnect() {
-        let signupPromise = Promise.resolve().then(() => {
+        let loadingPromise = Promise.resolve().then(() => {
             return axios.post("/api/user/", {
                 username: this.props.signup.get("login"),
                 password: hash_password(this.props.signup.get("password")),
@@ -77,16 +85,22 @@ export const SignUpScreen = React.createClass({
             }
         }).finally(() => {
             this.setState({
-                signupPromise: null
+                loadingPromise: null
             });
         });
 
-        this.setState({signupPromise});
+        this.setState({loadingPromise});
     },
 
     render() {
         return (
             <div className="signupscreen">
+                <button className="closepopup"
+                        name="close_json"
+                        type="button"
+                        onClick={this.props.handleClose}>
+                    ×
+                </button>
                 <input type="text"
                        placeholder="Identifiant"
                        onChange={this.onChangeId}>
@@ -99,16 +113,14 @@ export const SignUpScreen = React.createClass({
                        placeholder="email"
                        onChange={this.onChangeEmail}>
                 </input>
+                {this.getSpin()}
                 <button type="button"
+                        className="button main wide blue"
                         onClick={this.onConnect}>
-                    Connexion
+                    Inscription
                 </button>
-                <button className="button main red fright"
-                        name="close_json"
-                        type="button"
-                        onClick={this.props.handleClose}>
-                    Fermer
-                </button>
+
+
             </div>
         );
     }

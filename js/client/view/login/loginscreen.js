@@ -93,7 +93,12 @@ export const LoginScreen = React.createClass({
     render() {
         return (
             <div className="loginscreen">
-                {this.getSpin()}
+                <button className="closepopup"
+                        name="close_json"
+                        type="button"
+                        onClick={this.props.handleClose}>
+                    ×
+                </button>
                 <input type="text"
                        placeholder="Identifiant"
                        onChange={this.handleChangeLogin}>
@@ -102,16 +107,13 @@ export const LoginScreen = React.createClass({
                        placeholder="Mot de passe"
                        onChange={this.handleChangePassword}>
                 </input>
+                {this.getSpin()}
                 <button type="button"
+                        className="button main wide blue"
                         onClick={this.handleLoginButton}>
                     Connexion
                 </button>
-                <button className="button main red fright"
-                        name="close_json"
-                        type="button"
-                        onClick={this.props.handleClose}>
-                    Fermer
-                </button>
+
             </div>
         );
     }

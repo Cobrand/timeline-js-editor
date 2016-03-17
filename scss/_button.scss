@@ -51,6 +51,10 @@
         border-radius: 3px;
     }
 
+    &.wide{
+        width:100%;
+    }
+
     &.main{
         @extend .topnav_element;
         padding: 0 16px;

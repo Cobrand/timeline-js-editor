@@ -1,3 +1,4 @@
+@import "button";
 .popup-background {
     position: fixed;
     z-index: 1;
@@ -29,7 +30,6 @@
     margin-left:calc( 0px - #{$padding} - #{$width/2} );
     margin-top:calc( 0px - #{$padding} - #{$height/2} );
 
-
     &.small{
         $height:380px;
         $width:320px;
@@ -55,4 +55,14 @@
         line-height: 20px;
         padding: 6px 12px;
     }
+}
+
+.closepopup{
+    @extend .button, .xsmall, .red;
+    position: absolute;
+    margin:0px;
+    top: 0;
+    right:0;
+    width:20px;
+    float:right;
 }
