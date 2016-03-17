@@ -64,9 +64,9 @@ export const Slide = React.createClass({
 
     getBgColor() {
         const bg = this.props.slide.get("background");
-        let val = "#ffffff";
-        if (bg && bg.color) {
-            val = bg.url;
+        let val = "#000000";
+        if (this.isColorChecked()) {
+            val = bg.color;
         }
         let onBgColorChange = (event) => {
             const s = this.props.slide;
@@ -98,7 +98,7 @@ export const Slide = React.createClass({
     getBgImage() {
         const bg = this.props.slide.get("background");
         let val = "";
-        if (bg && bg.url) {
+        if (this.isImageChecked()) {
             val = bg.url;
         }
         let onBgImageChange = (event) => {
@@ -112,6 +112,16 @@ export const Slide = React.createClass({
                    onChange={onBgImageChange}>
             </input>
         );
+    },
+
+    isColorChecked() {
+        const bg = this.props.slide.get("background");
+        return bg && bg.color;
+    },
+
+    isImageChecked() {
+        const bg = this.props.slide.get("background");
+        return bg && bg.url;
     },
 
     render() {
@@ -136,11 +146,13 @@ export const Slide = React.createClass({
                     Fond :
                     <input type="checkbox"
                            className="toggle_bg_color"
+                           checked={this.isColorChecked()}
                            onClick={this.toggleBgColor}>
                     </input>
                     {this.getBgColor()}
                     <input type="checkbox"
                            className="toggle_bg_image"
+                           checked={this.isImageChecked()}
                            onClick={this.toggleBgImage}>
                     </input>
                     {this.getBgImage()}
