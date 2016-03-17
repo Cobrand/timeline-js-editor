@@ -256,8 +256,9 @@ export const Interface = React.createClass({
     },
 
     getMask() {
-        if (this.state.preview || this.state.json) {
-            return <div className="mask"></div>;
+        if (this.state.preview || this.state.json
+            || this.state.loginScreen || this.state.signupScreen ) {
+            return <div className="popup-background"></div>;
         }
     },
 

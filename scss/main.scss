@@ -4,6 +4,7 @@
 @import 'slide';
 @import 'tabs';
 @import 'select';
+@import 'popup';
 
 body {
     @include main-font();
@@ -39,22 +40,7 @@ h1,h2,h3,h4,h5,h6{
     height: $editor-height;
 }
 
-.export, .preview, .signupscreen, .loginscreen, .selecttimeline {
-    position: fixed;
-    width: auto;
-    height: auto;
-    top: 5vh;
-    bottom: 5vh;
-    left: 5%;
-    right: 5%;
-    z-index: 2;
 
-    padding:10px;
-
-    background-color: #EEE;
-    border: 2px solid #222;
-    border-radius: 20px;
-}
 
 .export textarea, .preview iframe {
     @include main-font(10px);
@@ -118,18 +104,4 @@ img.media_preview{
     width:auto;
     max-height:100%;
     max-width:100%;
-}
-
-
-
-.mask {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    background-color: black;
-    opacity: 0.6;
 }
