@@ -105,3 +105,19 @@ img.media_preview{
     max-height:100%;
     max-width:100%;
 }
+
+textarea,input{
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 2px -1px rgba(0,0,0,0.15);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -moz-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -ms-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    &:focus{
+        box-shadow: inset 1px 1px 2px -1px rgba(81,137,232,0.15),0 0 5px rgba(81,137,232,0.5);
+        border-color:rgb(81,137,232);
+    }
+}

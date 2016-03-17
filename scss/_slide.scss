@@ -19,16 +19,11 @@
         margin-top: $margin-horizontal;
         padding:3px;
         width:100%;
-        border:solid 1px #555;
         border-radius: 3px;
         resize:none;
 
         &[name='text']{
             height:130px;
-        }
-
-        &:focus{
-            border-color: #999;
         }
     }
 }

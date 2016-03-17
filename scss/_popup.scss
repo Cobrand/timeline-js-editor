@@ -16,8 +16,7 @@
     position: fixed;
     top: 50vh;
     left: 50vw;
-    background-color: #EEE;
-    border: 2px solid #222;
+    background-color: rgb(248, 251, 253);
     z-index: 3;
     padding:$padding;
     -webkit-border-radius: 5px;
@@ -32,8 +31,8 @@
 
 
     &.small{
-        $height:400px;
-        $width:200px;
+        $height:380px;
+        $width:320px;
         width: $width;
         height: $height;
         margin-left:calc( 0px - #{$padding} - #{$width/2} );
@@ -47,4 +46,13 @@
 
 .signupscreen, .loginscreen {
     @extend .popup,.small;
+    input{
+        -moz-box-sizing: border-box;
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        height: 34px;
+        line-height: 20px;
+        padding: 6px 12px;
+    }
 }
