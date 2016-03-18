@@ -55,3 +55,20 @@
 .slide_media{
     border-right:solid 2px black;
 }
+
+.slide_right {
+    div {
+        display: block;
+        width: 100%;
+
+        input[type="url"] {
+            width: 90%;
+        }
+        input[type="color"] {
+            width: 10%;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+    }
+}

@@ -64,7 +64,7 @@ export const Slide = React.createClass({
 
     getBgColor() {
         const bg = this.props.slide.get("background");
-        let val = "#000000";
+        let val = "#ffffff";
         if (this.isColorChecked()) {
             val = bg.color;
         }
@@ -75,6 +75,7 @@ export const Slide = React.createClass({
         };
         return (
             <input type="color"
+                   className="inline-block"
                    value={val}
                    onChange={onBgColorChange}>
             </input>
@@ -108,6 +109,8 @@ export const Slide = React.createClass({
         };
         return (
             <input type="url"
+                   className="inline-block"
+                   placeholder="URL image de fond"
                    value={val}
                    onChange={onBgImageChange}>
             </input>
@@ -138,24 +141,30 @@ export const Slide = React.createClass({
                               onChange={this.handleChangeText}
                               placeholder="Texte" />
                     <view.MDate slide={this.props.slide} />
-                    Groupe :
-                    <input value={s.get("group")}
-                           onChange={this.onGroupChange}
-                           placeholder="Groupe" />
-
-                    Fond :
-                    <input type="checkbox"
-                           className="toggle_bg_color"
-                           checked={this.isColorChecked()}
-                           onClick={this.toggleBgColor}>
-                    </input>
-                    {this.getBgColor()}
-                    <input type="checkbox"
-                           className="toggle_bg_image"
-                           checked={this.isImageChecked()}
-                           onClick={this.toggleBgImage}>
-                    </input>
-                    {this.getBgImage()}
+                    <div>
+                        Groupe :
+                        <input value={s.get("group")}
+                               className="inline-block"
+                               onChange={this.onGroupChange}
+                               placeholder="Groupe" />
+                    </div>
+                    <div>
+                        <input type="checkbox"
+                               className="toggle_bg_color"
+                               checked={this.isColorChecked()}
+                               onClick={this.toggleBgColor}>
+                        </input>
+                        Fond :
+                        {this.getBgColor()}
+                    </div>
+                    <div>
+                        <input type="checkbox"
+                               className="toggle_bg_image"
+                               checked={this.isImageChecked()}
+                               onClick={this.toggleBgImage}>
+                        </input>
+                        {this.getBgImage()}
+                    </div>
                 </div>
             </div>
         );
