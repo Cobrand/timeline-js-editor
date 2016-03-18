@@ -60,12 +60,12 @@ export const MDate = React.createClass({
                                 onChange={this.handleChangeStart} />
                     {this.getEndDate()}
                 </div>
-                <button name="toggle_end_date"
-                        className="toggle_end_date"
-                        type="button"
-                        onClick={this.toggleEndDate}>
-                    Date de fin
-                </button>
+                <input name="toggle_end_date"
+                       className="toggle_end_date"
+                       type="checkbox"
+                       value={this.props.slide.get("end_date")}
+                       onClick={this.toggleEndDate}>
+                </input>
             </div>
         );
     }
