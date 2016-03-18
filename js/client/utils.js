@@ -21,7 +21,9 @@ export function deep_override_object(object,objectToOverride,props_to_override =
         }
     }else if (props_to_override instanceof Array){
         for (let key of props_to_override){
-            objectToOverride[key] = deep_copy(object[key]);
+            if (object[key]) {
+                objectToOverride[key] = deep_copy(object[key]);
+            }
         }
     }else{
         throw new TypeError("expected array in propos_to_override");
