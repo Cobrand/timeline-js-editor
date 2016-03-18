@@ -57,6 +57,14 @@
     }
 }
 
+.signupscreen {
+    height: 220px;
+}
+
+.loginscreen {
+    height: 185px;
+}
+
 .closepopup{
     @extend .closebutton;
     position: absolute;
