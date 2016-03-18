@@ -20,9 +20,30 @@ export const Interface = React.createClass({
     },
 
     getInitialState() {
-        let timeline;
+        let timeline = new model.Timeline();
         if (localStorage.getItem("credentials_key")) {
-            timeline = new model.Timeline();
+            let id = localStorage.getItem("current_timeline");
+            if (id && id !== "undefined") {
+                Promise.resolve().then(() => {
+                    return axios.get("/api/timeline/" + id, {
+                        params: {
+                            user_id: localStorage.getItem("user_id"),
+                            credentials_key: localStorage.getItem("credentials_key"),
+                            timeline_id: id
+                        }
+                    });
+                }).then((res) => {
+                    let timeline = new model.Timeline(res.data.timeline,
+                                                      {parse: true});
+                    this.handleSelectTimeline(id, timeline);
+                }).catch((err) => {
+                    swal({
+                        title: "Erreur serveur",
+                        text: "Erreur de sauvegarde : " + err.statusText,
+                        type: "error"
+                    });
+                });
+            }
         } else {
             const json = require("example_json.json");
             timeline = new model.Timeline(json, {parse: true});
