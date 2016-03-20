@@ -21,6 +21,7 @@ export const Interface = React.createClass({
 
     getInitialState() {
         let timeline = new model.Timeline();
+        timeline.get("events").add(new model.Slide());
         if (localStorage.getItem("credentials_key")) {
             let id = localStorage.getItem("current_timeline");
             if (id && id !== "undefined") {
@@ -268,7 +269,9 @@ export const Interface = React.createClass({
             timeline,
             current_slide: timeline.get("title")
         });
-        localStorage.setItem("current_timeline", id);
+        if (id) {
+            localStorage.setItem("current_timeline", id);
+        }
     },
 
     getSlide() {
@@ -307,9 +310,11 @@ export const Interface = React.createClass({
         }
 
         const reader = new FileReader();
-        reader.onload = (e) => this.state
-                                   .timeline
-                                   .resetFromJson(e.target.result);
+        reader.onload = (e) => {
+            let timeline = new model.Timeline();
+            timeline.resetFromJson(e.target.result);
+            this.handleSelectTimeline(null, timeline);
+        };
         reader.readAsText(file);
     },
 
