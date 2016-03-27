@@ -195,7 +195,7 @@ export const Interface = React.createClass({
                     <button className="button main blue"
                             id="select_timeline_button"
                             onClick={this.showSelectTimelineScreen}>
-                        Sélectionner une timeline
+                        Mes timelines
                     </button>
                     <button className="button main red fright"
                             id="disconnect"
@@ -337,7 +337,7 @@ export const Interface = React.createClass({
                             type="button"
                             onClick={() => document.getElementById("importPicker")
                                                    .click()}>
-                        Import
+                        Importer
                     </button>
                     <input id="importPicker"
                            type="file"
@@ -347,7 +347,7 @@ export const Interface = React.createClass({
                             name="show_json"
                             type="button"
                             onClick={this.showJSON}>
-                        Export
+                        Exporter
                     </button>
                     <button className="button main lightblue"
                             name="preview"
