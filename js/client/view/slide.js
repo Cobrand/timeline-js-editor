@@ -142,7 +142,6 @@ export const Slide = React.createClass({
                               placeholder="Texte" />
                     <view.MDate slide={this.props.slide} />
                     <div>
-                        Groupe :
                         <input value={s.get("group")}
                                className="inline-block"
                                onChange={this.onGroupChange}
