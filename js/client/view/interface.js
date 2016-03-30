@@ -355,7 +355,7 @@ export const Interface = React.createClass({
                             name="show_json"
                             type="button"
                             onClick={this.showJSON}>
-                        Exporter
+                        Partager
                     </button>
                     <button className="button main lightblue"
                             name="preview"
