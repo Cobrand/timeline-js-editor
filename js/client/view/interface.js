@@ -166,7 +166,11 @@ export const Interface = React.createClass({
             });
             console.error(err);
         }).catch((err) => {
-            alert("Unexpected error : " + err.name);
+            swal({
+                title: "Erreur réseau",
+                text: "Unexpected error : " + err.name,
+                type: "error"
+            });
             throw err ;
         });
     },
@@ -305,7 +309,11 @@ export const Interface = React.createClass({
     importJSON(event) {
         const file = event.target.files[0];
         if (!file) {
-            alert("Aucun fichier sélectionné");
+            swal({
+                title: "Erreur d'import",
+                text: "Aucun fichier sélectionné",
+                type: "error"
+            });
             return;
         }
 

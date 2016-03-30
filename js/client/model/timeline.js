@@ -1,4 +1,5 @@
 import Backbone from "backbone";
+import swal from "sweetalert";
 import {Slide,Slides} from "model/slide.js";
 import {Era} from "model/structs/time.js";
 
@@ -39,7 +40,11 @@ export const Timeline = Backbone.Model.extend({
         try {
             json = JSON.parse(data);
         } catch (error) {
-            alert("Erreur dans le JSON : " + error.message);
+            swal({
+                title: "Erreur json",
+                text: "Le json est invalide : " + error.message,
+                type: "error"
+            });
             return;
         }
 

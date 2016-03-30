@@ -1,6 +1,7 @@
 import React from "react";
 import Promise from "bluebird";
 import axios from "axios";
+import swal from "sweetalert";
 import model from "model/model.js";
 
 const TimelinePreview = React.createClass({
@@ -67,7 +68,11 @@ export const SelectTimeline = React.createClass({
                 timelines
             });
         }).catch((err) => {
-            alert("Erreur lors de la récupération des timelines : " + err.statusText);
+            swal({
+                title: "Erreur réseau",
+                text: "Erreur lors de la récupération des timelines : " + err.statusText,
+                type: "error"
+            });
         }).finally(() => {
             this.setState({
                 promise: null
@@ -99,7 +104,11 @@ export const SelectTimeline = React.createClass({
         }).then(() => {
             return this.refreshTimelines();
         }).catch((err) => {
-            alert("Erreur lors de la suppression : " + err.statusText);
+            swal({
+                title: "Erreur réseau",
+                text: "Erreur lors de la suppression : " + err.statusText,
+                type: "error"
+            });
         });
     },
 
@@ -128,7 +137,11 @@ export const SelectTimeline = React.createClass({
         }).then(() => {
             return this.refreshTimelines();
         }).catch((err) => {
-            alert("Erreur lors de la création : " + err.statusText);
+            swal({
+                title: "Erreur réseau",
+                text: "Erreur lors de la création : " + err.statusText,
+                type: "error"
+            });
         });
     },
 
