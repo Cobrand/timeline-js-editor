@@ -82,6 +82,13 @@ export const LoginScreen = React.createClass({
         this.setState({loadingPromise});
     },
 
+    onKeyPressed(e) {
+        // If the user presses Enter, we validate the form.
+        if (e.charCode == 13) {
+            this.handleLoginButton();
+        }
+    },
+
     render() {
         return (
             <div className="loginscreen">
@@ -94,10 +101,12 @@ export const LoginScreen = React.createClass({
                 <h2>Connectez-vous</h2>
                 <input type="text"
                        placeholder="Identifiant"
+                       onKeyPress={this.onKeyPressed}
                        onChange={this.handleChangeLogin}>
                 </input>
                 <input type="password"
                        placeholder="Mot de passe"
+                       onKeyPress={this.onKeyPressed}
                        onChange={this.handleChangePassword}>
                 </input>
                 {this.getSpin()}

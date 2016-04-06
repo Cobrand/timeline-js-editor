@@ -95,6 +95,13 @@ export const SignUpScreen = React.createClass({
         this.setState({loadingPromise});
     },
 
+    onKeyPressed(e) {
+        // If the user presses Enter, we validate the form.
+        if (e.charCode == 13) {
+            this.onConnect();
+        }
+    },
+
     render() {
         return (
             <div className="signupscreen">
@@ -107,14 +114,17 @@ export const SignUpScreen = React.createClass({
                 <h2>Inscrivez-vous</h2>
                 <input type="text"
                        placeholder="Identifiant"
+                       onKeyPress={this.onKeyPressed}
                        onChange={this.onChangeId}>
                 </input>
                 <input type="password"
                        placeholder="Mot de passe"
+                       onKeyPress={this.onKeyPressed}
                        onChange={this.onChangePass}>
                 </input>
                 <input type="email"
                        placeholder="email"
+                       onKeyPress={this.onKeyPressed}
                        onChange={this.onChangeEmail}>
                 </input>
                 {this.getSpin()}
