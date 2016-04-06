@@ -73,14 +73,6 @@ export const LoginScreen = React.createClass({
                 console.log(err);
             }
         }).finally(() => {
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ne pas oublier de mettre des arrow function sinon le this n'est pas bind
-            // ^^^^ important, si c'est marqué 8 fois c'est pas pour faire joli ^^^^
             this.setState({loadingPromise: null});
             if (shouldClose){
                 this.props.handleClose(); // force close of this screen
