@@ -62,5 +62,21 @@ export const Slide = Backbone.Model.extend({
 });
 
 export const Slides = Backbone.Collection.extend({
-    model: Slide
+    model: Slide,
+
+    initialize() {
+        this.comparator = (a, b) => {
+            const date_a = a.get("start_date").date;
+            const date_b = b.get("start_date").date;
+
+            if (date_a.isBefore(date_b)) {
+                return -1;
+            } else if (date_a.isAfter(date_b)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        };
+        this.on("change:start_date", () => this.sort());
+    }
 });
