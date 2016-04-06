@@ -58,7 +58,10 @@ export const SignUpScreen = React.createClass({
                 "title":"Inscription terminée !",
                 "text":"Vous êtes désormais inscrit ! Vous pouvez commencer à éditer !",
                 "type":"success"
-            })
+            });
+            localStorage.setItem("credentials_key", res.data.credentials_key);
+            localStorage.setItem("user_id", res.data.userid);
+            this.props.handleClose();
         }).catch((err) => {
             if (err.status === 500){
                 swal({
