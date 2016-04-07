@@ -1,0 +1,24 @@
+.export textarea, .preview iframe {
+    @include main-font(10px);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 95%;
+    height: calc(100% - 90px);
+    // TODO : remplacer 90px par une vraie valeur dépendante du style
+    margin: 0 auto;
+    resize: none;
+}
+
+.export h1, .export select {
+    display: inline-block;
+}
+
+.export h1{
+    margin-right:16px;
+}
+
+.export select{
+    font-weight:bold;
+    font-size:  1.6em ;
+}

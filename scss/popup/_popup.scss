@@ -1,4 +1,8 @@
-@import "button";
+@import 'button';
+// ^ dependencies ^
+
+@import 'export';
+
 .popup-background {
     position: fixed;
     z-index: 1;
