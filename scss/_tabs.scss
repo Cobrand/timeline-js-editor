@@ -1,11 +1,4 @@
 @import 'button';
-.tabs_panel{
-    display:inline-block;
-    height:100%;
-
-    // TODO FIND THE FUCK WHY THERE IS 4PX UNUSED AFTER TABS ?.?.???
-}
-
 .tabs{
     width:$tabs-width;
     display:inline-block;
@@ -14,8 +7,8 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-$tab-margin-h:5px;
-$tab-margin-w:5px;
+$tab-margin-h:4px;
+$tab-margin-w:4px;
 $inactive-color:#555;
 $border-color:#999;
 

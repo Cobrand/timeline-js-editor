@@ -86,23 +86,21 @@ export const Tabs = React.createClass({
                                           />);
         // do not remove next seemingly useless divs : makes last-child and first-child work in css
         return (
-            <div className="tabs_panel">
-                <div className="tabs">
-                    <div>
-                        {this.getTitleTab()}
-                    </div>
-                    <hr />
-                    <div>
-                        {tabs}
-                    </div>
-                    <button className="newslide"
-                            name="add_slide"
-                            type="button"
-                            onClick={this.props.handleAddSlide}>
-                        <span className="huge_plus">+</span>
-                        <br/>Nouvelle Slide
-                    </button>
+            <div className="tabs">
+                <div>
+                    {this.getTitleTab()}
                 </div>
+                <hr />
+                <div>
+                    {tabs}
+                </div>
+                <button className="newslide"
+                        name="add_slide"
+                        type="button"
+                        onClick={this.props.handleAddSlide}>
+                    <span className="huge_plus">+</span>
+                    <br/>Nouvelle Slide
+                </button>
             </div>
         );
     }
