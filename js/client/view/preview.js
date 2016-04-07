@@ -11,11 +11,11 @@ export const Preview = React.createClass({
     render() {
         return (
             <div className="preview">
-                <button className="button main red fright"
+                <button className="closepopup"
                         name="close_json"
                         type="button"
                         onClick={this.props.handleClosePreview}>
-                    Fermer
+                    ×
                 </button>
                 <h1>Aperçu du rendu</h1>
                 <iframe src="preview/preview.html"></iframe>

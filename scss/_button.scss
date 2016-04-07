@@ -26,7 +26,15 @@
         border-color: #d43f3a;
         &:hover{
             background-color: #c9302c;
-            border-color: #ac2925;
+        }
+    }
+
+    &.blue{
+        color: #FFF;
+        background-color: #1d93d6;
+        border-color: #1d93d6;
+        &:hover{
+            background-color: #1d6ed6;
         }
     }
 
@@ -36,6 +44,12 @@
         font-size: 14px;
         line-height: 1.2;
         border-radius: 4px;
+    }
+
+    &.big{
+        padding:6px 14px;
+        font-size: 18px;
+        border-radius: 6px;
     }
 
     &.wide{

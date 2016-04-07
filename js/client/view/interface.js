@@ -194,14 +194,14 @@ export const Interface = React.createClass({
                     <button className="topnav_element"
                             id="save_timeline"
                             onClick={this.saveTimeline}>
-                        Sauvegarder
+                        Mettre à jour
                     </button>
                     <button className="topnav_element"
                             id="select_timeline_button"
                             onClick={this.showSelectTimelineScreen}>
                         Mes timelines
                     </button>
-                    <button className="topnav_element fright"
+                    <button className="topnav_element red fright"
                             id="disconnect"
                             onClick={this.disconnect}>
                         Déconnexion
@@ -345,7 +345,7 @@ export const Interface = React.createClass({
                             type="button"
                             onClick={() => document.getElementById("importPicker")
                                                    .click()}>
-                        Importer
+                        Ouvrir
                     </button>
                     <input id="importPicker"
                            type="file"
@@ -361,7 +361,7 @@ export const Interface = React.createClass({
                             name="preview"
                             type="button"
                             onClick={this.showPreview}>
-                        Apercu timeline
+                        Aperçu timeline
                     </button>
 
                     {this.getUserInterface()}

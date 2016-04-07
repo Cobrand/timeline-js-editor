@@ -35,6 +35,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .menu {
+    width:100%;
+    padding-left: 10px;
+    box-sizing: border-box;
     height: $topnav_height;
 }
 

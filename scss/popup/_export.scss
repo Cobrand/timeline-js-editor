@@ -1,3 +1,5 @@
+@import '../button';
+
 .export textarea, .preview iframe {
     @include main-font(10px);
     display: block;
@@ -10,15 +12,21 @@
     resize: none;
 }
 
-.export h1, .export select {
+.export select {
+    font-weight:bold;
+    font-size:  1.6em ;
     display: inline-block;
+
 }
 
 .export h1{
     margin-right:16px;
+    display: inline-block;
 }
 
-.export select{
-    font-weight:bold;
-    font-size:  1.6em ;
+button.save_as {
+    @extend .button, .blue ,.big ;
+    float:right;
+    margin-top:32px;
+    margin-right:32px;
 }

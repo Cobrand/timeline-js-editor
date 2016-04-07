@@ -108,17 +108,11 @@ export const Export = React.createClass({
     render() {
         return (
             <div className="export">
-                <button className="button main red fright"
+                <button className="closepopup"
                         name="close_json"
                         type="button"
                         onClick={this.props.handleCloseJSON}>
-                    Fermer
-                </button>
-                <button className="button main blue fright"
-                        name="save_json"
-                        type="button"
-                        onClick={this.saveAsFile}>
-                    Sauvegarder
+                    ×
                 </button>
                 <h1>Exporter en</h1>
                 <select value={this.state.which_export}
@@ -127,6 +121,12 @@ export const Export = React.createClass({
                     <option value="json">JSON</option>
                     <option value="html">HTML</option>
                 </select>
+                <button className="save_as"
+                        name="save_json"
+                        type="button"
+                        onClick={this.saveAsFile}>
+                    Enregistrer sous
+                </button>
                 {this.getExport()}
             </div>
         );
