@@ -7,6 +7,7 @@
     @include user-select(none); // rend le contenu non selectionnable
     border: 1px solid #E6E6E6;
     border-radius:4px;
+    background-color:#FEFEFE;
     padding:4px 12px;
     font-size:14px;
     margin-right:2px;
@@ -58,6 +59,7 @@
 }
 
 .closebutton{
+    outline:none;
     padding: 0;
     margin:0;
     cursor: pointer;

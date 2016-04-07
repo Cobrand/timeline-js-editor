@@ -36,7 +36,8 @@ export const Tab = React.createClass({
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide} data-focused={this.props.focused}>
-                {this.props.tab.get("text").headline} {this.getButtonRemove()}
+                {this.props.tab.get("text").headline || "(untitled)"}
+                {this.getButtonRemove()}
             </div>
         );
     }
@@ -94,13 +95,14 @@ export const Tabs = React.createClass({
                     <div>
                         {tabs}
                     </div>
+                    <button className="newslide"
+                            name="add_slide"
+                            type="button"
+                            onClick={this.props.handleAddSlide}>
+                        <span className="huge_plus">+</span>
+                        <br/>Nouvelle Slide
+                    </button>
                 </div>
-                <button className="newslide"
-                        name="add_slide"
-                        type="button"
-                        onClick={this.props.handleAddSlide}>
-                    Nouvelle slide
-                </button>
             </div>
         );
     }

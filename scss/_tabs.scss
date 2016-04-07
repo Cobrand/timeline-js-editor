@@ -2,53 +2,66 @@
 .tabs_panel{
     display:inline-block;
     height:100%;
-    width:$tabs-width;
+
     // TODO FIND THE FUCK WHY THERE IS 4PX UNUSED AFTER TABS ?.?.???
 }
 
 .tabs{
+    width:$tabs-width;
     display:inline-block;
     box-sizing: border-box;
-    height:calc(100% - #{30px});
+    height:calc(100% - #{6px});
     overflow-x: hidden;
     overflow-y: scroll;
 }
+$tab-margin-h:5px;
+$tab-margin-w:5px;
+$inactive-color:#555;
+$border-color:#999;
+
+.slide_tab_common {
+    position: relative;
+    box-sizing: border-box;
+    cursor:pointer;
+    -moz-user-select: none;
+    text-align: center;
+    border-radius: 5px;
+    margin-top:$tab-margin-h;
+    margin-bottom:$tab-margin-h;
+    margin-left:$tab-margin-w;
+    margin-right:$tab-margin-w;
+    height:$tab-height - (2*$tab-margin-h);
+    width:$tab-width - (2*$tab-margin-w);
+}
 
 .slide_tab{
-    position: relative;
+    @extend .slide_tab_common;
     @include title-font(14px);
-    -moz-user-select: none;
+    color:$inactive-color;
     font-weight: bold;
-    background-color: $tab-background;
-    border-right:$border;
-    border-top:$border;
-    cursor:pointer;
+    padding: 5px 3px;
     overflow:hidden;
     text-overflow: ellipsis;
-    height:$tab-height;
-    width:$tab-width;
-    padding:3px;
+    background-color: #FFF;
+    border:1px solid $border-color;
 
     &>.removeslide{
         display:none;
     }
 
     &:hover{
+        color:#000;
         &>.removeslide{
             display:inline-block;
         }
     }
 
-    &:last-child{
-        border-bottom-right-radius: $border-radius;
-        border-bottom:$border;
-    }
-
-    &:first-child{
-        border-top-right-radius: $border-radius;
+    &:active{
+        @include box-shadow(inset 0px 0px 4px 0px rgba(#888,0.45));
     }
 
     &[data-focused='true']{
+        color:#000;
         $focused-color:rgb(123, 104, 238);
         border-color:$focused-color;
         @include box-shadow(inset 0px 0px 4px 0px rgba($focused-color,0.45));
@@ -65,9 +78,24 @@
 }
 
 .newslide{
-    @extend .button, .small, .blue;
-    $margin-vertical:1px;
-    width:calc(100% - #{2*$margin-vertical});
-    margin:0 $margin-vertical;
-    box-sizing: border-box;
+    @extend .slide_tab_common;
+    color:$inactive-color;
+    padding:0 3px;
+    outline:none;
+    text-shadow:none;
+    @include user-select(none); // rend le contenu non selectionnable
+    outline:none;
+    background-color: transparent;
+    border-radius: 5px;
+    border:none;
+    font-weight: bold;
+    font-size: 14px;
+    &>.huge_plus{
+        line-height: 23px;
+        font-size:32px;
+    }
+
+    &:hover{
+        color:#000;
+    }
 }
