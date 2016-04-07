@@ -67,7 +67,7 @@
     margin:0;
     cursor: pointer;
     -moz-user-select: none; // rend le contenu non selectionnable
-    color:#FF0000;
+    color:#AAAAAA;
     background:rgba(0,0,0,0);
     border:none;
     font-size:2em;
@@ -80,5 +80,9 @@
         width:40px;
         height:40px;
         line-height:15px;
+    }
+
+    &:hover{
+        color:#FF0000;
     }
 }
