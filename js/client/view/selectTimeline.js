@@ -93,7 +93,7 @@ export const SelectTimeline = React.createClass({
         }
     },
 
-    deleteTimeline(id) {
+    deleteTimeline(id, e) {
         Promise.resolve().then(() => {
             return axios.delete("/api/timeline/" + id, {
                 data: {
@@ -102,6 +102,9 @@ export const SelectTimeline = React.createClass({
                 }
             });
         }).then(() => {
+            if (localStorage.getItem("current_timeline") == id) {
+                localStorage.removeItem("current_timeline");
+            }
             return this.refreshTimelines();
         }).catch((err) => {
             swal({
@@ -110,6 +113,8 @@ export const SelectTimeline = React.createClass({
                 type: "error"
             });
         });
+
+        e.stopPropagation();
     },
 
     getPreviews() {
