@@ -1,34 +1,29 @@
 @import 'vars';
-.button { // shamelessly taken from bootstrap css
+.button { // shamelessly taken from storymap css
+    outline:none;
+    text-shadow:none;
+    color: #242424;
     cursor: pointer;
-    -moz-user-select: none; // rend le contenu non selectionnable
-    border: 1px solid transparent;
-    &.blue{
-        color: #FFF;
-        background-color: #337AB7;
-        border-color: #2E6DA4;
-        &:hover{
-            background-color: #286090;
-            border-color: #204d74;
-        }
+    @include user-select(none); // rend le contenu non selectionnable
+    border: 1px solid #E6E6E6;
+    border-radius:4px;
+    padding:4px 12px;
+    font-size:14px;
+    margin-right:2px;
+    margin-left:2px;
+    &:hover{
+        background-color: #F8F8F8;
+        border-color: #999;
     }
 
-    &.lightblue{
-        color: #FFF;
-        background-color: #5BC0DE;
-        border-color: #46B8DA;
-
-        &:hover{
-            background-color: #31b0d5;
-            border-color: #269abc;
-        }
+    &:active{
+        box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
     }
 
     &.red{
         color: #FFF;
         background-color: #d9534f;
         border-color: #d43f3a;
-
         &:hover{
             background-color: #c9302c;
             border-color: #ac2925;
@@ -43,22 +38,8 @@
         border-radius: 4px;
     }
 
-    &.xsmall{
-        height:20px;
-        padding: 0 1px;
-        font-size: 12px;
-        line-height: 1;
-        border-radius: 3px;
-    }
-
     &.wide{
         width:100%;
-    }
-
-    &.main{
-        @extend .topnav_element;
-        padding: 0 16px;
-        font-size: 18px;
     }
 }
 

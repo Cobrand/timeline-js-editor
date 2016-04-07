@@ -1,0 +1,9 @@
+@import "button";
+button.topnav_element{
+    @extend .button;
+    display:inline-block;
+    margin-top:($topnav-height - $topnav_element_height) / 2  ;
+    height:$topnav_element_height;
+    box-sizing: border-box;
+    white-space: nowrap;
+}

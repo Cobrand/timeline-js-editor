@@ -191,17 +191,17 @@ export const Interface = React.createClass({
         if ( credentials_key && user_id ){
             return (
                 <div style={{display:"inline"}}>
-                    <button className="button main blue"
+                    <button className="topnav_element"
                             id="save_timeline"
                             onClick={this.saveTimeline}>
                         Sauvegarder
                     </button>
-                    <button className="button main blue"
+                    <button className="topnav_element"
                             id="select_timeline_button"
                             onClick={this.showSelectTimelineScreen}>
                         Mes timelines
                     </button>
-                    <button className="button main red fright"
+                    <button className="topnav_element fright"
                             id="disconnect"
                             onClick={this.disconnect}>
                         Déconnexion
@@ -210,13 +210,13 @@ export const Interface = React.createClass({
             );
         } else {
             return (<div style={{display:"inline"}}>
-                <button className="button main blue fright"
+                <button className="topnav_element fright"
                         id="open_login"
                         type="button"
                         onClick={this.showLoginScreen}>
                     Connexion
                 </button>
-                <button className="button main green fright"
+                <button className="topnav_element fright"
                         id="open_signup"
                         type="button"
                         onClick={this.showSignupScreen}>
@@ -341,7 +341,7 @@ export const Interface = React.createClass({
         return (
             <div className="interface">
                 <div className="menu">
-                    <button className="button main blue"
+                    <button className="topnav_element"
                             type="button"
                             onClick={() => document.getElementById("importPicker")
                                                    .click()}>
@@ -351,13 +351,13 @@ export const Interface = React.createClass({
                            type="file"
                            onChange={this.importJSON}
                            style={{display: "none"}} />
-                    <button className="button main blue"
+                    <button className="topnav_element"
                             name="show_json"
                             type="button"
                             onClick={this.showJSON}>
                         Partager
                     </button>
-                    <button className="button main lightblue"
+                    <button className="topnav_element"
                             name="preview"
                             type="button"
                             onClick={this.showPreview}>
