@@ -26,7 +26,7 @@
     padding:$padding;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
+    @include box-shadow(rgba(0, 0, 0, 0.5) 0px 5px 15px 0px);
     // ^ common ^
 
     width: $width;

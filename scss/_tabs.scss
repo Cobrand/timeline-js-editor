@@ -49,8 +49,9 @@
     }
 
     &[data-focused='true']{
-        border-color:rgb(123, 104, 238);
-        box-shadow: inset 0px 0px 4px 0px rgba(123, 104, 238,1);
+        $focused-color:rgb(123, 104, 238);
+        border-color:$focused-color;
+        @include box-shadow(inset 0px 0px 4px 0px rgba($focused-color,0.45));
     }
 }
 
