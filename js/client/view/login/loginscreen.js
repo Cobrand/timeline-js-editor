@@ -111,7 +111,7 @@ export const LoginScreen = React.createClass({
                 </input>
                 {this.getSpin()}
                 <button type="button"
-                        className="button main wide blue"
+                        className="button big wide blue"
                         onClick={this.handleLoginButton}>
                     Connexion
                 </button>

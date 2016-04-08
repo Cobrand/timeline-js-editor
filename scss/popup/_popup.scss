@@ -51,11 +51,10 @@
 .signupscreen, .loginscreen {
     @extend .popup,.small;
     input{
-        -moz-box-sizing: border-box;
+        box-sizing: border-box;
         display: block;
         width: 100%;
         font-size: 14px;
-        height: 34px;
         line-height: 20px;
         padding: 6px 12px;
     }
@@ -63,10 +62,16 @@
 
 .signupscreen {
     height: 220px;
+    &>input{
+        margin-bottom:2px;
+    }
 }
 
 .loginscreen {
     height: 185px;
+    &>input{
+        margin-bottom:2px;
+    }
 }
 
 .closepopup{
