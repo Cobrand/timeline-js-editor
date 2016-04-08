@@ -187,20 +187,26 @@ export const Interface = React.createClass({
     getUserInterface(){
         let credentials_key = localStorage.getItem("credentials_key") ;
         let user_id = localStorage.getItem("user_id") ;
-
-        if ( credentials_key && user_id ){
+        let connected = !!credentials_key && !!user_id ;
+        let my_timelines =
+        <div style={{display:"inline"}}>
+            <button className="topnav_element"
+                    id="save_timeline"
+                    data-disabled={connected?false:true}
+                    onClick={connected?this.saveTimeline:this.showLoginScreen}>
+                Mettre à jour
+            </button>
+            <button className="topnav_element"
+                    id="select_timeline_button"
+                    data-disabled={connected?false:true}
+                    onClick={connected?this.showSelectTimelineScreen:this.showLoginScreen}>
+                Mes timelines
+            </button>
+        </div> ;
+        if ( connected ){
             return (
                 <div style={{display:"inline"}}>
-                    <button className="topnav_element"
-                            id="save_timeline"
-                            onClick={this.saveTimeline}>
-                        Mettre à jour
-                    </button>
-                    <button className="topnav_element"
-                            id="select_timeline_button"
-                            onClick={this.showSelectTimelineScreen}>
-                        Mes timelines
-                    </button>
+                    {my_timelines}
                     <button className="topnav_element red fright"
                             id="disconnect"
                             onClick={this.disconnect}>
@@ -210,6 +216,7 @@ export const Interface = React.createClass({
             );
         } else {
             return (<div style={{display:"inline"}}>
+                {my_timelines}
                 <button className="topnav_element fright"
                         id="open_login"
                         type="button"

@@ -58,6 +58,11 @@
         margin-right:0px;
         width:100%;
     }
+
+    &[data-disabled]{
+        cursor: not-allowed;
+        color:$inactive-text-color;
+    }
 }
 
 .closebutton{
