@@ -39,6 +39,7 @@ export const Media = React.createClass({
         }
         return (
             <div className="slide_media">
+                <div className="slide_media_meta_info">Media</div>
                 {embed_media(m.url)}
                 <div className="slide_media_info">
                     <input className="slide_media_url" value={m.url}

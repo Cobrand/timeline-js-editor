@@ -9,8 +9,6 @@
 }
 $tab-margin-h:4px;
 $tab-margin-w:4px;
-$inactive-color:#555;
-$border-color:#999;
 
 .slide_tab_common {
     position: relative;
@@ -30,31 +28,31 @@ $border-color:#999;
 .slide_tab{
     @extend .slide_tab_common;
     @include title-font(14px);
-    color:$inactive-color;
+    color:$inactive-text-color;
     font-weight: bold;
     padding: 5px 3px;
     overflow:hidden;
     text-overflow: ellipsis;
     background-color: #FFF;
-    border:1px solid $border-color;
+    border:1px solid $grey-border-color;
 
     &>.removeslide{
         display:none;
     }
 
     &:hover{
-        color:#000;
+        color:$active-text-color;
         &>.removeslide{
             display:inline-block;
         }
     }
 
     &:active{
-        @include box-shadow(inset 0px 0px 4px 0px rgba(#888,0.45));
+        @include box-shadow(inset 0px 0px 4px 0px rgba($grey-border-color,0.45));
     }
 
     &[data-focused='true']{
-        color:#000;
+        color:$active-text-color;
         $focused-color:rgb(123, 104, 238);
         border-color:$focused-color;
         @include box-shadow(inset 0px 0px 4px 0px rgba($focused-color,0.45));
@@ -72,7 +70,7 @@ $border-color:#999;
 
 .newslide{
     @extend .slide_tab_common;
-    color:$inactive-color;
+    color:$inactive-text-color;
     padding:0 3px;
     outline:none;
     text-shadow:none;

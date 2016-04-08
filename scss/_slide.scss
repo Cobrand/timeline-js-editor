@@ -1,14 +1,18 @@
+@import 'vars';
 .slide {
+    $slide-margin-w:12px;
+    $slide-margin-h:5px;
+    margin:$slide-margin-h $slide-margin-w;
     box-sizing: border-box;
-    background-color: $slide-background;
-    border-radius:$border-radius;
-    border: $border;
+    background-color: #FFF;
+    border-radius: 15px;
+    border:1px solid #ccc;
     display:inline-block;
     background-repeat: no-repeat;
     background-size: contain;
-    width:$slide-width;
+    width:calc(100% - #{$tabs-width + 2*$slide-margin-w});
+    height:calc(100% - #{2*$slide-margin-h});
     vertical-align: top;
-    height: 100%;
     overflow-y: auto;
 
     textarea,input {
@@ -29,6 +33,7 @@
 }
 
 input.headline_input {
+    font-size: 1.5em;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -38,27 +43,28 @@ input.headline_input {
 }
 
 .slide_media,.slide_right {
+    $half-slide-margin-w:5px;
+    $half-slide-margin-h:5px;
     vertical-align: top; // MAGIC TRICK DO NOT REMOVE
     display: inline-block;
-    width: 50%;
-    height:100%;
+    margin: $half-slide-margin-h $half-slide-margin-w;
+    width: calc(50% - #{2*$half-slide-margin-w}) ;
+    height:calc(100% - #{2*$half-slide-margin-h}) ;
     box-sizing: border-box;
     padding:5px;
 }
 
-.slide_media_preview {
-    // TODO do a real preview mate
-    @include main-font(1.5em);
-    font-weight:bold;
-    height:52%;
-    border-radius : 25px;
-    box-sizing: border-box;
-    border: 40px solid black;
-    text-align: center;
+.slide_media{
+    border:1px solid $light-border-color;
+    border-radius:12px;
+    background-color:#F8F8F8;
 }
 
-.slide_media{
-    border-right:solid 2px black;
+.slide_media_meta_info{
+    @include title-font(18px);
+    color:$inactive-text-color;
+    font-weight: bold;
+    padding: 5px 0px 5px 15px;
 }
 
 .slide_right {
@@ -76,4 +82,28 @@ input.headline_input {
             width: auto;
         }
     }
+}
+
+iframe.media_preview,div.media_preview{
+    box-sizing: border-box;
+    height:calc(100% - 240px); // 240px is some "random" value, change when needed
+    width:100%;
+    max-width:90vw;
+    max-height:90vh;
+}
+
+div.media_preview.empty{
+    display: flex;
+    font-size: 2em;
+    align-items: center;
+    justify-content: center;
+    border:1px solid $grey-border-color;
+    border-radius: 10px;
+}
+
+img.media_preview{
+    height:auto;
+    width:auto;
+    max-height:100%;
+    max-width:100%;
 }
