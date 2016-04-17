@@ -1,6 +1,6 @@
 @import '../button';
 
-.export textarea, .preview iframe {
+.textexport, .preview iframe {
     @include main-font(10px);
     display: block;
     overflow-x: hidden;
@@ -10,6 +10,23 @@
     // TODO : remplacer 90px par une vraie valeur dépendante du style
     margin: 0 auto;
     resize: none;
+}
+
+.textexport {
+    width: 60%;
+    height: 100%;
+    display: inline-block;
+}
+
+.export p {
+    width: 35%;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.export div {
+    height: calc(100% - 90px);
 }
 
 .export select {

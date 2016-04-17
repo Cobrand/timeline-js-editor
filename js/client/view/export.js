@@ -4,7 +4,7 @@ import "utils.js";
 import model from "model/model.js";
 
 const EXPORT = `<div class="timeline">
-    <div id="timeline-embed-RANDOMID"></div>
+    <div class="timeline-js-embed" id="timeline-embed-RANDOMID"></div>
 
     <link title="timeline-styles"
           rel="stylesheet"
@@ -88,19 +88,32 @@ export const Export = React.createClass({
     getExport() {
         if (this.state.which_export == "json") {
             return (
-                <textarea id="jsontextexport"
-                          className="textexport"
-                          readOnly="readOnly"
-                          value={JSON.stringify(this.props.timeline.toJSON())}>
-                </textarea>
+                <div>
+                    <p>
+                        L'export en JSON permet de sauvegarder son travail.
+                        Il peut être chargé à l'aide du bouton "Ouvrir"
+                    </p>
+                    <textarea id="jsontextexport"
+                              className="textexport"
+                              readOnly="readOnly"
+                              value={JSON.stringify(this.props.timeline.toJSON())}>
+                    </textarea>
+                </div>
             );
         } else {
             return (
-                <textarea id="htmltextexport"
-                          className="textexport"
-                          readOnly="readOnly"
-                          value={this.getEmbedHtml()}>
-                </textarea>
+                <div>
+                    <p>
+                        L'export en HTML permet d'intégrer la timeline dans un site web.
+                        Il suffit de copier-coller le texte ci-contre dans la page web.
+                        La timeline devrait alors s'y intégrer.
+                    </p>
+                    <textarea id="htmltextexport"
+                              className="textexport"
+                              readOnly="readOnly"
+                              value={this.getEmbedHtml()}>
+                    </textarea>
+                </div>
             );
         }
     },
