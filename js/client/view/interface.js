@@ -373,6 +373,7 @@ export const Interface = React.createClass({
                     </button>
                     <input id="importPicker"
                            type="file"
+                           accept=".json"
                            onChange={this.importJSON}
                            style={{display: "none"}} />
                     <button className="topnav_element"
