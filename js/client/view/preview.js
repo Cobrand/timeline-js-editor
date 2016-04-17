@@ -18,6 +18,10 @@ export const Preview = React.createClass({
                     ×
                 </button>
                 <h1>Aperçu du rendu</h1>
+                <p>
+                    Cette fenêtre donne un aperçu de la timeline actuelle telle
+                    qu'elle apparaîtra dans Timeline.js
+                </p>
                 <iframe src="preview/preview.html"></iframe>
             </div>
         );
