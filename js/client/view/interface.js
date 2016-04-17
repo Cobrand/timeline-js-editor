@@ -184,28 +184,44 @@ export const Interface = React.createClass({
         })
     },
 
+    reset_timeline() {
+        let timeline = new model.Timeline();
+
+        this.setState({timeline: timeline});
+        this.setState({current_slide: timeline.get("title")});
+        localStorage.removeItem("current_timeline");
+    },
+
     getUserInterface(){
         let credentials_key = localStorage.getItem("credentials_key") ;
         let user_id = localStorage.getItem("user_id") ;
         let connected = !!credentials_key && !!user_id ;
-        let my_timelines =
-        <div style={{display:"inline"}}>
-            <button className="topnav_element"
-                    id="save_timeline"
-                    data-disabled={connected?false:true}
-                    onClick={connected?this.saveTimeline:this.showLoginScreen}>
-                Mettre à jour
-            </button>
-            <button className="topnav_element"
-                    id="select_timeline_button"
-                    data-disabled={connected?false:true}
-                    onClick={connected?this.showSelectTimelineScreen:this.showLoginScreen}>
-                Mes timelines
-            </button>
-        </div> ;
+        let reset_timeline =
+            <div style={{display:"inline"}}>
+                <button className="topnav_element"
+                        id="save_timeline"
+                        onClick={this.reset_timeline}>
+                    Nouvelle timeline
+                </button>
+            </div>;
+
         if ( connected ){
+            let my_timelines =
+                <div style={{display:"inline"}}>
+                    <button className="topnav_element"
+                            id="save_timeline"
+                            onClick={this.saveTimeline}>
+                        Mettre à jour
+                    </button>
+                    <button className="topnav_element"
+                            id="select_timeline_button"
+                            onClick={this.showSelectTimelineScreen}>
+                        Mes timelines
+                    </button>
+                </div>;
             return (
                 <div style={{display:"inline"}}>
+                    {reset_timeline}
                     {my_timelines}
                     <button className="topnav_element red fright"
                             id="disconnect"
@@ -215,8 +231,9 @@ export const Interface = React.createClass({
                 </div>
             );
         } else {
-            return (<div style={{display:"inline"}}>
-                {my_timelines}
+            return (
+                <div style={{display:"inline"}}>
+                    {reset_timeline}
                 <button className="topnav_element fright"
                         id="open_login"
                         type="button"
