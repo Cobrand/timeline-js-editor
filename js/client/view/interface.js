@@ -184,23 +184,38 @@ export const Interface = React.createClass({
         })
     },
 
-    reset_timeline() {
+    createNewTimeline() {
         let timeline = new model.Timeline();
-
         this.setState({timeline: timeline});
         this.setState({current_slide: timeline.get("title")});
         localStorage.removeItem("current_timeline");
+    },
+
+    handleNewTimeline(){
+        if (this.state.isConnected){
+            this.createNewTimeline();
+        } else {
+            swal({
+                title: "Supprimer la timeline actuelle ?",
+                text: "La timeline actuelle sera supprimée, voulez-vous vraiment continuer ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Oui, supprimer l'existante",
+                cancelButtonText: "Annuler"
+            },() => {this.createNewTimeline()})
+        }
     },
 
     getUserInterface(){
         let credentials_key = localStorage.getItem("credentials_key") ;
         let user_id = localStorage.getItem("user_id") ;
         let connected = !!credentials_key && !!user_id ;
-        let reset_timeline =
+        let new_timeline =
             <div style={{display:"inline"}}>
                 <button className="topnav_element"
                         id="save_timeline"
-                        onClick={this.reset_timeline}>
+                        onClick={this.handleNewTimeline}>
                     Nouvelle timeline
                 </button>
             </div>;
@@ -221,7 +236,7 @@ export const Interface = React.createClass({
                 </div>;
             return (
                 <div style={{display:"inline"}}>
-                    {reset_timeline}
+                    {new_timeline}
                     {my_timelines}
                     <button className="topnav_element red fright"
                             id="disconnect"
@@ -233,7 +248,7 @@ export const Interface = React.createClass({
         } else {
             return (
                 <div style={{display:"inline"}}>
-                    {reset_timeline}
+                    {new_timeline}
                 <button className="topnav_element fright"
                         id="open_login"
                         type="button"
