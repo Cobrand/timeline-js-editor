@@ -46,10 +46,10 @@ export const Media = React.createClass({
                            type="url"
                            onChange={this.handleChangeUrl}
                            placeholder="URL" />
-                    <textarea className="slide_media_credit" value={m.credit}
+                    <textarea className="slide_media_credit" value={m.credit || ""}
                               onChange={this.handleChangeCredit}
                               placeholder="Crédit" />
-                    <textarea className="slide_media_caption" value={m.caption}
+                    <textarea className="slide_media_caption" value={m.caption || ""}
                               onChange={this.handleChangeCaption}
                               placeholder="Caption" />
                 </div>
