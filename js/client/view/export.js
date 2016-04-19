@@ -67,7 +67,7 @@ export const Export = React.createClass({
             throw "unsupported export type";
         }
 
-        let txt = document.getElementById(id).textContent;
+        let txt = document.getElementById(id).value;
         let blob = new Blob([txt]);
         Filesaver.saveAs(blob, filename + ext);
     },
