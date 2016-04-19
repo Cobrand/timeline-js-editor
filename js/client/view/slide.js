@@ -144,6 +144,7 @@ export const Slide = React.createClass({
                     <view.MDate slide={this.props.slide} />
                     <div>
                         <input value={s.get("group")}
+                               title="Peut être n'importe quel texte, la timeline essaiera d'être organisée de façon à ce que les évenements ayant le même groupe soient sur la même ligne"
                                className="inline-block"
                                onChange={this.onGroupChange}
                                placeholder="Groupe" />
