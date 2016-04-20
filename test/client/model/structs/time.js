@@ -1,4 +1,4 @@
-import * as Time from "../../../js/model/structs/time.js"
+import * as Time from "../../../../js/client/model/structs/time.js"
 import {assert,expect} from "chai" ;
 import moment from "moment" ;
 describe("Time structs",() => {
