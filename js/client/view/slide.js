@@ -84,30 +84,25 @@ export const Slide = React.createClass({
         );
     },
 
-    toggleBgImage() {
-        const s = this.props.slide;
-        const bg = s.get("background");
-        if (bg) {
-            if (bg.url) {
-                s.set("background", {color: bg.color});
-            } else {
-                s.set("background", {color: bg.color, url: ""});
-            }
-        } else {
-            s.set("background", {url: ""});
-        }
-    },
-
     getBgImage() {
         const bg = this.props.slide.get("background");
         let val = "";
-        if (this.isImageChecked()) {
+        if (bg && bg.url) {
             val = bg.url;
         }
         let onBgImageChange = (event) => {
             const s = this.props.slide;
-            const bg = s.get("background");
-            s.set("background", Object.assign({}, bg, {url: event.target.value}));
+            const bg = s.get("background") || {};
+            const url = event.target.value;
+            if (url) {
+                s.set("background", Object.assign({}, bg, {url}));
+            } else {
+                if (bg.color) {
+                    s.set("background", {color: bg.color});
+                } else {
+                    s.set("background", null);
+                }
+            }
         };
         return (
             <input type="url"
@@ -122,11 +117,6 @@ export const Slide = React.createClass({
     isColorChecked() {
         const bg = this.props.slide.get("background");
         return bg && bg.color;
-    },
-
-    isImageChecked() {
-        const bg = this.props.slide.get("background");
-        return bg && bg.url;
     },
 
     render() {
@@ -158,14 +148,7 @@ export const Slide = React.createClass({
                         Fond :
                         {this.getBgColor()}
                     </div>
-                    <div>
-                        <input type="checkbox"
-                               className="toggle_bg_image"
-                               checked={this.isImageChecked()}
-                               onClick={this.toggleBgImage}>
-                        </input>
-                        {this.getBgImage()}
-                    </div>
+                    {this.getBgImage()}
                 </div>
                 <view.Media slide={s} />
             </div>
