@@ -73,6 +73,7 @@ export const Interface = React.createClass({
         if (tabs.size() < 2) {
             this.handleChangeTab(this.state.timeline.get("title"));
             tabs.reset();
+            tabs.add(new model.Slide());
         } else {
             if (tab == this.state.current_slide) {
                 let idx = tabs.indexOf(tab);
