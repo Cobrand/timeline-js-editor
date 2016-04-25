@@ -39,6 +39,7 @@
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-pikaday-component": "^0.2.2",
+    "react-quill": "^0.4.1",
     "react-spin": "^0.6.0",
     "sass-loader": "^3.1.1",
     "sequelize": "^3.19.3",

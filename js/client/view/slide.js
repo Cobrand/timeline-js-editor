@@ -1,6 +1,8 @@
 import React from "react";
 import view from "view/view.js";
 import model from "model/model.js";
+import "../../../node_modules/quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 
 export const Slide = React.createClass({
     mixins: [React.Backbone],
@@ -28,9 +30,9 @@ export const Slide = React.createClass({
         return style;
     },
 
-    handleChangeText(event) {
+    handleChangeText(str) {
         const s = this.props.slide;
-        const text = new model.Text(s.get("text").headline, event.target.value);
+        const text = new model.Text(s.get("text").headline, str);
         s.set({
             text
         });
@@ -136,10 +138,9 @@ export const Slide = React.createClass({
                            value={s.get("text").headline}
                            onChange={this.handleChangeTitle}
                            placeholder="Titre" />
-                    <textarea name="text"
-                              value={s.get("text").text}
-                              onChange={this.handleChangeText}
-                              placeholder="Texte" />
+                    <ReactQuill theme="snow"
+                                value={s.get("text").text}
+                                onChange={this.handleChangeText} />
                     <view.MDate slide={this.props.slide} />
                     <div>
                         <input value={s.get("group")}

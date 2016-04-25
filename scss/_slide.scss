@@ -68,7 +68,7 @@ input.headline_input {
 }
 
 .slide_right {
-    div {
+    >div {
         display: block;
         width: 100%;
 
@@ -82,6 +82,12 @@ input.headline_input {
             width: auto;
         }
     }
+}
+
+.quill {
+    height: 50%;
+    border:1px solid $light-border-color;
+    border-radius: 2px;
 }
 
 iframe.media_preview,div.media_preview{
