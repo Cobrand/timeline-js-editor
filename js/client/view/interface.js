@@ -385,7 +385,7 @@ export const Interface = React.createClass({
                             type="button"
                             onClick={() => document.getElementById("importPicker")
                                                    .click()}>
-                        Ouvrir
+                        Importer
                     </button>
                     <input id="importPicker"
                            type="file"
@@ -402,7 +402,7 @@ export const Interface = React.createClass({
                             name="preview"
                             type="button"
                             onClick={this.showPreview}>
-                        Aperçu timeline
+                        Aperçu
                     </button>
 
                     {this.getUserInterface()}
