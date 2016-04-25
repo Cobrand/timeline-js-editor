@@ -131,7 +131,6 @@ export const Slide = React.createClass({
         const s = this.props.slide;
         return (
             <div className="slide" style={this.getBg()}>
-                <view.Media slide={s} />
                 <div className="slide_right">
                     <input className="headline_input"
                            value={s.get("text").headline}
@@ -167,6 +166,7 @@ export const Slide = React.createClass({
                         {this.getBgImage()}
                     </div>
                 </div>
+                <view.Media slide={s} />
             </div>
         );
     }
