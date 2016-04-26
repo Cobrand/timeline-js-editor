@@ -68,7 +68,7 @@ input.headline_input {
 }
 
 .slide_right {
-    >div {
+    &>div {
         display: block;
         width: 100%;
 
@@ -82,13 +82,22 @@ input.headline_input {
             width: auto;
         }
     }
+    &>.quill {
+        border:1px solid $light-border-color;
+        border-radius: 5px;
+    }
 }
 
-.quill {
-    height: 50%;
+.quill-contents {
     border:1px solid $light-border-color;
-    border-radius: 2px;
+    border-radius: 4px;
+    height: 300px !important;
 }
+
+.ql-editor {
+    //height: 300px !important;
+}
+
 
 iframe.media_preview,div.media_preview{
     box-sizing: border-box;
