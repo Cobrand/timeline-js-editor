@@ -116,13 +116,14 @@ export const Slide = React.createClass({
 
     isColorChecked() {
         const bg = this.props.slide.get("background");
-        return bg && bg.color;
+        return !!(bg && bg.color);
     },
 
     render() {
         const s = this.props.slide;
+        console.log(this.isColorChecked())
         return (
-            <div className="slide" style={this.getBg()}>
+            <div className="slide">
                 <div className="slide_right">
                     <input className="headline_input"
                            value={s.get("text").headline}
@@ -139,16 +140,25 @@ export const Slide = React.createClass({
                                onChange={this.onGroupChange}
                                placeholder="Groupe" />
                     </div>
-                    <div>
-                        <input type="checkbox"
-                               className="toggle_bg_color"
-                               checked={this.isColorChecked()}
-                               onClick={this.toggleBgColor}>
-                        </input>
-                        Fond :
-                        {this.getBgColor()}
+                    <div className="bg_editor">
+                        <div className="bg_color_editor" >
+                            <div className="bg_meta_info">
+                                Fond
+                            </div>
+                            <view.Common.EnableButton
+                                   enabled={this.isColorChecked()}
+                                   handleChange={this.toggleBgColor} />
+                            {this.getBgColor()}
+                        </div>
+                        <div className="bg_url_editor">
+                            {this.getBgImage()}
+                        </div>
+                        <div className="bg_editor_preview"
+                             style={this.getBg()}>
+                            Aperçu du fond
+                        </div>
                     </div>
-                    {this.getBgImage()}
+
                 </div>
                 <view.Media slide={s} />
             </div>

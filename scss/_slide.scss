@@ -1,4 +1,12 @@
 @import 'vars';
+.meta_info{
+    // should not be used directly, extend it
+    @include title-font(18px);
+    color:$inactive-text-color;
+    font-weight: bold;
+    padding: 5px 0px 5px 15px;
+}
+
 .slide {
     $slide-margin-w:12px;
     $slide-margin-h:5px;
@@ -61,9 +69,7 @@ input.headline_input {
 }
 
 .slide_media_meta_info{
-    @include title-font(18px);
-    color:$inactive-text-color;
-    font-weight: bold;
+    @extend .meta_info;
     padding: 5px 0px 5px 15px;
 }
 
@@ -91,7 +97,7 @@ input.headline_input {
 .quill-contents {
     border:1px solid $light-border-color;
     border-radius: 4px;
-    height: 300px !important;
+    height: 170px !important;
 }
 
 .ql-editor {

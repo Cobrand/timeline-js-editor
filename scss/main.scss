@@ -6,8 +6,10 @@
 @import 'tabs';
 @import 'select';
 @import 'topnav';
+@import 'backgroundEditor';
 @import 'popup/popup';
 @import 'popup/preview';
+@import 'common/enable';
 
 body {
     @include main-font();

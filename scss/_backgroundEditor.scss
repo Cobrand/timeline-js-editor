@@ -1,0 +1,22 @@
+@import 'vars';
+@import 'slide';
+
+.bg_editor {
+	border:1px solid $light-border-color;
+	border-radius: 5px;
+}
+
+.bg_editor_preview {
+	border:1px solid $dark-border-color;
+	border-radius: 3px;
+	margin:5px;
+	padding:10px;
+	text-align:center;
+	vertical-align:center;
+}
+
+.bg_meta_info{
+	@extend .meta_info;
+	padding: 5px 15px 5px 15px;
+	display:inline-block;
+}

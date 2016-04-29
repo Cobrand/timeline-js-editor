@@ -23,5 +23,6 @@ export default {
     Media,
     MDate,
     LoginScreen,
-    SignUpScreen
+    SignUpScreen,
+    Common
 };
