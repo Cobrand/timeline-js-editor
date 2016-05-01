@@ -77,7 +77,7 @@ export const Slide = React.createClass({
         };
         return (
             <input type="color"
-                   className="inline-block"
+                   className="bg_color_editor_input"
                    value={val}
                    onChange={onBgColorChange}>
             </input>
@@ -106,8 +106,8 @@ export const Slide = React.createClass({
         };
         return (
             <input type="url"
-                   className="inline-block"
-                   placeholder="URL image de fond"
+                   className="bg_url_editor_input"
+                   placeholder="URL de l'image de fond"
                    value={val}
                    onChange={onBgImageChange}>
             </input>
@@ -141,8 +141,8 @@ export const Slide = React.createClass({
                                handleChange={this.toggleBgColor} />
                     </div>
                     <div className="bg_color_editor" >
+                        <div className="bg_color_meta_info">Couleur :</div>
                         {this.getBgColor()}
-
                     </div>
                     <div className="bg_url_editor">
                         {this.getBgImage()}
