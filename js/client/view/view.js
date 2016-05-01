@@ -5,7 +5,7 @@ import {Tabs, Tab} from "view/tab.js";
 import {Slide} from "view/slide.js";
 import {Preview} from "view/preview.js";
 import {Media} from "view/media.js";
-import {MDate} from "view/date.js";
+import {DateEditor} from "view/dateEditor.js";
 import Common from "view/common/common.js";
 import {LoginScreen} from "view/login/loginscreen.js";
 import {SignUpScreen} from "view/login/signupscreen.js";
@@ -21,7 +21,7 @@ export default {
     Slide,
     Preview,
     Media,
-    MDate,
+    DateEditor,
     LoginScreen,
     SignUpScreen,
     Common

@@ -173,7 +173,7 @@ export const Slide = React.createClass({
                     <ReactQuill theme="snow"
                                 value={s.get("text").text}
                                 onChange={this.handleChangeText} />
-                    <view.MDate slide={this.props.slide} />
+                            <view.DateEditor slide={this.props.slide} />
                     <div>
                         <input value={s.get("group")}
                                title="Peut être n'importe quel texte, la timeline essaiera d'être organisée de façon à ce que les évenements ayant le même groupe soient sur la même ligne"

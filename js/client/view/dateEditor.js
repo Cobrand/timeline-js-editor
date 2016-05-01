@@ -3,7 +3,7 @@ import moment from "moment";
 import DatePicker from "react-pikaday-component";
 import model from "model/model.js";
 
-export const MDate = React.createClass({
+export const DateEditor = React.createClass({
     mixins: [React.Backbone],
 
     updateOnProps: {
