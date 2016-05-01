@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import DatePicker from "react-pikaday-component";
+import view from "view/view.js";
 import model from "model/model.js";
 
 export const DateEditor = React.createClass({
@@ -54,19 +55,24 @@ export const DateEditor = React.createClass({
     render() {
         const s = this.props.slide;
         return (
-            <div className="date">
+            <div className="date_editor">
+                <view.Common.EitherButton
+                    handleChange={this.toggleEndDate} />
                 <div className="datepicker">
                     <DatePicker value={s.get("start_date").date.toDate()}
                                 onChange={this.handleChangeStart} />
                     {this.getEndDate()}
                 </div>
-                <input name="toggle_end_date"
-                       className="toggle_end_date"
-                       type="checkbox"
-                       value={this.props.slide.get("end_date")}
-                       onClick={this.toggleEndDate}>
-                </input>
+
             </div>
         );
     }
 });
+/*
+<input name="toggle_end_date"
+       className="toggle_end_date"
+       type="checkbox"
+       value={this.props.slide.get("end_date")}
+       onClick={this.toggleEndDate}>
+</input>
+*/
