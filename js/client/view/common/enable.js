@@ -13,12 +13,12 @@ export const EnableButton = React.createClass({
         let isEnabled = (this.props.enabled != null) ? !!this.props.enabled : true ;
         // default is "Enabled";
         if (isEnabled){
-            return (<button className="enable_button enable_button_enabled"
+            return (<button className={(this.props.className || "") + " enable_button enable_button_enabled"}
                             onClick={this.handleChange}>
                 Activé
             </button>)
         } else {
-            return (<button className="enable_button enable_button_disabled"
+            return (<button className={(this.props.className || "") + " enable_button enable_button_disabled"}
                             onClick={this.handleChange}>
                 Désactivé
             </button>)

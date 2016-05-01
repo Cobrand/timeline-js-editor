@@ -114,6 +114,47 @@ export const Slide = React.createClass({
         );
     },
 
+    getBgEditor(){
+        if (!this.isColorChecked()){
+            return (
+                <div className="bg_editor">
+                    <div className="bg_meta">
+                        <div className="bg_meta_info">
+                            Fond
+                        </div>
+                        <view.Common.EnableButton
+                               className="bg_meta_enable"
+                               enabled={this.isColorChecked()}
+                               handleChange={this.toggleBgColor} />
+                    </div>
+                </div>);
+        } else {
+            return (
+                <div className="bg_editor">
+                    <div className="bg_meta">
+                        <div className="bg_meta_info">
+                            Fond
+                        </div>
+                        <view.Common.EnableButton
+                               className="bg_meta_enable"
+                               enabled={this.isColorChecked()}
+                               handleChange={this.toggleBgColor} />
+                    </div>
+                    <div className="bg_color_editor" >
+                        {this.getBgColor()}
+
+                    </div>
+                    <div className="bg_url_editor">
+                        {this.getBgImage()}
+                    </div>
+                    <div className="bg_editor_preview"
+                         style={this.getBg()}>
+                        Aperçu du fond
+                    </div>
+                </div>);
+        }
+    },
+
     isColorChecked() {
         const bg = this.props.slide.get("background");
         return !!(bg && bg.color);
@@ -140,25 +181,7 @@ export const Slide = React.createClass({
                                onChange={this.onGroupChange}
                                placeholder="Groupe" />
                     </div>
-                    <div className="bg_editor">
-                        <div className="bg_color_editor" >
-                            <div className="bg_meta_info">
-                                Fond
-                            </div>
-                            <view.Common.EnableButton
-                                   enabled={this.isColorChecked()}
-                                   handleChange={this.toggleBgColor} />
-                            {this.getBgColor()}
-                        </div>
-                        <div className="bg_url_editor">
-                            {this.getBgImage()}
-                        </div>
-                        <div className="bg_editor_preview"
-                             style={this.getBg()}>
-                            Aperçu du fond
-                        </div>
-                    </div>
-
+                    {this.getBgEditor()}
                 </div>
                 <view.Media slide={s} />
             </div>

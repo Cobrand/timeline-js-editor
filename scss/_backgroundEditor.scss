@@ -4,6 +4,7 @@
 .bg_editor {
 	border:1px solid $light-border-color;
 	border-radius: 5px;
+	min-height:38px;
 }
 
 .bg_editor_preview {
@@ -19,4 +20,9 @@
 	@extend .meta_info;
 	padding: 5px 15px 5px 15px;
 	display:inline-block;
+}
+
+.bg_meta_enable{
+	float:right;
+	margin: 5px;
 }
