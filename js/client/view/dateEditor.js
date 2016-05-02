@@ -66,21 +66,23 @@ export const DateEditor = React.createClass({
                         option2text="Évenement continu"
                         option={option}
                         handleChange={this.toggleEndDate} />
-                    <div className="date_editor_begin_date">
-                        <div className="date_editor_meta_info">
-                            Date de début :
+                    <div>
+                        <div className="date_editor_begin_date">
+                            <div className="date_editor_meta_info">
+                                Début :
+                            </div>
+                            <DatePicker value={s.get("start_date").date.toDate()}
+                                        onChange={this.handleChangeStart}
+                                        className="date_editor_pikaday" />
                         </div>
-                        <DatePicker value={s.get("start_date").date.toDate()}
-                                    onChange={this.handleChangeStart}
-                                    className="date_editor_pikaday" />
-                    </div>
-                    <div className="date_editor_end_date">
-                        <div className="date_editor_meta_info">
-                            Date de fin :
+                        <div className="date_editor_end_date">
+                            <div className="date_editor_meta_info">
+                                Fin :
+                            </div>
+                            <DatePicker value={end_date.date.toDate()}
+                                        onChange={this.handleChangeEnd}
+                                        className="date_editor_pikaday" />
                         </div>
-                        <DatePicker value={end_date.date.toDate()}
-                                    onChange={this.handleChangeEnd}
-                                    className="date_editor_pikaday" />
                     </div>
                 </div>
             );
@@ -93,13 +95,15 @@ export const DateEditor = React.createClass({
                         option2text="Évenement continu"
                         option={option}
                         handleChange={this.toggleEndDate} />
-                    <div className="date_editor_begin_date">
-                        <div className="date_editor_meta_info">
-                            Date :
+                    <div>
+                        <div className="date_editor_only_date">
+                            <div className="date_editor_meta_info">
+                                Date :
+                            </div>
+                            <DatePicker value={s.get("start_date").date.toDate()}
+                                        onChange={this.handleChangeStart}
+                                        className="date_editor_pikaday" />
                         </div>
-                        <DatePicker value={s.get("start_date").date.toDate()}
-                                    onChange={this.handleChangeStart}
-                                    className="date_editor_pikaday" />
                     </div>
                 </div>
             );
