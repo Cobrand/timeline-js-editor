@@ -66,11 +66,21 @@ export const DateEditor = React.createClass({
                         option2text="Évenement continu"
                         option={option}
                         handleChange={this.toggleEndDate} />
-                    <div className="datepicker">
+                    <div className="date_editor_begin_date">
+                        <div className="date_editor_meta_info">
+                            Date de début :
+                        </div>
                         <DatePicker value={s.get("start_date").date.toDate()}
-                                    onChange={this.handleChangeStart} />
+                                    onChange={this.handleChangeStart}
+                                    className="date_editor_pikaday" />
+                    </div>
+                    <div className="date_editor_end_date">
+                        <div className="date_editor_meta_info">
+                            Date de fin :
+                        </div>
                         <DatePicker value={end_date.date.toDate()}
-                                    onChange={this.handleChangeEnd} />
+                                    onChange={this.handleChangeEnd}
+                                    className="date_editor_pikaday" />
                     </div>
                 </div>
             );
@@ -83,9 +93,13 @@ export const DateEditor = React.createClass({
                         option2text="Évenement continu"
                         option={option}
                         handleChange={this.toggleEndDate} />
-                    <div className="datepicker">
+                    <div className="date_editor_begin_date">
+                        <div className="date_editor_meta_info">
+                            Date :
+                        </div>
                         <DatePicker value={s.get("start_date").date.toDate()}
-                                    onChange={this.handleChangeStart} />
+                                    onChange={this.handleChangeStart}
+                                    className="date_editor_pikaday" />
                     </div>
                 </div>
             );
