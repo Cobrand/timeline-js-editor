@@ -54,21 +54,43 @@ export const DateEditor = React.createClass({
 
     render() {
         const s = this.props.slide;
-        return (
-            <div className="date_editor">
-                <view.Common.EitherButton
-                    option1text="Évenement ponctuel"
-                    commonClassName="date_editor_meta_switch"
-                    option2text="Évenement continu"
-                    handleChange={this.toggleEndDate} />
-                <div className="datepicker">
-                    <DatePicker value={s.get("start_date").date.toDate()}
-                                onChange={this.handleChangeStart} />
-                    {this.getEndDate()}
+        const end_date = s.get("end_date");
+        const hasEndDate = !!end_date ;
+        const option = hasEndDate ? 1 : 0 ;
+        if (hasEndDate){
+            return (
+                <div className="date_editor">
+                    <view.Common.EitherButton
+                        option1text="Évenement ponctuel"
+                        commonClassName="date_editor_meta_switch"
+                        option2text="Évenement continu"
+                        option={option}
+                        handleChange={this.toggleEndDate} />
+                    <div className="datepicker">
+                        <DatePicker value={s.get("start_date").date.toDate()}
+                                    onChange={this.handleChangeStart} />
+                        <DatePicker value={end_date.date.toDate()}
+                                    onChange={this.handleChangeEnd} />
+                    </div>
                 </div>
+            );
+        } else {
+            return (
+                <div className="date_editor">
+                    <view.Common.EitherButton
+                        option1text="Évenement ponctuel"
+                        commonClassName="date_editor_meta_switch"
+                        option2text="Évenement continu"
+                        option={option}
+                        handleChange={this.toggleEndDate} />
+                    <div className="datepicker">
+                        <DatePicker value={s.get("start_date").date.toDate()}
+                                    onChange={this.handleChangeStart} />
+                    </div>
+                </div>
+            );
+        }
 
-            </div>
-        );
     }
 });
 /*
