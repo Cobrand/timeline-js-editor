@@ -50,6 +50,32 @@ module.exports = function(){
         }
     })
 
+    krouter_api.post('/user/resetPassword', function* (next){
+        winston.debug("Received POST /user/resetPassword request : "+JSON.stringify(this.request.body));
+        // resets password of said user
+        let username = this.request.body.username ;
+        let email = this.request.body.email ;
+        if (!!username || !!email){
+            let user = yield db.User.findOne({where :{"$or":{'username':username,'email':email}}});
+            if (user != null){
+                let user_id = user.id ;
+                let randomPassword = "123456" ; // TODO: replace this by a real password ...
+                //yield db.Timeline.update({timeline:JSON.stringify(timeline),last_modified:Date.now()},{where:{'owner':user_id,'id':timelineid}}) ;
+                this.status = 400 ;
+                this.message = "not implemented";
+                // TODO : implement
+            } else {
+                this.status = 404 ;
+                this.message = "username or email not found";
+                winston.verbose("'username' or 'email' were not found for password reset [username:"+(username||"(nothing)")+",email:"+(email||"(nothing)")+"]");
+            }
+        }else{
+            this.status = 400 ;
+            this.message = "'username' or 'email' is needed for this request";
+            winston.verbose("Bad 'reset password' request : "+JSON.stringify(this.request.body));
+        }
+    })
+
     krouter_api.get('/user/timelines/', function* (next){
         winston.debug("Received /user/timelines/ request : "+JSON.stringify(this.request.query));
         let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
