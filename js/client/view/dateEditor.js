@@ -57,6 +57,9 @@ export const DateEditor = React.createClass({
         return (
             <div className="date_editor">
                 <view.Common.EitherButton
+                    option1text="Évenement ponctuel"
+                    commonClassName="date_editor_meta_switch"
+                    option2text="Évenement continu"
                     handleChange={this.toggleEndDate} />
                 <div className="datepicker">
                     <DatePicker value={s.get("start_date").date.toDate()}
