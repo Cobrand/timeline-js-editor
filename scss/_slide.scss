@@ -1,4 +1,3 @@
-@import 'vars';
 .meta_info{
     // should not be used directly, extend it
     @include title-font(18px);
@@ -44,10 +43,6 @@ input.headline_input {
     font-size: 1.5em;
     font-weight: bold;
     text-transform: uppercase;
-}
-
-.datepicker {
-    display: flex;
 }
 
 .slide_media,.slide_right {

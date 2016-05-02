@@ -1,13 +1,11 @@
-@import "../button";
-@import "../vars";
-.enable_button {
-	@extend .button;
-}
-
 .enable_button_enabled {
 
 }
 
 .enable_button_disabled {
 	color:$disabled-text-color;
+}
+
+.enable_button {
+	@extend .button;
 }

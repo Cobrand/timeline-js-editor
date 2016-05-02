@@ -1,0 +1,47 @@
+.date_editor{
+    border:1px solid $light-border-color;
+    border-radius: 5px;
+    margin-top:5px;
+    .date_editor_meta_info {
+        @extend .meta_info;
+		font-weight: normal;
+		display:inline-block;
+		box-sizing: border-box;
+		padding-left: 5px;
+		margin-right:5px;
+    }
+
+    $switch-button-max-width:175px;
+    .date_editor_begin_date,.date_editor_end_date {
+        display:inline-block;
+        width:calc(50% - #{$switch-button-max-width / 2}); // 175 is width of "evenement continu"
+        // TODO : make it relative to text size ...
+        box-sizing: border-box;
+        margin:0;
+        padding-left:5px;
+        text-align:center;
+    }
+
+    .date_editor_only_date {
+        display:inline-block;
+        width:calc(100% - #{$switch-button-max-width});
+        box-sizing: border-box;
+        padding-left:5px;
+        text-align:center;
+    }
+
+    .date_editor_meta_switch {
+        @extend .button;
+        float:right;
+        margin: 5px;
+    }
+
+    .date_editor_pikaday{
+        width: 120px !important;
+    }
+}
+
+
+
+
+//
