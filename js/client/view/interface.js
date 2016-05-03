@@ -2,6 +2,7 @@ import React from "react";
 import view from "view/view.js";
 import model from "model/model.js";
 import Promise from "bluebird";
+import Filesaver from "filesaver.js";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -366,6 +367,17 @@ export const Interface = React.createClass({
         reader.readAsText(file);
     },
 
+    onExportJSON() {
+        const filename = "timeline.json";
+        const blob = new Blob([JSON.stringify(this.state.timeline)]);
+        Filesaver.saveAs(blob, filename);
+        swal({
+            title: "Export JSON",
+            text: `La timeline a été exportée dans "${filename}".`,
+            type: "success"
+        });
+    },
+
     render() {
         const t = this.state.timeline;
         // <div className="selectscaletext">
@@ -392,6 +404,11 @@ export const Interface = React.createClass({
                            accept=".json"
                            onChange={this.importJSON}
                            style={{display: "none"}} />
+                    <button className="topnav_element"
+                            type="button"
+                            onClick={this.onExportJSON}>
+                        Exporter
+                    </button>
                     <button className="topnav_element"
                             name="show_json"
                             type="button"

@@ -43,29 +43,12 @@ export const Export = React.createClass({
         handleCloseJSON: React.PropTypes.func.isRequired
     },
 
-    getInitialState() {
-        return {
-            which_export: "json"
-        };
-    },
-
     saveAsFile(){
         // TODO set filename as title of timeline
         let filename = this.props.filename || "timeline" ;
 
-        let id, ext;
-        switch (this.state.which_export) {
-        case "json":
-            id = "jsontextexport";
-            ext = ".json";
-            break;
-        case "html":
-            id = "htmltextexport";
-            ext = ".html";
-            break;
-        default:
-            throw "unsupported export type";
-        }
+        let id = "htmltextexport";
+        let ext = ".html";
 
         let txt = document.getElementById(id).value;
         let blob = new Blob([txt]);
@@ -79,43 +62,21 @@ export const Export = React.createClass({
                      .replace(/TIMELINE/, timeline);
     },
 
-    onWhichExportChange(event) {
-        this.setState({
-            which_export: event.target.value
-        });
-    },
-
     getExport() {
-        if (this.state.which_export == "json") {
-            return (
-                <div>
-                    <p>
-                        L'export en JSON permet de sauvegarder son travail.
-                        Il peut être chargé à l'aide du bouton "Ouvrir"
-                    </p>
-                    <textarea id="jsontextexport"
-                              className="textexport"
-                              readOnly="readOnly"
-                              value={JSON.stringify(this.props.timeline.toJSON())}>
-                    </textarea>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <p>
-                        L'export en HTML permet d'intégrer la timeline dans un site web.
-                        Il suffit de copier-coller le texte ci-contre dans la page web.
-                        La timeline devrait alors s'y intégrer.
-                    </p>
-                    <textarea id="htmltextexport"
-                              className="textexport"
-                              readOnly="readOnly"
-                              value={this.getEmbedHtml()}>
-                    </textarea>
-                </div>
-            );
-        }
+        return (
+            <div>
+                <p>
+                    L'export en HTML permet d'intégrer la timeline dans un site web.
+                    Il suffit de copier-coller le texte ci-contre dans la page web.
+                    La timeline devrait alors s'y intégrer.
+                </p>
+                <textarea id="htmltextexport"
+                          className="textexport"
+                          readOnly="readOnly"
+                          value={this.getEmbedHtml()}>
+                </textarea>
+            </div>
+        );
     },
 
     render() {
@@ -127,13 +88,7 @@ export const Export = React.createClass({
                         onClick={this.props.handleCloseJSON}>
                     ×
                 </button>
-                <h1>Exporter en</h1>
-                <select value={this.state.which_export}
-                        onChange={this.onWhichExportChange}
-                        className="select_option">
-                    <option value="json">JSON</option>
-                    <option value="html">HTML</option>
-                </select>
+                <h1>Exporter en HTML</h1>
                 <button className="save_as"
                         name="save_json"
                         type="button"
