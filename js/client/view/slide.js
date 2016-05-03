@@ -162,7 +162,6 @@ export const Slide = React.createClass({
 
     render() {
         const s = this.props.slide;
-        console.log(this.isColorChecked())
         return (
             <div className="slide">
                 <div className="slide_right">

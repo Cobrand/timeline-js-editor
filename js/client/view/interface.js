@@ -132,7 +132,6 @@ export const Interface = React.createClass({
     },
 
     handleClosePreview() {
-        console.log("mdr");
         this.setState({
             preview: null
         });
