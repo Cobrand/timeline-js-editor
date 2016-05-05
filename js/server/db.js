@@ -9,7 +9,8 @@ if (!!options.dialect && !!options.database ){
         logging:false,
         host:options.host,
         dialect:options.dialect,
-        storage:options.storage
+        storage:options.storage,
+        port:options["dbPort"]
     });
 
     let User = sequelize.define('user', {

@@ -6,6 +6,7 @@ module.exports = {
         "database":"database_name",
         "username":"username",
         "password":"password",
-        "storage": "db.sqlite"
+        "storage": "db.sqlite",
+        "port":6666 // undefine to keep default
     }
 }
