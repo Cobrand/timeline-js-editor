@@ -1,4 +1,5 @@
 static/
+!static/index.html
 node_modules/
 server_config.js
 npm-debug.log
