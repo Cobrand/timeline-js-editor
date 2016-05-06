@@ -47,7 +47,5 @@ module.exports = function(app,api){
     app.use(koa_mount('/api',api));
 
     // static file delivery
-    // WHY ??
-    app.use(serve('.'));
-    // WHY DOES THIS WORK ??? SERIOUSLY I DONT UNDERSTAND ????
+    app.use(serve('static/'));
 }
