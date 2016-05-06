@@ -24,7 +24,7 @@ const EXPORT = `<div class="timeline">
             "use strict";
             var options = {};
             window.timelinejs = new TL.Timeline("timeline-embed-RANDOMID",
-                                                JSON.parse('TIMELINE'),
+                                                TIMELINE,
                                                 options);
         }());
     </script>
