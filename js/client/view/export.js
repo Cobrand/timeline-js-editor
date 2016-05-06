@@ -40,7 +40,7 @@ export const Export = React.createClass({
     propTypes: {
         timeline: React.PropTypes.objectOf(model.Timeline).isRequired,
         filename: React.PropTypes.string,
-        handleCloseJSON: React.PropTypes.func.isRequired
+        handleCloseHTMLExport: React.PropTypes.func.isRequired
     },
 
     saveAsFile(){
@@ -85,7 +85,7 @@ export const Export = React.createClass({
                 <button className="closepopup"
                         name="close_json"
                         type="button"
-                        onClick={this.props.handleCloseJSON}>
+                        onClick={this.props.handleCloseHTMLExport}>
                     ×
                 </button>
                 <h1>Exporter en HTML</h1>

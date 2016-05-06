@@ -53,7 +53,7 @@ export const Interface = React.createClass({
         return {
             current_slide: timeline.get("title"),
             timeline,
-            json: null,
+            exportHTML: null,
             preview: null,
             loginScreen: null,
             signupScreen: null,
@@ -109,14 +109,14 @@ export const Interface = React.createClass({
 
     showJSON() {
         this.setState({
-            json: <view.Export timeline={this.state.timeline}
-                             handleCloseJSON={this.handleCloseJSON}/>
+            exportHTML: <view.Export timeline={this.state.timeline}
+                             handleCloseHTMLExport={this.handleCloseHTMLExport}/>
         });
     },
 
-    handleCloseJSON() {
+    handleCloseHTMLExport() {
         this.setState({
-            json: null
+            exportHTML: null
         });
     },
 
@@ -325,7 +325,7 @@ export const Interface = React.createClass({
     },
 
     closeAllPopups(){
-        this.handleCloseJSON();
+        this.handleCloseHTMLExport();
         this.handleClosePreview();
         this.handleCloseLoginScreen();
         this.handleCloseSignupScreen();
@@ -333,7 +333,7 @@ export const Interface = React.createClass({
     },
 
     getMask() {
-        if (this.state.preview || this.state.json
+        if (this.state.preview || this.state.exportHTML
             || this.state.loginScreen || this.state.signupScreen
             || this.state.selectTimelineScreen ) {
             return <div className="popup-background" onClick={this.closeAllPopups}></div>;
@@ -435,7 +435,7 @@ export const Interface = React.createClass({
                     {this.getSlide()}
                 </div>
                 {this.getMask()}
-                {this.state.json}
+                {this.state.exportHTML}
                 {this.state.preview}
                 {this.state.loginScreen}
                 {this.state.signupScreen}
