@@ -108,22 +108,36 @@ module.exports = function(){
         winston.debug("Received /timeline/"+this.params.timelineid+"/ request : "+JSON.stringify(this.request.query));
         let timelineid = Number(this.params.timelineid);
         if (!isNaN(timelineid)){
-            let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
-            let credentials_key = this.request.query.credentials_key ;
-            let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
-            if (is_connected){
-                let timeline = yield db.Timeline.findOne({where:{'owner':user_id,'id':timelineid}}) ;
-                if (timeline){
-                    this.body = {"timeline":JSON.parse(timeline.timeline)};
+            try {
+                let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
+                let credentials_key = this.request.query.credentials_key ;
+                let is_connected = yield* utils.checkCredentials(user_id,credentials_key);
+                if (is_connected){
+                    let timeline = yield db.Timeline.findOne({where:{'owner':user_id,'id':timelineid}}) ;
+                    if (timeline){
+                        this.body = {"timeline":JSON.parse(timeline.timeline)};
+                    } else {
+                        this.status = 404;
+                        this.message = "Timeline not found"
+                    }
                 } else {
-                    this.status = 404;
-                    this.message = "Timeline not found"
+                    this.status = 401 ;
+                    this.message = "Bad credentials to access this data" ;
+                    winston.verbose("Sent 401 for bad credentials at /timeline/"+this.params.timelineid+"/ , request : "+JSON.stringify(this.request.query));
                 }
-            } else {
-                this.status = 401 ;
-                this.message = "Bad credentials to access this data" ;
+            } catch (e) {
+                if (e.name === "UserNotFoundError"){
+                    this.status = 401 ;
+                    this.message = "Bad credentials to access this data" ;
+                    winston.verbose("Sent 401 for user not found at /timeline/"+this.params.timelineid+"/ , request : "+JSON.stringify(this.request.query));
+                } else {
+                    // unknown error
+                    winston.error("An unknown error happened at /timeline/"+this.params.timelineid+"/ , request : "+JSON.stringify(this.request.query));
+                    throw e ;
+                }
             }
         } else {
+            winston.verbose("Answered 400 for /timeline/"+this.params.timelineid+"/ , request : "+JSON.stringify(this.request.query)+" ,timelineid is NaN");
             this.status = 400 ;
             this.message = "Invalid 'timeline' parameter" ;
         }
