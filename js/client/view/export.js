@@ -11,7 +11,7 @@ const EXPORT = `<div class="timeline">
           href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
     </link>
     <style>
-        html, body, #timeline-embed {
+        html, body, #timeline-js-embed {
             width: 100%;
             height: 100%;
             margin: 0;
