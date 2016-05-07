@@ -16,12 +16,12 @@ export const EnableButton = React.createClass({
             return (<button className={(this.props.className || "") + " enable_button enable_button_enabled"}
                             onClick={this.handleChange}>
                 Activé
-            </button>)
+            </button>);
         } else {
             return (<button className={(this.props.className || "") + " enable_button enable_button_disabled"}
                             onClick={this.handleChange}>
                 Désactivé
-            </button>)
+            </button>);
         }
     }
-})
+});

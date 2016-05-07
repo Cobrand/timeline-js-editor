@@ -12,12 +12,12 @@ export const Interface = React.createClass({
     updateOnProps: {
         "timeline": "model",
         "login": "model",
-        "signup": "model",
+        "signup": "model"
     },
 
     propTypes: {
         login: React.PropTypes.objectOf(model.Login).isRequired,
-        signup: React.PropTypes.objectOf(model.SignUp).isRequired,
+        signup: React.PropTypes.objectOf(model.SignUp).isRequired
     },
 
     getInitialState() {
@@ -35,9 +35,9 @@ export const Interface = React.createClass({
                         }
                     });
                 }).then((res) => {
-                    let timeline = new model.Timeline(res.data.timeline,
+                    let online_timeline = new model.Timeline(res.data.timeline,
                                                       {parse: true});
-                    this.handleSelectTimeline(id, timeline);
+                    this.handleSelectTimeline(id, online_timeline);
                 }).catch((err) => {
                     swal({
                         title: "Erreur serveur",
@@ -76,11 +76,11 @@ export const Interface = React.createClass({
             tabs.reset();
             tabs.add(new model.Slide());
         } else {
-            if (tab == this.state.current_slide) {
+            if (tab === this.state.current_slide) {
                 let idx = tabs.indexOf(tab);
 
                 // On prends le suivant sauf si c'est le dernier
-                if (idx == tabs.size() - 1) {
+                if (idx === tabs.size() - 1) {
                     idx -= 1;
                 } else {
                     idx += 1;
@@ -182,7 +182,7 @@ export const Interface = React.createClass({
         localStorage.removeItem("credentials_key");
         this.setState({
             isConnected:false
-        })
+        });
     },
 
     createNewTimeline() {
@@ -204,7 +204,9 @@ export const Interface = React.createClass({
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Oui, supprimer l'existante",
                 cancelButtonText: "Annuler"
-            },() => {this.createNewTimeline()})
+            },() => {
+                this.createNewTimeline();
+            });
         }
     },
 
@@ -343,7 +345,7 @@ export const Interface = React.createClass({
     onConnect(){
         this.setState({
             isConnected:true
-        })
+        });
     },
 
     importJSON(event) {

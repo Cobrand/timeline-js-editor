@@ -19,7 +19,7 @@ module.exports = {
     },
     devtool: "source-map",
     eslint: {
-        configFile: ".eslintrc"
+        configFile: ".eslintrc.yaml"
     },
     module: {
         preLoaders: [

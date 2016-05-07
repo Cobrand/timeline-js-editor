@@ -21,12 +21,12 @@ export const LoginScreen = React.createClass({
     getInitialState() {
         return {
             loadingPromise:null // if != null : currently connecting
-        }
+        };
     },
 
     getSpin(){
         if (this.state.loadingPromise){
-            return <Spinner config={{top:"80%"}}/>
+            return <Spinner config={{top:"80%"}}/>;
         } else {
             return ;
         }
@@ -34,7 +34,7 @@ export const LoginScreen = React.createClass({
 
     handleChangeLogin(event) {
         this.props.login.set({
-            login:event.target.value,
+            login:event.target.value
         });
     },
 
@@ -63,14 +63,14 @@ export const LoginScreen = React.createClass({
                     "title":"Identification échouée",
                     "text":"Nom d'utilisateur ou mot de passe incorrect",
                     "type":"error"
-                })
+                });
             } else {
                 swal({
                     "title":"Identification échouée",
                     "text":"Erreur inconnue",
                     "type":"error"
-                })
-                console.log(err);
+                });
+                console.console.error(err);
             }
         }).finally(() => {
             this.setState({loadingPromise: null});
@@ -84,7 +84,7 @@ export const LoginScreen = React.createClass({
 
     onKeyPressed(e) {
         // If the user presses Enter, we validate the form.
-        if (e.charCode == 13) {
+        if (e.charCode === 13) {
             this.handleLoginButton();
         }
     },

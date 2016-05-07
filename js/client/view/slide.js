@@ -71,9 +71,8 @@ export const Slide = React.createClass({
             val = bg.color;
         }
         let onBgColorChange = (event) => {
-            const s = this.props.slide;
-            const bg = s.get("background");
-            s.set("background", Object.assign({}, bg, {color: event.target.value}));
+            const slide = this.props.slide;
+            slide.set("background", Object.assign({}, bg, {color: event.target.value}));
         };
         return (
             <input type="color"
@@ -92,13 +91,13 @@ export const Slide = React.createClass({
         }
         let onBgImageChange = (event) => {
             const s = this.props.slide;
-            const bg = s.get("background") || {};
+            const background = bg || {};
             const url = event.target.value;
             if (url) {
-                s.set("background", Object.assign({}, bg, {url}));
+                s.set("background", Object.assign({}, background, {url}));
             } else {
-                if (bg.color) {
-                    s.set("background", {color: bg.color});
+                if (background.color) {
+                    s.set("background", {color: background.color});
                 } else {
                     s.set("background", null);
                 }

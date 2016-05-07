@@ -12,16 +12,16 @@ export const EitherButton = React.createClass({
     render(){
         let option = (this.props.option != null) ? this.props.option : 0 ;
         // default is "Enabled";
-        if (option == 0){
+        if (option === 0){
             return (<button className={(this.props.commonClassName || "") + " " + (this.props.option1className || "")}
                             onClick={this.handleChange}>
                 {this.props.option1text || "OPTION1_DEFAULT"}
-            </button>)
+            </button>);
         } else {
             return (<button className={(this.props.commonClassName || "") + " "+(this.props.option2className || "")}
                             onClick={this.handleChange}>
                 {this.props.option2text || "OPTION2_DEFAULT"}
-            </button>)
+            </button>);
         }
     }
-})
+});

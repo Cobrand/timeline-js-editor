@@ -7,11 +7,30 @@ rules:
     - 2
     - double
   semi:
-    - 2
+    - 1
     - always
+  eqeqeq:
+    - 1
+    - allow-null
+  no-alert: 2
+  no-eval: 2
+  no-shadow: 2
+  no-console: 0
+  curly: 2
+  default-case: 1
+  no-caller: 2
+  no-loop-func: 1
+  no-self-compare: 2
+  no-sequences: 2
+  no-throw-literal: 1
+  no-warning-comments: 1
+  no-with: 2
   react/jsx-uses-react: 1
   react/jsx-uses-vars: 1
   react/jsx-no-undef: 1
+  brace-style:
+    - 1
+    - "1tbs"
 env:
   es6: true
   browser: true

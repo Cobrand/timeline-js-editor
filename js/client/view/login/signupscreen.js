@@ -22,7 +22,7 @@ export const SignUpScreen = React.createClass({
 
     getSpin(){
         if (this.state.loadingPromise){
-            return <Spinner config={{top:"80%"}}/>
+            return <Spinner config={{top:"80%"}}/>;
         } else {
             return ;
         }
@@ -68,7 +68,7 @@ export const SignUpScreen = React.createClass({
                     "title":"Erreur serveur",
                     "text":"Le serveur a renvoyé une erreur",
                     "type":"error"
-                })
+                });
                 console.error("Une erreur serveur est survenue :");
                 console.error(err);
             } else if (err.status === 409){
@@ -76,13 +76,13 @@ export const SignUpScreen = React.createClass({
                     "title":"Inscription échouée",
                     "text":"Nom d'utilisateur ou email déjà utilisé",
                     "type":"error"
-                })
+                });
             } else {
                 swal({
                     "title":"Erreur",
                     "text":"Une erreur inconnue est survenue : "+err.statusText,
                     "type":"error"
-                })
+                });
                 console.error("Une erreur inconnue est survenue :");
                 console.error(err);
             }
@@ -97,7 +97,7 @@ export const SignUpScreen = React.createClass({
 
     onKeyPressed(e) {
         // If the user presses Enter, we validate the form.
-        if (e.charCode == 13) {
+        if (e.charCode === 13) {
             this.onConnect();
         }
     },
