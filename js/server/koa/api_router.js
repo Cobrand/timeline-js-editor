@@ -76,6 +76,38 @@ module.exports = function(){
         }
     })
 
+    krouter_api.post('/user/changePassword', function* (next){
+        winston.debug("Received POST /user/changePassword request : "+JSON.stringify(this.request.body));
+        // resets password of said user
+        let user_id = this.request.body.id || this.request.body.user_id || this.request.body.userid ;
+        let username = this.request.body.username ;
+        let newPassword = this.request.body.newPassword || this.request.body.new_password ;
+        let oldPassword = this.request.body.oldPassword || this.request.body.old_password ;
+        if ((!!username || !!user_id) && !!newPassword && !!oldPassword ){
+            let user = yield db.User.findOne({where :{"$or":{'id':user_id,'username':username}}});
+            if (user == null){
+                this.status = 404 ;
+                this.message = "User was not found in the database" ;
+                winston.verbose("Change password try failed, request : "+JSON.stringify({username,user_id,newPassword,oldPassword}));
+            }else{
+                let salted_password = utils.saltedPassword(oldPassword,user.salt);
+                if (salted_password === user.password) {// good password my friend
+                    let new_salted_password = utils.saltedPassword(newPassword,user.salt);
+                    yield db.User.update({password:new_salted_password},{where:{'id':user.id}}) ;
+                    this.body = {"userid":user.id,"credentials_key":yield* utils.generateCredentials(user.id,new_salted_password,user.salt)};
+                } else {
+                    this.status = 404 ;
+                    this.message = "Invalid old password" ;
+                    winston.verbose("User "+user.username+" tried to change his password with salt '"+salted_password.substr(0,4)+"...', expected '"+user.password.substr(0,4)+"...'");
+                }
+            }
+        }else{
+            this.status = 400 ;
+            this.message = "'newPassword','oldPassword' and 'user_id' or 'username' are needed for this request";
+            winston.verbose("Bad 'change password' request : "+JSON.stringify(this.request.body));
+        }
+    })
+
     krouter_api.get('/user/timelines/', function* (next){
         winston.debug("Received /user/timelines/ request : "+JSON.stringify(this.request.query));
         let user_id = this.request.query.id || this.request.query.user_id || this.request.query.userid ;
@@ -283,6 +315,12 @@ module.exports = function(){
                     path:common_path+"/user/",
                     description:"Creates a new user",
                     parameters:"email AND username AND password::sha512password[0:32]"
+                },
+                {
+                    method:"POST",
+                    path:common_path+"/user/changePassword",
+                    description:"Change a user's password",
+                    parameters:"(user_id OR username) AND old_password::sha512password[0:32] AND new_password::sha512password[0:32]"
                 },
                 {
                     method:"GET",
