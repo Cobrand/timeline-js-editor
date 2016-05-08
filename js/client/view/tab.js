@@ -36,7 +36,7 @@ export const Tab = React.createClass({
     render() {
         return (
             <div className="slide_tab" onClick={this.switchToSlide} data-focused={this.props.focused}>
-                {this.props.tab.get("text").headline || "(untitled)"}
+                {this.props.tab.get("text").headline || "(sans titre)"}
                 {this.getButtonRemove()}
             </div>
         );
