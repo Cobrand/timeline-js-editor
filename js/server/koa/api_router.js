@@ -30,6 +30,7 @@ module.exports = function(){
                     // TODO send email to confirm account creation
                     this.body = {
                         "message":"Account successfully created",
+                        "username":user.username,
                         "userid":user.id,
                         "credentials_key":yield* utils.generateCredentials(user.id,salted_password,user.salt)
                     };
@@ -289,7 +290,12 @@ module.exports = function(){
         }else{
             let salted_password = utils.saltedPassword(password,user.salt);
             if (salted_password === user.password) {// good password my friend
-                this.body = {"userid":user.id,"credentials_key":yield* utils.generateCredentials(user.id,user.password,user.salt)};
+                let credentials_key = yield* utils.generateCredentials(user.id,user.password,user.salt);
+                this.body = {
+                    "userid":user.id,
+                    "credentials_key":credentials_key,
+                    "username":user.username
+                };
             } else {
                 this.status = 404 ;
                 this.message = "User was not found in the database, or invalid password" ;
