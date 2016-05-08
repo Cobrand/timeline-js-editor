@@ -392,14 +392,16 @@ export const Interface = React.createClass({
     },
 
     onExportJSON() {
-        const filename = "timeline.json";
         const blob = new Blob([JSON.stringify(this.state.timeline)]);
+        console.log(this.state.timeline.attributes);
+        let filename_raw = "" ;
+        try {
+            filename_raw = this.state.timeline.attributes.title.attributes.text.headline || "sans_titre";
+        } catch( e ){
+            filename_raw = "sans_titre";
+        }
+        const filename = "timeline_"+filename_raw+".json";
         Filesaver.saveAs(blob, filename);
-        swal({
-            title: "Export JSON",
-            text: `La timeline a été exportée dans "${filename}".`,
-            type: "success"
-        });
     },
 
     render() {
