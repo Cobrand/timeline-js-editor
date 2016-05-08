@@ -1,3 +1,7 @@
+.export {
+    @extend .popup;
+}
+
 .textexport, .preview iframe {
     @include main-font(10px);
     display: block;

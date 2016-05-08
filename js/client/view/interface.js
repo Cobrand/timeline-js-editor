@@ -241,11 +241,21 @@ export const Interface = React.createClass({
                 <div style={{display:"inline"}}>
                     {new_timeline}
                     {my_timelines}
-                    <button className="topnav_element red fright"
-                            id="disconnect"
-                            onClick={this.disconnect}>
-                        Déconnexion
-                    </button>
+
+                    <div style={{display:"inline"}}
+                         className="fright">
+                         <span>Bonjour, UTILISATEUR_8564 </span>
+                        <button className="topnav_element blue"
+                                id="parameters"
+                                onClick={this.showParameters}>
+                            Paramètres
+                        </button>
+                        <button className="topnav_element red"
+                                id="disconnect"
+                                onClick={this.disconnect}>
+                            Déconnexion
+                        </button>
+                    </div>
                 </div>
             );
         } else {
@@ -309,6 +319,18 @@ export const Interface = React.createClass({
         });
     },
 
+    showParameters(){
+        this.setState({
+            parameters:<view.Parameters handleClose={this.handleCloseParameters} />
+        });
+    },
+
+    handleCloseParameters(){
+        this.setState({
+            parameters: null
+        });
+    },
+
     handleSelectTimeline(id, timeline) {
         this.handleCloseSelectTimelineScreen();
         this.setState({
@@ -332,12 +354,13 @@ export const Interface = React.createClass({
         this.handleCloseLoginScreen();
         this.handleCloseSignupScreen();
         this.handleCloseSelectTimelineScreen();
+        this.handleCloseParameters();
     },
 
     getMask() {
         if (this.state.preview || this.state.exportHTML
             || this.state.loginScreen || this.state.signupScreen
-            || this.state.selectTimelineScreen ) {
+            || this.state.selectTimelineScreen || this.state.parameters ) {
             return <div className="popup-background" onClick={this.closeAllPopups}></div>;
         }
     },
@@ -439,6 +462,7 @@ export const Interface = React.createClass({
                 {this.getMask()}
                 {this.state.exportHTML}
                 {this.state.preview}
+                {this.state.parameters}
                 {this.state.loginScreen}
                 {this.state.signupScreen}
                 {this.state.selectTimelineScreen}

@@ -1,6 +1,7 @@
 import {Timeline} from "view/timeline.js" ;
 import {Export} from "view/export.js";
 import {Interface} from "view/interface.js";
+import {Parameters} from "view/parameters.js";
 import {Tabs, Tab} from "view/tab.js";
 import {Slide} from "view/slide.js";
 import {Preview} from "view/preview.js";
@@ -24,5 +25,6 @@ export default {
     DateEditor,
     LoginScreen,
     SignUpScreen,
-    Common
+    Common,
+    Parameters
 };

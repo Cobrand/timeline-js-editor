@@ -1,5 +1,3 @@
-@import 'export';
-
 .popup-background {
     position: fixed;
     z-index: 1;
@@ -41,7 +39,7 @@
     }
 }
 
-.export, .preview, .selecttimeline {
+.selecttimeline {
     @extend .popup;
 }
 

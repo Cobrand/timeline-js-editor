@@ -1,3 +1,7 @@
+.preview{
+    @extend .popup;
+}
+
 .preview h1 {
     display: inline-block;
 }
