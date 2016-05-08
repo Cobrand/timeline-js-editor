@@ -7,7 +7,8 @@ let winston = require("winston");
 module.exports = function(){
     let api = koa();
     let app = koa();
+    let timeline_router = koa();
 
-    require('./middlewares.js')(app,api);
+    require('./middlewares.js')(app,api,timeline_router);
     return app ;
 }

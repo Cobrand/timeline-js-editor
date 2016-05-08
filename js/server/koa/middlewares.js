@@ -6,8 +6,9 @@ let serve = require("koa-static");
 let program = require("../program.js");
 let winston = require("winston");
 
-module.exports = function(app,api){
+module.exports = function(app,api,timeline_router){
     let krouter_api = require('./api_router.js')();
+    let krouter_timeline = require('./timeline_router.js')();
 
     api.use(function* (next){
         try {
@@ -40,11 +41,13 @@ module.exports = function(app,api){
         }
     })
     api.use(koa_bodyparser());
+    timeline_router.use(krouter_timeline.routes());
 
     api.use(krouter_api.routes());
 
     // mount the API under /api
     app.use(koa_mount('/api',api));
+    app.use(koa_mount('/timeline',timeline_router));
 
     // static file delivery
     app.use(serve('static/'));
