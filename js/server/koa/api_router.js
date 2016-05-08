@@ -97,7 +97,7 @@ module.exports = function(){
                     yield db.User.update({password:new_salted_password},{where:{'id':user.id}}) ;
                     this.body = {"userid":user.id,"credentials_key":yield* utils.generateCredentials(user.id,new_salted_password,user.salt)};
                 } else {
-                    this.status = 404 ;
+                    this.status = 401 ;
                     this.message = "Invalid old password" ;
                     winston.verbose("User "+user.username+" tried to change his password with salt '"+salted_password.substr(0,4)+"...', expected '"+user.password.substr(0,4)+"...'");
                 }

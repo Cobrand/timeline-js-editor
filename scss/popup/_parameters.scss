@@ -1,4 +1,10 @@
 
 .parameters_popup{
-    @extend .popup;
+    @extend .popup, .small;
+
+    input{
+        font-size:1.1em;
+        width:100%;
+        box-sizing: border-box;
+    }
 }
