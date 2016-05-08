@@ -51,11 +51,11 @@ export const Parameters = React.createClass({
             }).then((response) => {
                 swal({
                     "title":"Mot de passe changé !",
-                    "text":"Votre mot de passe a été changé avec succès !",
+                    "text":"Votre mot de passe a été changé avec succès !"
                 });
                 localStorage.setItem("credentials_key",response.data.credentials_key);
             }).catch((response) => {
-                if (reponse.status === 401){
+                if (response.status === 401){
                     swal({
                         "title":"Mauvais mot de passe actuel",
                         "text":"Le mot de passe original n'est pas correct, impossible de changer le mot de passe",
