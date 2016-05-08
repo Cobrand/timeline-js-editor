@@ -55,6 +55,7 @@ export const LoginScreen = React.createClass({
         }).then((response) => {
             localStorage.setItem("user_id", response.data.userid);
             localStorage.setItem("credentials_key", response.data.credentials_key);
+            localStorage.setItem("username", response.data.username);
             this.props.onConnect();
             shouldClose = true ;
         }).catch((err) => {

@@ -61,6 +61,7 @@ export const SignUpScreen = React.createClass({
             });
             localStorage.setItem("credentials_key", res.data.credentials_key);
             localStorage.setItem("user_id", res.data.userid);
+            localStorage.setItem("username", res.data.username);
             this.props.handleClose();
         }).catch((err) => {
             if (err.status === 500){

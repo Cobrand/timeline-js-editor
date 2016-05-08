@@ -244,7 +244,7 @@ export const Interface = React.createClass({
 
                     <div style={{display:"inline"}}
                          className="fright">
-                         <span>Bonjour, UTILISATEUR_8564 </span>
+                        <span>Bonjour, {localStorage.getItem("username")} </span>
                         <button className="topnav_element blue"
                                 id="parameters"
                                 onClick={this.showParameters}>
