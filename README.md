@@ -130,8 +130,3 @@ $ npm install mysql // For both mariadb and mysql dialects
 $ npm install sqlite3
 $ npm install tedious // MSSQL
 ```
-
-# LICENSE
-
-MIT
-
