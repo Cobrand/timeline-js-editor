@@ -11,6 +11,7 @@ import Common from "view/common/common.js";
 import {LoginScreen} from "view/login/loginscreen.js";
 import {SignUpScreen} from "view/login/signupscreen.js";
 import {SelectTimeline} from "view/selectTimeline.js";
+import {Help} from "view/help.js";
 
 export default {
     SelectTimeline,
@@ -26,5 +27,6 @@ export default {
     LoginScreen,
     SignUpScreen,
     Common,
+    Help,
     Parameters
 };

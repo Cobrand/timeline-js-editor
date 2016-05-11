@@ -58,6 +58,7 @@ export const Interface = React.createClass({
             loginScreen: null,
             signupScreen: null,
             selectTimelineScreen: null,
+            helpScreen: null,
             isConnected:(!!localStorage.getItem("credentials_key"))
         };
     },
@@ -331,6 +332,18 @@ export const Interface = React.createClass({
         });
     },
 
+    showHelpScreen() {
+        this.setState({
+            helpScreen: <view.Help handleClose={this.handleCloseHelpScreen} />
+        });
+    },
+
+    handleCloseHelpScreen() {
+        this.setState({
+            helpScreen: null
+        });
+    },
+
     handleSelectTimeline(id, timeline) {
         this.handleCloseSelectTimelineScreen();
         this.setState({
@@ -359,6 +372,7 @@ export const Interface = React.createClass({
 
     getMask() {
         if (this.state.preview || this.state.exportHTML
+            || this.state.helpScreen
             || this.state.loginScreen || this.state.signupScreen
             || this.state.selectTimelineScreen || this.state.parameters ) {
             return <div className="popup-background" onClick={this.closeAllPopups}></div>;
@@ -447,6 +461,12 @@ export const Interface = React.createClass({
                             onClick={this.showPreview}>
                         Aperçu
                     </button>
+                    <button className="topnav_element"
+                            name="preview"
+                            type="button"
+                            onClick={this.showHelpScreen}>
+                        Aide
+                    </button>
 
                     {this.getUserInterface()}
 
@@ -468,6 +488,7 @@ export const Interface = React.createClass({
                 {this.state.loginScreen}
                 {this.state.signupScreen}
                 {this.state.selectTimelineScreen}
+                {this.state.helpScreen}
             </div>
         );
     }
