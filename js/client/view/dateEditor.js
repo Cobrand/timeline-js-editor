@@ -111,11 +111,3 @@ export const DateEditor = React.createClass({
 
     }
 });
-/*
-<input name="toggle_end_date"
-       className="toggle_end_date"
-       type="checkbox"
-       value={this.props.slide.get("end_date")}
-       onClick={this.toggleEndDate}>
-</input>
-*/
