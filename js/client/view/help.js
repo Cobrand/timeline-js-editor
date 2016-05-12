@@ -37,7 +37,7 @@ export const Help = React.createClass({
                 <h2> Quels sont les médias supportés par timeline ? </h2>
                 <p> Les médias supportés par timeline sont indiqués sur
                 <a href="https://timeline.knightlab.com/docs/media-types.html">
-                cette page </a>.<br> Il est possible que des médias de cette
+                cette page </a>.<br /> Il est possible que des médias de cette
                 liste ne supportent pas la prévisualisation intégrée dans l'éditeur;
                 les médias indiqués dans la liste ci dessus marcheront quand
                 même dans la timeline exportée ! Seule la prévisualisation dans
