@@ -4,11 +4,13 @@ import {Slide,Slides} from "model/slide.js";
 import {Era} from "model/structs/time.js";
 
 export const Timeline = Backbone.Model.extend({
-    defaults: {
-        title: new Slide(),
-        events: new Slides(),
-        eras: [],
-        scale: "human"
+    defaults() {
+        return {
+            title: new Slide(),
+            events: new Slides(),
+            eras: [],
+            scale: "human"
+        };
     },
 
     toJSON() {
