@@ -1,7 +1,6 @@
-Timelinizator,
-a web interface to create timelines powered by [Timeline JS](https://timeline.knightlab.com/)
+# Timeline-js Editor
 
-[![build status](https://gitlab.univ-nantes.fr/ci/projects/5/status.png?ref=master)](https://gitlab.univ-nantes.fr/ci/projects/5?ref=master)
+a web interface to create timelines powered by [Timeline JS](https://timeline.knightlab.com/)
 
 # HOW TO DEV
 
@@ -14,8 +13,8 @@ It also needs webpack to build the client-side javascript file
 
     # Install the command line tools
     # sudo npm install -g webpack
-    
-If you don't have root access, you can still access the webpack executable at this path ( given that your current directory is this project's root) : `node_modules/webpack/bin/webpack.js` 
+
+If you don't have root access, you can still access the webpack executable at this path ( given that your current directory is this project's root) : `node_modules/webpack/bin/webpack.js`
 
 Once you have installed webpack, you can start building the app as you wish :
 
@@ -23,7 +22,7 @@ Once you have installed webpack, you can start building the app as you wish :
 
 This will allow you to dev on this project easily.
 It will reload the server and rebuild the client-side javascript file every time
-you modify a source file. It is not recommended for production use, since it 
+you modify a source file. It is not recommended for production use, since it
 "watches" all your files in the source tree, hence it will use more ressources
 than the vanilla build
 
@@ -76,7 +75,7 @@ $ webpack --progress --colors
 You can then run the server as you wish :
 
     $ node js/server/main.js [OPTIONS]
-    
+
 For example :
 
     $ node js/server/main.js --port 8080 --logging warning
@@ -121,7 +120,7 @@ The db.storage field is only used when using sqlite3.
 
 ## Additional notes
 
-Depending on what SQL db you using, you might need to install some additional 
+Depending on what SQL db you using, you might need to install some additional
 package when starting this application :
 
 ```sh
